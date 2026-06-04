@@ -750,7 +750,8 @@
     "test": "npm run compile && vscode-test",
     "test:old": "npm run compile && node ./out/test/runTest.js",
     "watch": "tsc -watch -p ./",
-    "prepare": "husky"
+    "prepare": "husky",
+    "vscode:prepublish": "echo skip"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
