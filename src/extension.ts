@@ -81,7 +81,7 @@ export async function activate(
   const clientOptions: LanguageClientOptions = {
     documentSelector,
     synchronize: {
-      configurationSection: "vscode-home-assistant",
+      configurationSection: "home-assistant-vscode",
       fileEvents: fileWatcher,
     },
     initializationOptions: async () => {
@@ -89,7 +89,7 @@ export async function activate(
       try {
         const token = await AuthManager.getToken(context);
         const url = await AuthManager.getUrl(context);
-        const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+        const config = vscode.workspace.getConfiguration("home-assistant-vscode");
 
         console.log("Setting up initialization options for Home Assistant language server");
         console.log(`Token available: ${token ? "Yes" : "No"}`);
@@ -97,7 +97,7 @@ export async function activate(
 
         // Use SecretStorage values first, then fallback to settings
         return {
-          "vscode-home-assistant": {
+          "home-assistant-vscode": {
             longLivedAccessToken: token || "",
             hostUrl: url || config.get<string>("hostUrl") || "",
             ignoreCertificates: !!config.get<boolean>("ignoreCertificates")
@@ -137,7 +137,7 @@ export async function activate(
       console.log("Auth middleware successfully installed");
 
       // Force an initial configuration refresh to ensure token and URL are set
-      const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
 
       // Get the token and URL directly and explicitly trigger a configuration update
       const token = await AuthManager.getToken(context);
@@ -175,7 +175,7 @@ export async function activate(
       );
       if (optionClicked === manageAuthCommand) {
         await vscode.commands.executeCommand(
-          "vscode-home-assistant.manageAuth",
+          "home-assistant-vscode.manageAuth",
         );
       }
 
@@ -254,131 +254,131 @@ export async function activate(
 
   const commandMappings = [
     new CommandMappings(
-      "vscode-home-assistant.reloadAll",
+      "home-assistant-vscode.reloadAll",
       "homeassistant",
       "reload_all",
     ),
     new CommandMappings(
-      "vscode-home-assistant.scriptReload",
+      "home-assistant-vscode.scriptReload",
       "script",
       "reload",
     ),
-    new CommandMappings("vscode-home-assistant.groupReload", "group", "reload"),
+    new CommandMappings("home-assistant-vscode.groupReload", "group", "reload"),
     new CommandMappings(
-      "vscode-home-assistant.homeassistantReloadCoreConfig",
+      "home-assistant-vscode.homeassistantReloadCoreConfig",
       "homeassistant",
       "reload_core_config",
     ),
     new CommandMappings(
-      "vscode-home-assistant.homeassistantRestart",
+      "home-assistant-vscode.homeassistantRestart",
       "homeassistant",
       "restart",
     ),
     new CommandMappings(
-      "vscode-home-assistant.automationReload",
+      "home-assistant-vscode.automationReload",
       "automation",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.conversationReload",
+      "home-assistant-vscode.conversationReload",
       "conversation",
       "reload",
     ),
-    new CommandMappings("vscode-home-assistant.sceneReload", "scene", "reload"),
+    new CommandMappings("home-assistant-vscode.sceneReload", "scene", "reload"),
     new CommandMappings(
-      "vscode-home-assistant.themeReload",
+      "home-assistant-vscode.themeReload",
       "frontend",
       "reload_themes",
     ),
     new CommandMappings(
-      "vscode-home-assistant.homekitReload",
+      "home-assistant-vscode.homekitReload",
       "homekit",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.filesizeReload",
+      "home-assistant-vscode.filesizeReload",
       "filesize",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.minMaxReload",
+      "home-assistant-vscode.minMaxReload",
       "min_max",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.genericThermostatReload",
+      "home-assistant-vscode.genericThermostatReload",
       "generic_thermostat",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.genericCameraReload",
+      "home-assistant-vscode.genericCameraReload",
       "generic",
       "reload",
     ),
-    new CommandMappings("vscode-home-assistant.pingReload", "ping", "reload"),
-    new CommandMappings("vscode-home-assistant.trendReload", "trend", "reload"),
+    new CommandMappings("home-assistant-vscode.pingReload", "ping", "reload"),
+    new CommandMappings("home-assistant-vscode.trendReload", "trend", "reload"),
     new CommandMappings(
-      "vscode-home-assistant.historyStatsReload",
+      "home-assistant-vscode.historyStatsReload",
       "history_stats",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.universalReload",
+      "home-assistant-vscode.universalReload",
       "universal",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.statisticsReload",
+      "home-assistant-vscode.statisticsReload",
       "statistics",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.filterReload",
+      "home-assistant-vscode.filterReload",
       "filter",
       "reload",
     ),
-    new CommandMappings("vscode-home-assistant.restReload", "rest", "reload"),
+    new CommandMappings("home-assistant-vscode.restReload", "rest", "reload"),
     new CommandMappings(
-      "vscode-home-assistant.commandLineReload",
+      "home-assistant-vscode.commandLineReload",
       "command_line",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.bayesianReload",
+      "home-assistant-vscode.bayesianReload",
       "bayesian",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.telegramReload",
+      "home-assistant-vscode.telegramReload",
       "telegram",
       "reload",
     ),
-    new CommandMappings("vscode-home-assistant.smtpReload", "smtp", "reload"),
-    new CommandMappings("vscode-home-assistant.mqttReload", "mqtt", "reload"),
+    new CommandMappings("home-assistant-vscode.smtpReload", "smtp", "reload"),
+    new CommandMappings("home-assistant-vscode.mqttReload", "mqtt", "reload"),
     new CommandMappings(
-      "vscode-home-assistant.rpioGpioReload",
+      "home-assistant-vscode.rpioGpioReload",
       "rpi_gpio",
       "reload",
     ),
-    new CommandMappings("vscode-home-assistant.knxReload", "knx", "reload"),
+    new CommandMappings("home-assistant-vscode.knxReload", "knx", "reload"),
     new CommandMappings(
-      "vscode-home-assistant.templateReload",
+      "home-assistant-vscode.templateReload",
       "template",
       "reload",
     ),
     new CommandMappings(
-      "vscode-home-assistant.customTemplatesReload",
+      "home-assistant-vscode.customTemplatesReload",
       "homeassistant",
       "reload_custom_templates",
     ),
     new CommandMappings(
-      "vscode-home-assistant.hassioAddonRestartGitPull",
+      "home-assistant-vscode.hassioAddonRestartGitPull",
       "hassio",
       "addon_restart",
       { addon: "core_git_pull" },
     ),
     new CommandMappings(
-      "vscode-home-assistant.hassioHostReboot",
+      "home-assistant-vscode.hassioHostReboot",
       "hassio",
       "host_reboot",
     ),
@@ -410,7 +410,7 @@ export async function activate(
 
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.homeassistantCheckConfig",
+      "home-assistant-vscode.homeassistantCheckConfig",
       async () => {
         await client.sendRequest("checkConfig");
       },
@@ -418,7 +418,7 @@ export async function activate(
   );
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.getErrorLog",
+      "home-assistant-vscode.getErrorLog",
       async () => {
         await client.sendRequest("getErrorLog");
       },
@@ -427,7 +427,7 @@ export async function activate(
 
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.renderTemplate",
+      "home-assistant-vscode.renderTemplate",
       async () => {
         const editor = vscode.window.activeTextEditor;
         const selectedText = editor.document.getText(editor.selection);
@@ -439,7 +439,7 @@ export async function activate(
   // Register command to open Home Assistant in browser
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.openInBrowser",
+      "home-assistant-vscode.openInBrowser",
       async () => {
         await statusBar.openInBrowser();
       }
@@ -449,7 +449,7 @@ export async function activate(
   // Register the token management command with status bar update
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.manageAuth",
+      "home-assistant-vscode.manageAuth",
       async () => {
         await manageAuth(context);
         // Update status bar after auth changes
@@ -461,7 +461,7 @@ export async function activate(
   // Register the debug token command
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.debugAuth",
+      "home-assistant-vscode.debugAuth",
       () => debugAuthSettings(context)
     )
   );
@@ -469,7 +469,7 @@ export async function activate(
   // Register the token repair command with status bar update
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.repairAuth",
+      "home-assistant-vscode.repairAuth",
       async () => {
         await repairAuthConfiguration(context);
         // Update status bar after repair
@@ -481,7 +481,7 @@ export async function activate(
   // Register the test connection command with status bar update
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.testConnection",
+      "home-assistant-vscode.testConnection",
       async () => {
         await testConnection(context);
         // Update status bar after connection test
@@ -491,7 +491,7 @@ export async function activate(
   );
 
   // Check configuration setting to see if automatic file association is disabled
-  const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+  const config = vscode.workspace.getConfiguration("home-assistant-vscode");
   const disableAutomaticFileAssociation = config.get<boolean>("disableAutomaticFileAssociation", false);
   
   if (disableAutomaticFileAssociation) {
@@ -532,7 +532,7 @@ export async function activate(
   // Listen for configuration changes that might affect the connection
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration(async (event) => {
-      const haConfigChanged = event.affectsConfiguration("vscode-home-assistant");
+      const haConfigChanged = event.affectsConfiguration("home-assistant-vscode");
       
       if (haConfigChanged) {
         console.log("Home Assistant configuration changed, updating status bar");
@@ -551,7 +551,7 @@ export async function activate(
         manageAuthCommandText
       ).then(selection => {
         if (selection === manageAuthCommandText) {
-          vscode.commands.executeCommand("vscode-home-assistant.manageAuth");
+          vscode.commands.executeCommand("home-assistant-vscode.manageAuth");
         }
       });
     }, 1000);

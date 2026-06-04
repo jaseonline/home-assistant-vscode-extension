@@ -1,7 +1,14 @@
 .vscode/**
 .vscode-test/**
+.claude/**
 out/test/**
 src/**
+!src/themes/**
+!src/grammars/**
+!src/snippets/**
+test-ha-detection/**
+test-non-ha-detection/**
+test-workspace/**
 .gitignore
 **/tsconfig.json
 **/tslint.json

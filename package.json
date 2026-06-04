@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "name": "vscode-home-assistant",
   "displayName": "Home Assistant Config Helper",
   "description": " Completion for entity-id's in Home Assistant Configurations",
@@ -58,6 +59,734 @@
             "default": true,
             "description": "Enable automatic rendering of Home Assistant templates on hover. When enabled, templates will be rendered and displayed as previews when hovering over template values in YAML files."
           }
+=======
+    "name": "home-assistant-vscode-extension",
+    "displayName": "Home Assistant Config Helper",
+    "description": " Completion for entity-id's in Home Assistant Configurations",
+    "version": "1.0.0",
+    "preview": false,
+    "engines": {
+        "vscode": "^1.99.0"
+    },
+    "categories": [
+        "Themes",
+        "Other",
+        "Home Assistant",
+        "Programming Languages",
+        "Formatters",
+        "Snippets"
+    ],
+    "publisher": "JaseOnline",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jaseonline/home-assistant-vscode-extension"
+    },
+    "bugs": {
+        "url": "https://github.com/jaseonline/home-assistant-vscode-extension",
+        "email": "jase@matilda.network"
+    },
+    "license": "MIT",
+    "icon": "assets/logo.png",
+    "activationEvents": [
+        "workspaceContains:**/configuration.yaml",
+        "workspaceContains:**/ui-lovelace.yaml",
+        "onLanguage:home-assistant",
+        "onFileSystem:ftp",
+        "onFileSystem:ssh",
+        "onFileSystem:sftp"
+    ],
+    "keywords": [
+        "home",
+        "assistant",
+        "home-assistant",
+        "homeassistant"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "configuration": [
+            {
+                "title": "Home Assistant Config Helper",
+                "properties": {
+                    "home-assistant-vscode.ignoreCertificates": {
+                        "type": "boolean",
+                        "description": "Enable insecure transport. Check this if you want to connect over an insecure HTTPS transport with a invalid certificate!"
+                    },
+                    "home-assistant-vscode.disableAutomaticFileAssociation": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Disable automatic association of YAML files with the Home Assistant language. When enabled, the extension will not automatically set file associations for YAML files, even in detected Home Assistant workspaces."
+                    },
+                    "home-assistant-vscode.autoRenderTemplates": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Enable automatic rendering of Home Assistant templates on hover. When enabled, templates will be rendered and displayed as previews when hovering over template values in YAML files."
+                    }
+                }
+            }
+        ],
+        "submenus": [
+            {
+                "id": "home-assistant.reload",
+                "label": "Home Assistant: Reload specific integration"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "home-assistant",
+                "path": "./src/snippets/homeassistant_automation.json"
+            },
+            {
+                "language": "home-assistant",
+                "path": "./src/snippets/homeassistant_script.json"
+            }
+        ],
+        "languages": [
+            {
+                "id": "home-assistant",
+                "configuration": "./syntaxes/yaml-language-configuration.json",
+                "extensions": [
+                    ".yml",
+                    ".yaml"
+                ],
+                "aliases": [
+                    "Home Assistant",
+                    "homeassistant",
+                    "home-assistant"
+                ]
+            },
+            {
+                "comments": "unfortunately this dummy entry is necessary for embedding to work",
+                "id": "home-assistant-jinja",
+                "configuration": "./jinja-language-configuration.json"
+            }
+        ],
+        "themes": [
+            {
+                "label": "HA Neon Dark",
+                "uiTheme": "vs-dark",
+                "path": "./src/themes/ha-neon-dark-color-theme.json"
+            }
+        ],
+        "grammars": [
+            {
+                "comments": [
+                    "YAML syntax as base for Home Assistant",
+                    "scopeName changed so that we can use it as base for injections"
+                ],
+                "language": "home-assistant",
+                "scopeName": "source.home-assistant",
+                "path": "./syntaxes/external/YAML.tmLanguage"
+            },
+            {
+                "comments": [
+                    "Jinja syntax as injection into Home Assistant YAML",
+                    "This is so that we do not need to rely on the Jinja extension being installed"
+                ],
+                "language": "home-assistant-jinja",
+                "scopeName": "source.home-assistant-jinja",
+                "path": "./syntaxes/external/jinja.tmLanguage.json"
+            },
+            {
+                "comments": [
+                    "Highlighting of Home Assistant keywords in Jinja"
+                ],
+                "path": "./syntaxes/home-assistant/jinja-keywords.tmLanguage",
+                "scopeName": "injection.homeassistant.jinja-keywords",
+                "injectTo": [
+                    "source.home-assistant"
+                ]
+            },
+            {
+                "comments": [
+                    "Additional Jinja grammars"
+                ],
+                "path": "./syntaxes/home-assistant/jinja-extras.tmLanguage",
+                "scopeName": "injection.homeassistant.jinja-extras",
+                "injectTo": [
+                    "source.home-assistant"
+                ]
+            },
+            {
+                "comments": [
+                    "Support for Jinja in double curly braces"
+                ],
+                "path": "./syntaxes/home-assistant/jinja-braces.tmLanguage",
+                "scopeName": "injection.homeassistant.jinja-braces",
+                "embeddedLanguages": {
+                    "meta.embedded.inline.jinja": "home-assistant-jinja"
+                },
+                "injectTo": [
+                    "source.home-assistant"
+                ]
+            },
+            {
+                "comments": [
+                    "Support for Jinja in single curly braces with percentage symbol"
+                ],
+                "path": "./syntaxes/home-assistant/jinja-braces-block.tmLanguage",
+                "scopeName": "injection.homeassistant.jinja-braces-block",
+                "embeddedLanguages": {
+                    "meta.embedded.block.jinja": "home-assistant-jinja"
+                },
+                "injectTo": [
+                    "source.home-assistant"
+                ]
+            },
+            {
+                "comments": [
+                    "Support for Jinja in conditionals"
+                ],
+                "path": "./syntaxes/home-assistant/jinja-conditionals.tmLanguage",
+                "scopeName": "injection.homeassistant.jinja-conditionals",
+                "embeddedLanguages": {
+                    "meta.embedded.inline.jinja": "home-assistant-jinja",
+                    "meta.embedded.block.jinja": "home-assistant-jinja"
+                },
+                "injectTo": [
+                    "source.home-assistant"
+                ]
+            },
+            {
+                "comments": [
+                    "The quote escapes implemented in the conditionals injection do not work inside brackets etc.",
+                    "Support for single quote escapes in Jinja"
+                ],
+                "path": "./syntaxes/home-assistant/jinja-single-quote-escape.tmLanguage",
+                "scopeName": "injection.homeassistant.jinja-single-quote-escape",
+                "injectTo": [
+                    "source.home-assistant"
+                ]
+            },
+            {
+                "comments": [
+                    "The quote escapes implemented in the conditionals injection do not work inside brackets etc.",
+                    "Support for double quote escapes in Jinja"
+                ],
+                "path": "./syntaxes/home-assistant/jinja-double-quote-escape.tmLanguage",
+                "scopeName": "injection.homeassistant.jinja-double-quote-escape",
+                "injectTo": [
+                    "source.home-assistant"
+                ]
+            },
+            {
+                "scopeName": "js-block.injection",
+                "path": "./src/grammars/js-block.tmLanguage.json",
+                "injectTo": [
+                    "source.home-assistant",
+                    "source.yaml"
+                ]
+            },
+            {
+                "scopeName": "js-inline.injection",
+                "path": "./src/grammars/js-inline.tmLanguage.json",
+                "injectTo": [
+                    "source.home-assistant",
+                    "source.yaml"
+                ]
+            }
+        ],
+        "commands": [
+            {
+                "command": "home-assistant-vscode.reloadAll",
+                "title": "Reload all integrations",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.scriptReload",
+                "title": "Reload Scripts",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.groupReload",
+                "title": "Reload Groups",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.homeassistantCheckConfig",
+                "title": "Check Configuration (remote!)",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.homeassistantReloadCoreConfig",
+                "title": "Reload Configuration",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.homeassistantRestart",
+                "title": "Restart Home Assistant",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.automationReload",
+                "title": "Reload Automations",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.conversationReload",
+                "title": "Reload conversation intents",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.sceneReload",
+                "title": "Reload Scenes",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.themeReload",
+                "title": "Reload Themes",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.inputReload",
+                "title": "Reload Inputs",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.homekitReload",
+                "title": "Reload HomeKit",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.filesizeReload",
+                "title": "Reload File Size",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.minMaxReload",
+                "title": "Reload Min/Max",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.genericThermostatReload",
+                "title": "Reload Generic Thermostat",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.genericCameraReload",
+                "title": "Reload Generic Camera",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.pingReload",
+                "title": "Reload Ping",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.trendReload",
+                "title": "Reload Trend",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.historyStatsReload",
+                "title": "Reload History Stats",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.universalReload",
+                "title": "Reload Universal Media Player",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.statisticsReload",
+                "title": "Reload Statistics",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.filterReload",
+                "title": "Reload Filter",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.restReload",
+                "title": "Reload REST",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.commandLineReload",
+                "title": "Reload Command Line",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.bayesianReload",
+                "title": "Reload Bayesian",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.telegramReload",
+                "title": "Reload Telegram",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.smtpReload",
+                "title": "Reload SMTP",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.mqttReload",
+                "title": "Reload MQTT",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.rpioGpioReload",
+                "title": "Reload Raspberry Pi GPIO",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.knxReload",
+                "title": "Reload KNX",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.templateReload",
+                "title": "Reload Template Entities",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.customTemplatesReload",
+                "title": "Reload custom Jinja2 templates",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.hassioAddonRestartGitPull",
+                "title": "Restart 'Git Pull' Add-on",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.hassioHostReboot",
+                "title": "Reboot Supervisor Host",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.getErrorLog",
+                "title": "Get Error Logs",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.renderTemplate",
+                "title": "Render Template",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.manageAuth",
+                "title": "Manage Home Assistant Authentication",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.debugAuth",
+                "title": "Debug Home Assistant Authentication",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.repairAuth",
+                "title": "Repair Home Assistant Authentication Configuration",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.testConnection",
+                "title": "Test Home Assistant Connection",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.openInBrowser",
+                "title": "Open Home Assistant in Browser",
+                "category": "Home Assistant"
+            },
+            {
+                "command": "home-assistant-vscode.showReloadIntegrations",
+                "title": "Reload specific integration",
+                "category": "Home Assistant"
+            }
+        ],
+        "configurationDefaults": {
+            "[home-assistant]": {
+                "editor.insertSpaces": true,
+                "editor.tabSize": 2,
+                "editor.quickSuggestions": {
+                    "other": true,
+                    "comments": false,
+                    "strings": true
+                },
+                "editor.autoIndent": "advanced"
+            }
+        },
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "home-assistant-vscode.renderTemplate",
+                    "when": "editorHasSelection"
+                },
+                {
+                    "command": "home-assistant-vscode.showReloadIntegrations"
+                },
+                {
+                    "command": "home-assistant-vscode.reloadAll"
+                },
+                {
+                    "command": "home-assistant-vscode.homeassistantReloadCoreConfig",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.homeassistantRestart"
+                },
+                {
+                    "command": "home-assistant-vscode.scriptReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.groupReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.automationReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.conversationReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.sceneReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.themeReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.inputReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.homekitReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.filesizeReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.minMaxReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.genericThermostatReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.genericCameraReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.pingReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.trendReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.historyStatsReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.universalReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.statisticsReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.filterReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.restReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.commandLineReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.bayesianReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.telegramReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.smtpReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.mqttReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.rpioGpioReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.knxReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.templateReload",
+                    "when": "false"
+                },
+                {
+                    "command": "home-assistant-vscode.customTemplatesReload",
+                    "when": "false"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "home-assistant-vscode.renderTemplate",
+                    "group": "home-assistant",
+                    "when": "editorHasSelection"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "home-assistant-vscode.reloadAll",
+                    "title": "Home Assistant: Quick reload all",
+                    "group": "navigation@1",
+                    "when": "editorLangId == home-assistant"
+                },
+                {
+                    "command": "home-assistant-vscode.showReloadIntegrations",
+                    "title": "Home Assistant: Reload specific integration",
+                    "group": "navigation@2",
+                    "when": "editorLangId == home-assistant"
+                },
+                {
+                    "command": "home-assistant-vscode.homeassistantRestart",
+                    "title": "Home Assistant: Restart Home Assistant",
+                    "group": "navigation@3",
+                    "when": "editorLangId == home-assistant"
+                }
+            ],
+            "home-assistant.reload": [
+                {
+                    "command": "home-assistant-vscode.automationReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.bayesianReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.commandLineReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.conversationReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.customTemplatesReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.filesizeReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.filterReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.genericCameraReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.genericThermostatReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.groupReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.historyStatsReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.homekitReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.homeassistantReloadCoreConfig",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.inputReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.knxReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.minMaxReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.mqttReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.pingReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.restReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.rpioGpioReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.sceneReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.scriptReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.smtpReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.statisticsReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.telegramReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.templateReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.themeReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.trendReload",
+                    "group": "2_components"
+                },
+                {
+                    "command": "home-assistant-vscode.universalReload",
+                    "group": "2_components"
+                }
+            ]
+>>>>>>> Stashed changes
         }
       }
     ],

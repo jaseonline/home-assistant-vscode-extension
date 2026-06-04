@@ -98,7 +98,7 @@ export class AuthMiddleware {
       const secretToken = await AuthManager.getToken(this.context);
       const envToken = process.env.HASS_TOKEN || process.env.SUPERVISOR_TOKEN;
       
-      const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
       const settingsToken = config.get<string>("longLivedAccessToken");
       
       const token = secretToken || envToken || settingsToken;
@@ -123,7 +123,7 @@ export class AuthMiddleware {
         
       // Create configuration object
       const settings = {
-        "vscode-home-assistant": {
+        "home-assistant-vscode": {
           longLivedAccessToken: token,
           hostUrl: hostUrl,
           ignoreCertificates: config.get<boolean>("ignoreCertificates") || false,
@@ -148,7 +148,7 @@ export class AuthMiddleware {
       setTimeout(async () => {
         try {
           AuthMiddleware.log("Sending follow-up configuration to ensure token and URL are set");
-          settings["vscode-home-assistant"].configTimestamp = Date.now();
+          settings["home-assistant-vscode"].configTimestamp = Date.now();
           await connection.sendNotification(DidChangeConfigurationNotification.type, { settings });
           AuthMiddleware.log("Follow-up configuration with token and URL sent");
         } catch (followupError) {
@@ -173,10 +173,10 @@ export class AuthMiddleware {
 
     if (Array.isArray(result)) {
       for (const item of result) {
-        if (item && typeof item === "object" && "vscode-home-assistant" in item) {
+        if (item && typeof item === "object" && "home-assistant-vscode" in item) {
           const secretToken = await AuthManager.getToken(this.context);
           const envToken = process.env.HASS_TOKEN || process.env.SUPERVISOR_TOKEN;
-          const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+          const config = vscode.workspace.getConfiguration("home-assistant-vscode");
           const settingsToken = config.get<string>("longLivedAccessToken");
           const token = secretToken || envToken || settingsToken;
 
@@ -186,16 +186,16 @@ export class AuthMiddleware {
             (process.env.SUPERVISOR_TOKEN ? "http://supervisor/core" : null);
           const url = secretUrl || settingsUrl || envUrl;
 
-          if (!item["vscode-home-assistant"]) {
-            item["vscode-home-assistant"] = {};
+          if (!item["home-assistant-vscode"]) {
+            item["home-assistant-vscode"] = {};
           }
 
           if (token) {
             AuthMiddleware.log(`Injecting token (length: ${token.length}, first 5 chars: ${token.substring(0, 5)}...) into configuration`);
-            item["vscode-home-assistant"].longLivedAccessToken = token;
+            item["home-assistant-vscode"].longLivedAccessToken = token;
 
             AuthMiddleware.log("Token injection verification: " +
-              (item["vscode-home-assistant"].longLivedAccessToken === token ?
+              (item["home-assistant-vscode"].longLivedAccessToken === token ?
                 "SUCCESS" : "FAILED"));
 
             const obscuredToken = token.length <= 10
@@ -222,7 +222,7 @@ export class AuthMiddleware {
 
           if (url) {
             AuthMiddleware.log(`Injecting URL (${url}) into configuration`);
-            item["vscode-home-assistant"].hostUrl = url;
+            item["home-assistant-vscode"].hostUrl = url;
 
             // Migrate URL if found in settings but not SecretStorage (mirroring DidChangeConfigurationNotification)
             if (!secretUrl && settingsUrl) {
@@ -243,8 +243,8 @@ export class AuthMiddleware {
               (process.env.SUPERVISOR_TOKEN ? "http://supervisor/core" : "");
           const fallbackUrl = currentSettingsUrlFallback || currentEnvUrlFallback;
 
-          if (fallbackUrl && !item["vscode-home-assistant"].hostUrl) {
-            item["vscode-home-assistant"].hostUrl = fallbackUrl;
+          if (fallbackUrl && !item["home-assistant-vscode"].hostUrl) {
+            item["home-assistant-vscode"].hostUrl = fallbackUrl;
             AuthMiddleware.log(`Also injected fallback URL: ${fallbackUrl}`);
           }
         }
@@ -266,17 +266,17 @@ export class AuthMiddleware {
     if (params.length > 0) {
       const notification = params[0] as DidChangeConfigurationParams;
       if (notification && notification.settings) {
-        // Ensure the vscode-home-assistant settings object exists
-        if (!notification.settings["vscode-home-assistant"]) {
-          notification.settings["vscode-home-assistant"] = {};
-          AuthMiddleware.log("Created missing vscode-home-assistant settings object in notification");
+        // Ensure the home-assistant-vscode settings object exists
+        if (!notification.settings["home-assistant-vscode"]) {
+          notification.settings["home-assistant-vscode"] = {};
+          AuthMiddleware.log("Created missing home-assistant-vscode settings object in notification");
         }
         
         // Try to get token from multiple sources
         const secretToken = await AuthManager.getToken(this.context);
         const envToken = process.env.HASS_TOKEN || process.env.SUPERVISOR_TOKEN;
         
-        const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+        const config = vscode.workspace.getConfiguration("home-assistant-vscode");
         const settingsToken = config.get<string>("longLivedAccessToken");
         
         const token = secretToken || envToken || settingsToken;
@@ -292,12 +292,12 @@ export class AuthMiddleware {
         // Inject token if available
         if (token) {
           AuthMiddleware.log(`Injecting token (length: ${token.length}) into notification`);
-          notification.settings["vscode-home-assistant"].longLivedAccessToken = token;
+          notification.settings["home-assistant-vscode"].longLivedAccessToken = token;
           
           // Inject URL if available
           if (url) {
             AuthMiddleware.log(`Injecting URL (${url}) into notification`);
-            notification.settings["vscode-home-assistant"].hostUrl = url;
+            notification.settings["home-assistant-vscode"].hostUrl = url;
             
             // If URL was found in settings but not in SecretStorage, migrate it
             if (!secretUrl && settingsUrl) {

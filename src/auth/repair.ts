@@ -6,7 +6,7 @@ import { AuthManager } from "./manager";
  * This function addresses common migration and storage issues for both token and URL.
  */
 export async function repairAuthConfiguration(context: vscode.ExtensionContext): Promise<void> {
-  const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+  const config = vscode.workspace.getConfiguration("home-assistant-vscode");
   
   // Get current state for token
   const settingsToken = config.get<string>("longLivedAccessToken");

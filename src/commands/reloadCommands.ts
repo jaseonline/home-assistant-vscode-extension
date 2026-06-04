@@ -32,7 +32,7 @@ export function registerReloadCommands(
   // Register special case for inputReload that handles multiple domains
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.inputReload",
+      "home-assistant-vscode.inputReload",
       async (_) => {
         const inputReloadDomains = [
           "input_button",
@@ -61,7 +61,7 @@ export function registerReloadCommands(
   // Register the reload integrations menu command
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "vscode-home-assistant.showReloadIntegrations",
+      "home-assistant-vscode.showReloadIntegrations",
       () => showReloadIntegrations(commandMappings)
     )
   );
@@ -76,14 +76,14 @@ export async function showReloadIntegrations(commandMappings: CommandMappings[])
     // Filter all reload commands
     const reloadCommands = commandMappings
       .filter(cmd => cmd.commandId.toLowerCase().includes("reload"))
-      .filter(cmd => cmd.commandId !== "vscode-home-assistant.reloadAll") // Filter out "reloadAll" since it's available in the main menu
+      .filter(cmd => cmd.commandId !== "home-assistant-vscode.reloadAll") // Filter out "reloadAll" since it's available in the main menu
       .map(cmd => {
         // Extract just the integration name (domain) from the command ID
-        // For example, extract "script" from "vscode-home-assistant.scriptReload"
+        // For example, extract "script" from "home-assistant-vscode.scriptReload"
         const domainName = cmd.domain === "homeassistant" ? "Core" : cmd.domain;
         
         return {
-          label: cmd.commandId.replace("vscode-home-assistant.", ""),
+          label: cmd.commandId.replace("home-assistant-vscode.", ""),
           description: `${cmd.domain}.${cmd.service}`,
           commandId: cmd.commandId,
           domain: cmd.domain,

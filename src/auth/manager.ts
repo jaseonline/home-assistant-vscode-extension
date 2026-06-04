@@ -99,7 +99,7 @@ export class AuthManager {
    * @returns true if a token was migrated, false otherwise
    */
   public static async migrateTokenFromSettings(context: vscode.ExtensionContext): Promise<boolean> {
-    const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+    const config = vscode.workspace.getConfiguration("home-assistant-vscode");
     const token = config.get<string>("longLivedAccessToken");
 
     // If there's no token in settings, nothing to migrate
@@ -132,7 +132,7 @@ export class AuthManager {
    * @returns true if a URL was migrated, false otherwise
    */
   public static async migrateUrlFromSettings(context: vscode.ExtensionContext): Promise<boolean> {
-    const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+    const config = vscode.workspace.getConfiguration("home-assistant-vscode");
     const url = config.get<string>("hostUrl");
 
     // If there's no URL in settings, nothing to migrate
@@ -171,7 +171,7 @@ export class AuthManager {
     
     // If not in SecretStorage, check settings and environment
     if (!hostUrl) {
-      const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
       hostUrl = config.get<string>("hostUrl") || process.env.HASS_SERVER || 
         (process.env.SUPERVISOR_TOKEN ? "http://supervisor/core" : "");
       
@@ -225,7 +225,7 @@ export class AuthManager {
     
     // If not found in SecretStorage or environment, try from settings
     if (!token) {
-      const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
       token = config.get<string>("longLivedAccessToken");
       
       // If found in settings, migrate it

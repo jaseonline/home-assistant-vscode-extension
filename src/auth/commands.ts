@@ -51,7 +51,7 @@ async function setToken(context: vscode.ExtensionContext): Promise<void> {
   
   // If not in SecretStorage, check settings and environment
   if (!currentUrl) {
-    const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+    const config = vscode.workspace.getConfiguration("home-assistant-vscode");
     currentUrl = config.get<string>("hostUrl") || process.env.HASS_SERVER || 
       (process.env.SUPERVISOR_TOKEN ? "http://supervisor/core" : "");
   }
@@ -95,7 +95,7 @@ async function setToken(context: vscode.ExtensionContext): Promise<void> {
       await AuthManager.storeUrl(context, instanceUrl);
       
       // Remove from settings if it exists
-      const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
       if (config.get("hostUrl") !== undefined) {
         await config.update("hostUrl", undefined, vscode.ConfigurationTarget.Global);
       }
@@ -117,7 +117,7 @@ async function setToken(context: vscode.ExtensionContext): Promise<void> {
     try {
       await AuthManager.storeToken(context, token);
       // Remove from settings if it exists
-      const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
       if (config.get("longLivedAccessToken") !== undefined) {
         await config.update("longLivedAccessToken", undefined, vscode.ConfigurationTarget.Global);
       }
@@ -309,7 +309,7 @@ async function setInstanceUrl(context: vscode.ExtensionContext): Promise<void> {
     try {
       await AuthManager.storeUrl(context, newUrl);
       // Remove from settings if it exists
-      const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
       if (config.get("hostUrl") !== undefined) {
         await config.update("hostUrl", undefined, vscode.ConfigurationTarget.Global);
       }

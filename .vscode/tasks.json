@@ -6,7 +6,7 @@
     {
         "label": "Run Extension",
         "type": "shell",
-        "command": "code --extensionDevelopmentPath=/Users/frenck/code/vscode-home-assistant",
+        "command": "code --extensionDevelopmentPath=/Users/frenck/code/home-assistant-vscode",
         "group": "test",
         "isBackground": true,
         "problemMatcher": []

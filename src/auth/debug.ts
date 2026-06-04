@@ -15,7 +15,7 @@ export async function debugAuthSettings(context: vscode.ExtensionContext): Promi
   const secretUrl = await AuthManager.getUrl(context);
   
   // Get token from settings (for migration check)
-  const config = vscode.workspace.getConfiguration("vscode-home-assistant");
+  const config = vscode.workspace.getConfiguration("home-assistant-vscode");
   const settingsToken = config.get<string>("longLivedAccessToken");
   // Get URL from settings (for migration check)
   const settingsUrl = config.get<string>("hostUrl");
@@ -117,7 +117,7 @@ export async function debugAuthSettings(context: vscode.ExtensionContext): Promi
     
     const ignoreCertificates = config.get<boolean>("ignoreCertificates");
     if (ignoreCertificates) {
-      debugPanel.appendLine("Ignoring TLS certificate errors (vscode-home-assistant.ignoreCertificates is true).");
+      debugPanel.appendLine("Ignoring TLS certificate errors (home-assistant-vscode.ignoreCertificates is true).");
     }
     
     try {
@@ -169,7 +169,7 @@ export async function debugAuthSettings(context: vscode.ExtensionContext): Promi
         if (err.message.includes("CERT_HAS_EXPIRED")) {
           debugPanel.appendLine("Hint: The TLS certificate for your Home Assistant instance may have expired.");
         } else if (err.message.includes("UNABLE_TO_VERIFY_LEAF_SIGNATURE")) {
-          debugPanel.appendLine("Hint: The TLS certificate for your Home Assistant instance is not trusted. You may need to set `vscode-home-assistant.ignoreCertificates` to true in your VS Code settings if you are using a self-signed certificate.");
+          debugPanel.appendLine("Hint: The TLS certificate for your Home Assistant instance is not trusted. You may need to set `home-assistant-vscode.ignoreCertificates` to true in your VS Code settings if you are using a self-signed certificate.");
         } else if (err.message.includes("ENOTFOUND")) {
           debugPanel.appendLine("Hint: The hostname for your Home Assistant instance could not be resolved. Check your DNS settings and the URL.");
         } else if (err.message.includes("ECONNREFUSED")) {
