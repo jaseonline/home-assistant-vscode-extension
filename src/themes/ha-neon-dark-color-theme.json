@@ -278,7 +278,7 @@
         "support.type.domain.homeassistant"
       ],
       "settings": {
-        "foreground": "#bbadff"
+        "foreground": "#c792ea"
       }
     },
     {
@@ -288,7 +288,7 @@
         "entity.other.entity-name.home-assistant"
       ],
       "settings": {
-        "foreground": "#00b4ff"
+        "foreground": "#00ffe7"
       }
     },
     {
@@ -298,7 +298,7 @@
         "punctuation.accessor.dot.home-assistant"
       ],
       "settings": {
-        "foreground": "#6655aa"
+        "foreground": "#e8e8f0"
       }
     },
     {
@@ -836,3 +836,4 @@
     "comment": "#929292"
   }
 }
+
