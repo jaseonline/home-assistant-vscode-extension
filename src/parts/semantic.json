@@ -1,0 +1,20 @@
+{
+  "enumMember": "#00b4ff",
+  "variable.constant": "#bbadff",
+  "variable.defaultLibrary": "#e8e8f0",
+  "variable.readonly": "#00ffe7",
+  "function": "#ff9500",
+  "method": "#ff9500",
+  "class": "#bbadff",
+  "interface": "#bbadff",
+  "type": "#bbadff",
+  "namespace": "#bbadff",
+  "property": "#ffe600",
+  "parameter": "#00ffe7",
+  "variable": "#00ffe7",
+  "string": "#ffe600",
+  "keyword": "#ff0080",
+  "number": "#c792ea",
+  "regexp": "#00ff80",
+  "comment": "#929292"
+}

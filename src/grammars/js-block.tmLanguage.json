@@ -1,0 +1,23 @@
+{
+  "scopeName": "js-block.injection",
+  "injectionSelector": "L:string.unquoted.block",
+  "name": "Grammar for Button-Card Javascript blocks surrounded by triple square brackets",
+  "patterns": [
+    {
+      "name": "keyword.operator",
+      "begin": "\\[{3,}",
+      "end": "\\]{3,}",
+      "captures": {
+        "0": {
+          "name": "constant.character.escape"
+        }
+      },
+      "contentName": "meta.embedded.block.js",
+      "patterns": [
+        {
+          "include": "source.js"
+        }
+      ]
+    }
+  ]
+}
