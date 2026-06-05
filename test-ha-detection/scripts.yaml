@@ -1,0 +1,17 @@
+turn_off_tv:
+  sequence:
+  - type: turn_off
+    device_id: 8bc847c59c120a29f16316dca9cffc31
+    entity_id: 86804820ac084a3955100a1b5c5bd71f
+    domain: remote
+  - action: remote.send_command
+    metadata: {}
+    target:
+      device_id: 253994b80917013e95d051f1cd3225ac
+    data:
+      num_repeats: 1
+      delay_secs: 0.4
+      device: TV
+      command: PowerOff
+  alias: Turn off TV
+  description: ''

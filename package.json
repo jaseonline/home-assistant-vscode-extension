@@ -46,16 +46,16 @@
       {
         "title": "Home Assistant Config Helper",
         "properties": {
-          "home-assistant-vscode.ignoreCertificates": {
+          "home-assistant-vscode-extension.ignoreCertificates": {
             "type": "boolean",
             "description": "Enable insecure transport. Check this if you want to connect over an insecure HTTPS transport with a invalid certificate!"
           },
-          "home-assistant-vscode.disableAutomaticFileAssociation": {
+          "home-assistant-vscode-extension.disableAutomaticFileAssociation": {
             "type": "boolean",
             "default": false,
             "description": "Disable automatic association of YAML files with the Home Assistant language. When enabled, the extension will not automatically set file associations for YAML files, even in detected Home Assistant workspaces."
           },
-          "home-assistant-vscode.autoRenderTemplates": {
+          "home-assistant-vscode-extension.autoRenderTemplates": {
             "type": "boolean",
             "default": true,
             "description": "Enable automatic rendering of Home Assistant templates on hover. When enabled, templates will be rendered and displayed as previews when hovering over template values in YAML files."
@@ -437,16 +437,42 @@
       }
     ],
     "configurationDefaults": {
+      "editor.semanticHighlighting.enabled": false,
+      "files.associations": {
+        "*.yaml": "home-assistant",
+        "*.yml": "home-assistant"
+      },
+      "files.autoGuessEncoding": true,
+      "files.watcherExclude": {
+        "**/tts/**": true,
+        "**/www/community/**": true,
+        "**/.storage/**": true,
+        "**/__pycache__/**": true
+      },
+      "search.exclude": {
+        "**/tts/**": true,
+        "**/www/community/**": true,
+        "**/.storage/**": true,
+        "**/__pycache__/**": true
+      },
       "[home-assistant]": {
+        "editor.defaultFormatter": "JaseOnline.home-assistant-vscode-extension",
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
+        "editor.formatOnPaste": true,
+        "editor.autoIndent": "advanced",
         "editor.quickSuggestions": {
           "other": true,
           "comments": false,
           "strings": true
-        },
-        "editor.autoIndent": "advanced"
-      }
+        }
+      },
+      "[home-assistant-jinja]": {
+        "editor.defaultFormatter": "JaseOnline.home-assistant-vscode-extension"
+      },
+      "home-assistant-vscode.autoRenderTemplates": true,
+      "home-assistant-vscode.disableAutomaticFileAssociation": true,
+      "home-assistant-vscode.ignoreCertificates": true
     },
     "menus": {
       "commandPalette": [

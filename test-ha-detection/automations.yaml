@@ -1,0 +1,28 @@
+- id: "1610984712330"
+  alias: "Routine: Evening Lights"
+  description: ""
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.jack
+          state: home
+        - condition: state
+          entity_id: person.james
+          state: home
+      alias: Jack or James are Home
+  action:
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+    - service: scene.turn_on
+      data:
+        transition: 30
+      target:
+        entity_id: scene.evening_lighting
+  mode: single

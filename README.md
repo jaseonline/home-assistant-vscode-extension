@@ -1,6 +1,6 @@
 <h1 align="center">
 
-<img src="https://raw.githubusercontent.com/keesschollaart81/home-assistant-vscode/dev/assets/header.png" alt="Home Assistant Config Helper for Visual Studio Code"/>
+<img src="https://raw.githubusercontent.com/jaseonline/home-assistant-vscode-extension/dev/assets/header.png" alt="Home Assistant Config Helper for Visual Studio Code"/>
 
 </h1>
 
@@ -12,16 +12,16 @@
 
 3. Configure the connection to Home Assistant via the HA Section in the VS Code Settings UI
 
-   More details in [the How-To in the Wiki](https://github.com/keesschollaart81/home-assistant-vscode/wiki/Configure-connection-to-HA)
+   More details in [the How-To in the Wiki](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Configure-connection-to-HA)
 
 4. Enjoy the features showcased below 👇
 
 5. Continue reading in the Wiki:
 
-   - [Configure connection to HA](https://github.com/keesschollaart81/home-assistant-vscode/wiki/Configure-connection-to-HA)
-   - [VS Code Remote SSH](https://github.com/keesschollaart81/home-assistant-vscode/wiki/VS-Code-Remote-SSH)
-   - [Your config, local or remote?](https://github.com/keesschollaart81/home-assistant-vscode/wiki/Your-config,-local-or-remote%3F)
-   - [The troubleshooting guide](https://github.com/keesschollaart81/home-assistant-vscode/wiki/Troubleshooting)
+   - [Configure connection to HA](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Configure-connection-to-HA)
+   - [VS Code Remote SSH](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/VS-Code-Remote-SSH)
+   - [Your config, local or remote?](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Your-config,-local-or-remote%3F)
+   - [The troubleshooting guide](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Troubleshooting)
 
 # Features
 
@@ -29,33 +29,33 @@
 
 When connected with your Home Assistant server, entity IDs and actions will be auto-completed.
 
-<img src="https://raw.githubusercontent.com/keesschollaart81/home-assistant-vscode/dev/assets/entity_service_completion.gif">
+<img src="https://raw.githubusercontent.com/jaseonline/home-assistant-vscode-extension/dev/assets/entity_service_completion.gif">
 
 ## Completion & Validation for Configuration & Lovelace Schema
 
 Most of the scheme's of Home Assistant will be validated and things like properties, values and enums will be auto-completed. This extension understands the behaviour of Home Assistant '!include...' behaviour and use this to provide scoped validation for all your files.
 
-<img src="https://raw.githubusercontent.com/keesschollaart81/home-assistant-vscode/dev/assets/schema_validation_completion.gif">
+<img src="https://raw.githubusercontent.com/jaseonline/home-assistant-vscode-extension/dev/assets/schema_validation_completion.gif">
 
 Deprecation Warnings:
 
-<img src="https://raw.githubusercontent.com/keesschollaart81/home-assistant-vscode/dev/assets/deprecation-warnings.png">
+<img src="https://raw.githubusercontent.com/jaseonline/home-assistant-vscode-extension/dev/assets/deprecation-warnings.png">
 
 Schema Documentation
 
-<img src="https://raw.githubusercontent.com/keesschollaart81/home-assistant-vscode/dev/assets/schema-documentation.png">
+<img src="https://raw.githubusercontent.com/jaseonline/home-assistant-vscode-extension/dev/assets/schema-documentation.png">
 
 ## Go to Definition for Includes
 
 Easy navigate between your files references via the different !include... tags using 'f12' / 'Go to Definition'.
 
-<img src="https://raw.githubusercontent.com/keesschollaart81/home-assistant-vscode/dev/assets/go_to_definition.gif">
+<img src="https://raw.githubusercontent.com/jaseonline/home-assistant-vscode-extension/dev/assets/go_to_definition.gif">
 
 ## Snippets
 
 Snippets allow you to create commonly used data structures very quickly.
 
-<img src="https://raw.githubusercontent.com/keesschollaart81/home-assistant-vscode/dev/assets/snippet.gif">
+<img src="https://raw.githubusercontent.com/jaseonline/home-assistant-vscode-extension/dev/assets/snippet.gif">
 
 ## Commands
 
@@ -69,16 +69,12 @@ Evaluate jinja templates via Home Assistant's API and see how they would render.
 
 # Contribution
 
-- [How to update the schemas](https://github.com/keesschollaart81/home-assistant-vscode/wiki/HowTo:-Update-the-schema's)
-- [Local Development](https://github.com/keesschollaart81/home-assistant-vscode/wiki/Local-development-of-this-Extension)
+- [How to update the schemas](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/HowTo:-Update-the-schema's)
+- [Local Development](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Local-development-of-this-Extension)
 
 # Release Notes
 
-Read all the recent changes in the [GitHub releases section](https://github.com/keesschollaart81/home-assistant-vscode/releases)
-
-# Feedback / Ideas
-
-Create an [issue](https://github.com/keesschollaart81/home-assistant-vscode/issues/new/choose), reach out to me on [Twitter](https://twitter.com/keesschollaart) or the [Home Assistant Discord](https://discord.gg/c5DvZ4e).
+Read all the recent changes in the [GitHub releases section](https://github.com/jaseonline/home-assistant-vscode-extension/releases)
 
 # Things to do / up for grabs
 

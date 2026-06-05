@@ -278,7 +278,7 @@
         "support.type.domain.homeassistant"
       ],
       "settings": {
-        "foreground": "#c792ea"
+        "foreground": "#ffff00"
       }
     },
     {
@@ -288,7 +288,7 @@
         "entity.other.entity-name.home-assistant"
       ],
       "settings": {
-        "foreground": "#00ffe7"
+        "foreground": "#ff00ff"
       }
     },
     {
@@ -457,7 +457,7 @@
         "entity.name.tag.yaml.homeassistant"
       ],
       "settings": {
-        "foreground": "#00b4ff"
+        "foreground": "#0011ff"
       }
     },
     {
