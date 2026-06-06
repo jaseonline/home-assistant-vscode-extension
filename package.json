@@ -42,7 +42,7 @@
     "theme",
     "rgb",
     "rgba"
-    ],
+  ],
   "main": "./out/extension",
   "contributes": {
     "configuration": [
@@ -766,7 +766,8 @@
     ]
   },
   "scripts": {
-    "compile": "tsc -p src/language-service/tsconfig.json && ts-node src/language-service/src/schemas/generateSchemas.ts --quick && tsc -p ./",
+    "build:theme": "node scripts/build-theme.js",
+    "compile": "node scripts/build-theme.js && tsc -p src/language-service/tsconfig.json && ts-node src/language-service/src/schemas/generateSchemas.ts --quick && tsc -p ./",
     "format:eslint": "eslint \"**/src/**/*.ts\" --fix",
     "format:prettier": "prettier \"**/src/**/*.json\" --write",
     "format": "npm run format:eslint && npm run format:prettier",

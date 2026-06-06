@@ -1176,7 +1176,7 @@
                     button|calendar|camera|climate|conversation|counter|cover|
                     device_tracker|event|fan|group|homeassistant|image|
                     input_boolean|input_button|input_datetime|input_number|
-                    input_select|input_text|lock|logbook|media_player|notify|
+                    input_select|input_text|light|lock|logbook|media_player|notify|
                     number|persistent_notification|person|recorder|remote|scene|
                     script|select|sensor|siren|sun|switch|system_health|text|
                     timer|todo|update|vacuum|water_heater|weather|zone
