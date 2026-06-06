@@ -2,7 +2,7 @@
   "name": "home-assistant-vscode-extension",
   "displayName": "Home Assistant Config Helper",
   "description": "Home Assistant Configuration Helper",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "preview": false,
   "engines": {
     "vscode": "^1.99.0"
@@ -20,7 +20,7 @@
     "url": "https://github.com/jaseonline/home-assistant-vscode-extension"
   },
   "bugs": {
-    "url": "https://github.com/jaseonline/home-assistant-vscode-extension",
+    "url": "https://github.com/jaseonline/home-assistant-vscode-extension/issues",
     "email": "jase@matilda.network"
   },
   "license": "MIT",
@@ -52,7 +52,7 @@
           "home-assistant-vscode-extension.ignoreCertificates": {
             "type": "boolean",
             "default": true,
-            "description": "Enable insecure transport. Check this if you want to connect over an insecure HTTPS transport with a invalid certificate!"
+            "description": "Enable insecure transport. Check this if you want to connect over an insecure HTTPS transport with an invalid certificate!"
           },
           "home-assistant-vscode-extension.disableAutomaticFileAssociation": {
             "type": "boolean",
@@ -766,7 +766,7 @@
     ]
   },
   "scripts": {
-    "compile": "tsc -p src/language-service/tsconfig.json && ts-node src/language-service/src/schemas/generateSchemas.ts --quick && tsc -p ./ ",
+    "compile": "tsc -p src/language-service/tsconfig.json && ts-node src/language-service/src/schemas/generateSchemas.ts --quick && tsc -p ./",
     "format:eslint": "eslint \"**/src/**/*.ts\" --fix",
     "format:prettier": "prettier \"**/src/**/*.json\" --write",
     "format": "npm run format:eslint && npm run format:prettier",

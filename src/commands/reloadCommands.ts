@@ -120,7 +120,8 @@ export async function showReloadIntegrations(commandMappings: CommandMappings[])
       await vscode.commands.executeCommand(selectedCommand.commandId);
     }
   } catch (error) {
-    vscode.window.showErrorMessage(`Error showing reload integrations: ${error.message}`);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    vscode.window.showErrorMessage(`Error showing reload integrations: ${errorMessage}`);
   }
 }
 

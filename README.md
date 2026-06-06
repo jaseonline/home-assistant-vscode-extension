@@ -1,49 +1,63 @@
-<h1 align="center">
-![banner-dark](assets/banner-dark.png)
-</h1>
+![banner-dark](./assets/banner-dark.png)
 # Features
 
 ## Completion for Entity IDs, Actions, Scenes and Triggers
 
 When connected with your Home Assistant server, entity IDs and actions will be auto-completed.
 
-![image](assets/entity_service_completion.gif)
+![entity_service_completion](./assets/entity_service_completion.gif)
 
 ## Completion & Validation for Configuration & Lovelace Schema
 
-Most of the scheme's of Home Assistant will be validated and things like properties, values and enums will be auto-completed. This extension understands the behaviour of Home Assistant '!include...' behaviour and use this to provide scoped validation for all your files.
+Most of the schemas of Home Assistant will be validated and things like properties, values and enums will be auto-completed. This extension understands the behaviour of Home Assistant '!include...' and uses this to provide scoped validation for all your files.
 
-![image](assets/schema_validation_completion.gif)
+![schema_validation_completion](./assets/schema_validation_completion.gif)
 
 Deprecation Warnings:
 
-![image](assets/deprecation-warnings.png)
+![eprecation-warnings](./assets/deprecation-warnings.png)
 
 Schema Documentation
 
-![image](assets/schema-documentation.png)
+![schema-documentation](./assets/schema-documentation.png)
 
 ## Go to Definition for Includes
 
-Easy navigate between your files references via the different !include... tags using 'f12' / 'Go to Definition'.
+Easily navigate between your files references via the !include... tags using 'F12' / 'Go to Definition'.
 
-![image](assets/go_to_definition.gif)
+![go_to_definition](./assets/go_to_definition.gif)
 
 ## Snippets
 
 Snippets allow you to create commonly used data structures very quickly.
 
-![image](assets/snippet.gif)
+![snippet](./assets/snippet.gif)
 
 ## Commands
 
-Commands allow you to quickly interact with Home Assistant! Find them using Cmd+shift+P and type 'Home Assistant'
+Commands allow you to quickly interact with Home Assistant! Find them using Cmd+Shift+P and type 'Home Assistant'
 
 ## Render templates
 
 Evaluate jinja templates via Home Assistant's API and see how they would render.
 
-![image](assets/render-template.png)
+![render-template](./assets/render-template.png)
+
+## Standardised Palette
+
+| Purpose | HEX |
+| -- | -- |
+| NEON BLUE | #5fe8ff |
+| NEON GREEN | #64ff00 |
+| NEON YELLOW | #e7ff00 |
+| NEON PINK | #fc49ab |
+| NEON ORANGE | #ff7300 |
+| Accent | #FB073A |
+| Error | #F14C4C |
+| Cyan | #00FFE7 |
+| Blue | #00B4FF |
+| Yellow | #FFE600 |
+| Warning | #CCA700 |
 
 # Getting started
 
