@@ -26,10 +26,13 @@ npm run schema
 # Watch mode for extension TypeScript only
 npm run watch
 
-# Lint
+# Lint (ESLint + Prettier check + type check)
 npm run lint
 
-# Tests (compiles first)
+# Auto-fix lint/formatting issues
+npm run format
+
+# Tests (compiles first, then runs inside a VS Code host process)
 npm test
 ```
 
@@ -40,6 +43,14 @@ The `compile` script runs three steps in order:
 
 **Important:** `generateSchemas.ts` must be run via `ts-node` (not `node dist/...`). It uses `__dirname` to resolve `.ts` source files; running the compiled JS from `dist/` breaks this because the `.ts` files are only in `src/`.
 
+## Testing
+
+Tests run as VS Code integration tests inside a real VS Code extension host, using `@vscode/test-electron`. The test workspace is `./test-workspace/`. There is no unit test runner — all tests spin up VS Code via `vscode-test`.
+
+- Config: `.vscode-test.js` — `out/test/**/*.test.js`, TDD mocha, 20 s timeout, `--disable-extensions`
+- There is no CLI mechanism to run a single test file; running `npm test` runs the full suite.
+- Most tests in `src/test/suite/` use mock connections and do not require a live HA instance.
+
 ## Architecture
 
 ### Two-Process Model
@@ -49,18 +60,58 @@ The extension runs as two separate Node.js processes communicating over IPC:
 - **Extension host** (`src/extension.ts` → `out/extension.js`): VS Code process. Manages auth (SecretStorage), status bar, commands, and spawns the language server.
 - **Language server** (`src/server/server.ts` → `out/server/server.js`): Separate process. Handles all YAML intelligence — completions, validation, hover, go-to-definition. Uses `vscode-languageclient`/`vscode-languageserver`.
 
-The extension host starts the language server via `LanguageClient`, passing credentials in `initializationOptions`. An `AuthMiddleware` intercepts LSP messages to inject the HA token and URL from SecretStorage.
+The extension host starts the language server via `LanguageClient`, passing credentials in `initializationOptions`. An `AuthMiddleware` intercepts LSP messages to inject the HA token and URL from SecretStorage into every configuration exchange.
+
+### Credential Flow
+
+Credentials (token + HA URL) are resolved at three layers, each falling back to the next:
+1. **VS Code SecretStorage** — keys `home-assistant.token` and `home-assistant.url` (managed by `AuthManager`)
+2. **Environment variables** — `HASS_TOKEN` / `SUPERVISOR_TOKEN` and `HASS_SERVER` (Supervisor sets these when running as an add-on)
+3. **Legacy settings.json** — `longLivedAccessToken` and `hostUrl` (auto-migrated to SecretStorage on first use and cleared)
+
+On startup, `AuthManager.migrateTokenFromSettings` and `migrateUrlFromSettings` run to move any settings-stored credentials into SecretStorage.
+
+### IPC Surface Between Processes
+
+The extension host and language server communicate beyond standard LSP via custom requests and notifications:
+
+**Extension → Server (requests):**
+- `callService` — triggers a HA service call (domain, service, optional serviceData)
+- `checkConfig` — triggers HA config check
+- `getErrorLog` — fetches HA error log
+- `renderTemplate` — renders a Jinja2 template against HA
+
+**Server → Extension (notifications):**
+- `no-config` — credentials missing or incomplete
+- `ha_connected` — WebSocket connected, carries `{ name, version }`
+- `ha_connection_error` — WebSocket failed, carries `{ error }`
+- `configuration_check_completed` — result of `checkConfig`
+- `get_eror_log_completed` — (typo in original) result of `getErrorLog`
+- `render_template_completed` — rendered template string
+
+### AuthMiddleware
+
+`src/auth/middleware.ts` monkey-patches the LanguageClient's private connection (`client._connection`) to intercept:
+- `ConfigurationRequest` — injects token and URL into every config response before it reaches the server
+- `DidChangeConfigurationNotification` — injects token and URL into outgoing config update notifications
+
+On install it immediately sends an initial `DidChangeConfigurationNotification` with full credentials, then a follow-up after 2 s to handle race conditions during server startup. The `@ts-expect-error` on `client._connection` is intentional — the connection is private in `vscode-languageclient` but must be accessed directly for middleware installation.
 
 ### Language Service (`src/language-service/`)
 
 Self-contained sub-package with its own `tsconfig.json` (`outDir: dist`, `rootDir: src`). Provides:
 
-- **`haLanguageService.ts`** — Orchestrates completions, diagnostics, hover, definition. Wraps `yaml-language-server` and injects HA-specific completions.
+- **`haLanguageService.ts`** — Orchestrates completions, diagnostics, hover, definition. Wraps `yaml-language-server` and injects HA-specific completions. Hover template rendering uses a 30 s in-memory cache (`templateCache` map) keyed by template text.
 - **`completionHelpers/`** — One file per completion type: entity IDs, services, areas, floors, labels, device IDs, secrets, UUIDs.
-- **`haConfig/`** — Parses the HA config directory, resolves `!include` / `!include_dir_*` YAML tags.
-- **`home-assistant/`** — WebSocket connection to HA (`haConnection.ts`, `socket.ts`) using `home-assistant-js-websocket`.
+- **`haConfig/`** — Parses the HA config directory, resolves `!include` / `!include_dir_*` YAML tags. File rediscovery on save is debounced (1 s) and only fires for root config files, files in `blueprints/`, or files containing `!include` directives — not on every save.
+- **`home-assistant/`** — WebSocket connection to HA (`haConnection.ts`, `socket.ts`) using `home-assistant-js-websocket`. Exposes `onConnectionEstablished` and `onConnectionFailed` callbacks used by the server to notify the extension host.
 - **`schemas/`** — TypeScript type definitions compiled to JSON Schema at build time. `configuration.ts` is the root; `integrations/core/` has one `.ts` per integration; `lovelace/` covers dashboard schemas. `generateSchemas.ts` uses `typescript-json-schema` to emit `dist/schemas/json/*.json`, which are loaded at runtime by `schemaService.ts`.
 - **`definition/`** — Go-to-definition providers for `!include` tags, script references, and secrets.
+- **`configuration.ts`** — `ConfigurationService` receives `DidChangeConfigurationParams` from the server's `onDidChangeConfiguration` handler and applies the resolved token/URL. It also reads env vars directly as a fallback.
+
+### HA Workspace Detection
+
+`isHomeAssistantWorkspace()` in `src/extension.ts` guards automatic YAML file-association. It looks for `configuration.yaml` first, then checks for `.storage/`, `home-assistant_v2.db`, `home-assistant.log`, `.HA_VERSION`, `automations.yaml`, `scripts.yaml`, `scenes.yaml`, or `ui-lovelace.yaml`. If none found, it reads `configuration.yaml` and checks for a `homeassistant:` top-level key. This prevents the extension from hijacking YAML in non-HA projects.
 
 ### Grammar / Syntax Highlighting
 
