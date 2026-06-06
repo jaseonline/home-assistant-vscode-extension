@@ -1,4 +1,5 @@
 {
+  "$schema": "vscode://schemas/color-theme",
   "name": "HA Neon Dark",
   "type": "dark",
   "semanticHighlighting": true,
@@ -263,7 +264,6 @@
       "name": "Home Assistant - Entity ID",
       "scope": [
         "entity.name.tag.home-assistant",
-        "entity.name.tag.yaml",
         "constant.other.entity-id.home-assistant"
       ],
       "settings": {
@@ -383,9 +383,7 @@
         "string.unquoted.plain.out.home-assistant",
         "string.unquoted.plain.in.home-assistant",
         "string.unquoted.plain.out.homeassistant",
-        "string.unquoted.plain.in.homeassistant",
-        "string.unquoted.plain.out.homeassistantsource.home-assistant",
-        "string.unquoted.plain.in.homeassistantsource.home-assistant"
+        "string.unquoted.plain.in.homeassistant"
       ],
       "settings": {
         "foreground": "#00ffe7"
@@ -418,8 +416,6 @@
     {
       "name": "Home Assistant - Comments",
       "scope": [
-        "comment.line.number-sign.home-assistant",
-        "punctuation.definition.comment.home-assistant",
         "comment.line.number-sign.homeassistant",
         "punctuation.definition.comment.homeassistant"
       ],
@@ -453,11 +449,10 @@
     {
       "name": "Home Assistant - YAML Keys (homeassistant suffix)",
       "scope": [
-        "entity.name.tag.homeassistant",
-        "entity.name.tag.yaml.homeassistant"
+        "entity.name.tag.homeassistant"
       ],
       "settings": {
-        "foreground": "#0011ff"
+        "foreground": "#29b8db"
       }
     },
     {

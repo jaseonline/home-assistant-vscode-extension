@@ -28,7 +28,6 @@
   "activationEvents": [
     "workspaceContains:**/configuration.yaml",
     "workspaceContains:**/ui-lovelace.yaml",
-    "onLanguage:home-assistant",
     "onFileSystem:ftp",
     "onFileSystem:ssh",
     "onFileSystem:sftp"
@@ -52,6 +51,7 @@
         "properties": {
           "home-assistant-vscode-extension.ignoreCertificates": {
             "type": "boolean",
+            "default": true,
             "description": "Enable insecure transport. Check this if you want to connect over an insecure HTTPS transport with a invalid certificate!"
           },
           "home-assistant-vscode-extension.disableAutomaticFileAssociation": {
@@ -444,7 +444,8 @@
       "editor.semanticHighlighting.enabled": false,
       "files.associations": {
         "*.yaml": "home-assistant",
-        "*.yml": "home-assistant"
+        "*.yml": "home-assistant",
+        "*.jinja": "home-assistant-jinja"
       },
       "files.autoGuessEncoding": true,
       "files.watcherExclude": {
@@ -473,10 +474,7 @@
       },
       "[home-assistant-jinja]": {
         "editor.defaultFormatter": "JaseOnline.home-assistant-vscode-extension"
-      },
-      "home-assistant-vscode.autoRenderTemplates": true,
-      "home-assistant-vscode.disableAutomaticFileAssociation": true,
-      "home-assistant-vscode.ignoreCertificates": true
+      }
     },
     "menus": {
       "commandPalette": [
