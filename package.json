@@ -1,7 +1,7 @@
 {
   "name": "home-assistant-vscode-extension",
   "displayName": "Home Assistant Config Helper",
-  "description": " Completion for entity-id's in Home Assistant Configurations",
+  "description": "Home Assistant Configuration Helper",
   "version": "1.1.2",
   "preview": false,
   "engines": {
@@ -10,7 +10,6 @@
   "categories": [
     "Themes",
     "Other",
-    "Home Assistant",
     "Programming Languages",
     "Formatters",
     "Snippets"
@@ -38,8 +37,13 @@
     "home",
     "assistant",
     "home-assistant",
-    "homeassistant"
-  ],
+    "homeassistant",
+    "yaml",
+    "color",
+    "theme",
+    "rgb",
+    "rgba"
+    ],
   "main": "./out/extension",
   "contributes": {
     "configuration": [
