@@ -135,22 +135,7 @@ export async function activate(
       const connection = client._connection || client;
       await AuthMiddleware.install(context, connection);
       console.log("Auth middleware successfully installed");
-
-      // Force an initial configuration refresh to ensure token and URL are set
-      const config = vscode.workspace.getConfiguration("home-assistant-vscode");
-
-      // Get the token and URL directly and explicitly trigger a configuration update
-      const token = await AuthManager.getToken(context);
-      const url = await AuthManager.getUrl(context); // Also check URL
-
-      if (token && url) { // Ensure both token and URL are present
-        console.log("Token and Home Assistant instance URL found, explicitly sending configuration update");
-        // Force update some setting to trigger a configuration refresh
-        await config.update("triggerConfigRefresh", Date.now(), vscode.ConfigurationTarget.Global);
-
-        // Check the status bar connection
-        statusBar.checkConnectionStatus();
-      }
+      statusBar.checkConnectionStatus();
     } catch (error) {
       console.error("Error setting up auth middleware:", error);
     }

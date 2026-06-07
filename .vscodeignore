@@ -15,3 +15,23 @@ test-workspace/**
 **/tslint.json
 **/*.map
 **/*.ts
+out/auth/**
+out/commands/**
+out/language-service/**
+out/parts/**
+out/status/**
+out/server/fileAccessor.js
+out/grammars/**
+out/snippets/**
+out/themes/**
+# Dev/CI files that don't belong in the extension
+.github/**
+.husky/**
+scripts/**
+CLAUDE.md
+CNAME
+.nvmrc
+.prettierignore
+.vscode-test.js
+eslint.config.mjs
+selfIdentity.plist

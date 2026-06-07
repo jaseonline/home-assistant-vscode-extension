@@ -99,8 +99,19 @@ export class AuthManager {
    * @returns true if a token was migrated, false otherwise
    */
   public static async migrateTokenFromSettings(context: vscode.ExtensionContext): Promise<boolean> {
+    // Check current namespace first, then fall back to old 1.1.5 namespace
     const config = vscode.workspace.getConfiguration("home-assistant-vscode");
-    const token = config.get<string>("longLivedAccessToken");
+    const oldConfig = vscode.workspace.getConfiguration("home-assistant-vscode-extension");
+
+    let token = config.get<string>("longLivedAccessToken");
+    let sourceConfig: vscode.WorkspaceConfiguration = config;
+
+    if (!token) {
+      token = oldConfig.get<string>("longLivedAccessToken");
+      if (token) {
+        sourceConfig = oldConfig;
+      }
+    }
 
     // If there's no token in settings, nothing to migrate
     if (!token) {
@@ -112,7 +123,7 @@ export class AuthManager {
       await AuthManager.storeToken(context, token);
 
       // Clear from settings
-      await config.update("longLivedAccessToken", undefined, vscode.ConfigurationTarget.Global);
+      await sourceConfig.update("longLivedAccessToken", undefined, vscode.ConfigurationTarget.Global);
       
       // Inform user
       vscode.window.showInformationMessage(
@@ -132,8 +143,19 @@ export class AuthManager {
    * @returns true if a URL was migrated, false otherwise
    */
   public static async migrateUrlFromSettings(context: vscode.ExtensionContext): Promise<boolean> {
+    // Check current namespace first, then fall back to old 1.1.5 namespace
     const config = vscode.workspace.getConfiguration("home-assistant-vscode");
-    const url = config.get<string>("hostUrl");
+    const oldConfig = vscode.workspace.getConfiguration("home-assistant-vscode-extension");
+
+    let url = config.get<string>("hostUrl");
+    let sourceConfig: vscode.WorkspaceConfiguration = config;
+
+    if (!url) {
+      url = oldConfig.get<string>("hostUrl");
+      if (url) {
+        sourceConfig = oldConfig;
+      }
+    }
 
     // If there's no URL in settings, nothing to migrate
     if (!url) {
@@ -145,7 +167,7 @@ export class AuthManager {
       await AuthManager.storeUrl(context, url);
 
       // Clear from settings
-      await config.update("hostUrl", undefined, vscode.ConfigurationTarget.Global);
+      await sourceConfig.update("hostUrl", undefined, vscode.ConfigurationTarget.Global);
       
       // Inform user
       vscode.window.showInformationMessage(
