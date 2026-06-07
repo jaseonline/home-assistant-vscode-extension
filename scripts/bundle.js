@@ -29,11 +29,36 @@ const root = path.resolve(__dirname, "..");
 const isWatch = process.argv.includes("--watch");
 const isProduction = process.argv.includes("--production");
 
+// yaml-language-server@1.19.2 directly imports internal UMD subpaths from its
+// nested vscode-json-languageservice@4.x, e.g.:
+//   require("vscode-json-languageservice/lib/umd/services/jsonSchemaService")
+// The UMD factory pattern — factory(require, exports) — aliases `require` through
+// a function parameter, hiding require('jsonc-parser') from esbuild's static
+// analysis. jsonc-parser never gets bundled, and the installed extension crashes.
+// This plugin rewrites those hard-coded lib/umd/ subpaths to lib/esm/, which uses
+// static `import` statements that esbuild can bundle correctly.
+const yamlLsUmdToEsm = {
+  name: "yaml-ls-umd-to-esm",
+  setup(build) {
+    build.onResolve(
+      { filter: /^vscode-json-languageservice\/lib\/umd\// },
+      async (args) => {
+        const esmPath = args.path.replace("/lib/umd/", "/lib/esm/");
+        return await build.resolve(esmPath, {
+          resolveDir: args.resolveDir,
+          kind: args.kind,
+        });
+      },
+    );
+  },
+};
+
 const shared = {
   bundle: true,
   platform: "node",
   target: "node18",
   format: "cjs",
+  plugins: [yamlLsUmdToEsm],
   external: [
     // Provided by VS Code at runtime
     "vscode",
