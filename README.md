@@ -15,7 +15,7 @@ Most of the schemas of Home Assistant will be validated and things like properti
 
 Deprecation Warnings:
 
-![eprecation-warnings](./assets/deprecation-warnings.png)
+![deprecation-warnings](./assets/deprecation-warnings.png)
 
 Schema Documentation
 
@@ -67,14 +67,14 @@ Evaluate jinja templates via Home Assistant's API and see how they would render.
 
 3. Configure the connection to Home Assistant via the HA Section in the VS Code Settings UI
 
-   More details in [the How-To in the Wiki](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Configure-connection-to-HA)
+   More details in [the How-To in the Wiki](https://github.com/jaseonline/home-assistant-vscode/wiki/Configure-connection-to-HA)
 
 4. Enjoy the features showcased below 👇
 
 5. Continue reading in the Wiki:
 
-   - [Configure connection to HA](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Configure-connection-to-HA)
-   - [VS Code Remote SSH](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/VS-Code-Remote-SSH)
-   - [Your config, local or remote?](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Your-config,-local-or-remote%3F)
-   - [The troubleshooting guide](https://github.com/jaseonline/home-assistant-vscode-extension/wiki/Troubleshooting)
+   - [Configure connection to HA](https://github.com/jaseonline/home-assistant-vscode/wiki/Configure-connection-to-HA)
+   - [VS Code Remote SSH](https://github.com/jaseonline/home-assistant-vscode/wiki/VS-Code-Remote-SSH)
+   - [Your config, local or remote?](https://github.com/jaseonline/home-assistant-vscode/wiki/Your-config,-local-or-remote%3F)
+   - [The troubleshooting guide](https://github.com/jaseonline/home-assistant-vscode/wiki/Troubleshooting)
 

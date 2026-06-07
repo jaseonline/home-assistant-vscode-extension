@@ -1,6 +1,6 @@
 {
   "scopeName": "js-inline.injection",
-  "injectionSelector": "L:string.quoted.double, L:string.quoted.single, L:string.unquoted.plain.out, L:string.unquoted.plain.in",
+  "injectionSelector": "L:string.quoted.double, L:string.quoted.single, L:string.unquoted.plain.out, L:string.unquoted.plain.in, L:string.quoted.double.homeassistant, L:string.quoted.single.homeassistant, L:string.unquoted.plain.out.homeassistant, L:string.unquoted.plain.in.homeassistant",
   "name": "Grammar for Button-Card Javascript expressions surrounded by triple square brackets in quoted strings",
   "patterns": [
     {

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Fork Identity
 
-This is a personal fork (`JaseOnline/home-assistant-vscode-extension`) of `keesschollaart81/home-assistant-vscode`. Fork-specific additions live in:
+This is a personal fork (`JaseOnline/home-assistant-vscode`) of `keesschollaart81/home-assistant-vscode`. Fork-specific additions live in:
 - `src/themes/` — HA Neon Dark colour theme (embedded, replaces the standalone `ha-neon-dark` extension)
 - `src/grammars/` — JS block/inline injection grammars for Button-Card `[[[...]]]` syntax
 - `src/parts/` — Modular theme source components (hand-assembled into `src/themes/ha-neon-dark-color-theme.json`; no build script yet)

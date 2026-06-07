@@ -1,6 +1,6 @@
 {
   "scopeName": "js-block.injection",
-  "injectionSelector": "L:string.unquoted.block",
+  "injectionSelector": "L:string.unquoted.block, L:string.unquoted.block.homeassistant",
   "name": "Grammar for Button-Card Javascript blocks surrounded by triple square brackets",
   "patterns": [
     {

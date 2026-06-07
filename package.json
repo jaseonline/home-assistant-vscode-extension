@@ -1,5 +1,5 @@
 {
-  "name": "home-assistant-vscode-extension",
+  "name": "home-assistant-vscode",
   "displayName": "Home Assistant Config Helper",
   "description": "Home Assistant Configuration Helper",
   "version": "1.1.6",
@@ -17,10 +17,10 @@
   "publisher": "JaseOnline",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaseonline/home-assistant-vscode-extension"
+    "url": "https://github.com/jaseonline/home-assistant-vscode"
   },
   "bugs": {
-    "url": "https://github.com/jaseonline/home-assistant-vscode-extension/issues",
+    "url": "https://github.com/jaseonline/home-assistant-vscode/issues",
     "email": "jase@matilda.network"
   },
   "license": "MIT",
@@ -49,17 +49,17 @@
       {
         "title": "Home Assistant Config Helper",
         "properties": {
-          "home-assistant-vscode-extension.ignoreCertificates": {
+          "home-assistant-vscode.ignoreCertificates": {
             "type": "boolean",
             "default": true,
             "description": "Enable insecure transport. Check this if you want to connect over an insecure HTTPS transport with an invalid certificate!"
           },
-          "home-assistant-vscode-extension.disableAutomaticFileAssociation": {
+          "home-assistant-vscode.disableAutomaticFileAssociation": {
             "type": "boolean",
             "default": false,
             "description": "Disable automatic association of YAML files with the Home Assistant language. When enabled, the extension will not automatically set file associations for YAML files, even in detected Home Assistant workspaces."
           },
-          "home-assistant-vscode-extension.autoRenderTemplates": {
+          "home-assistant-vscode.autoRenderTemplates": {
             "type": "boolean",
             "default": true,
             "description": "Enable automatic rendering of Home Assistant templates on hover. When enabled, templates will be rendered and displayed as previews when hovering over template values in YAML files."
@@ -307,7 +307,7 @@
         "**/__pycache__/**": true
       },
       "[home-assistant]": {
-        "editor.defaultFormatter": "JaseOnline.home-assistant-vscode-extension",
+        "editor.defaultFormatter": "JaseOnline.home-assistant-vscode",
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
         "editor.formatOnPaste": true,
@@ -319,7 +319,7 @@
         }
       },
       "[home-assistant-jinja]": {
-        "editor.defaultFormatter": "JaseOnline.home-assistant-vscode-extension"
+        "editor.defaultFormatter": "JaseOnline.home-assistant-vscode"
       }
     },
     "menus": {
