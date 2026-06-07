@@ -47,11 +47,11 @@ Evaluate jinja templates via Home Assistant's API and see how they would render.
 
 | Purpose | HEX |
 | -- | -- |
-| NEON BLUE | #5fe8ff |
-| NEON GREEN | #64ff00 |
-| NEON YELLOW | #e7ff00 |
-| NEON PINK | #fc49ab |
-| NEON ORANGE | #ff7300 |
+| NEON BLUE | `#5fe8ff` |
+| NEON GREEN | `#64ff00` |
+| NEON YELLOW | `#e7ff00` |
+| NEON PINK | `#fc49ab` |
+| NEON ORANGE | `#ff7300` |
 | Accent | #FB073A |
 | Error | #F14C4C |
 | Cyan | #00FFE7 |
