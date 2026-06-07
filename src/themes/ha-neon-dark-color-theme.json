@@ -448,6 +448,71 @@
             }
         },
         {
+            "name": "card-mod - Key (card_mod:)",
+            "scope": [
+                "keyword.other.card-mod-key.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ff4d73",
+                "fontStyle": "bold"
+            }
+        },
+        {
+            "name": "card-mod - Shadow DOM Piercing Key ($:)",
+            "scope": [
+                "keyword.operator.shadow-dom.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#00b4ff",
+                "fontStyle": "italic"
+            }
+        },
+        {
+            "name": "card-mod CSS - HA Element Selectors (ha-*, hui-*, mwc-*)",
+            "scope": [
+                "entity.name.tag.css.ha-element.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#00ffe7"
+            }
+        },
+        {
+            "name": "card-mod CSS - Custom Properties (--var-name)",
+            "scope": [
+                "variable.other.custom-property.ha.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#c792ea"
+            }
+        },
+        {
+            "name": "card-mod CSS - Property Names",
+            "scope": [
+                "support.type.property-name.css.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ffe600"
+            }
+        },
+        {
+            "name": "card-mod CSS - Block Delimiters ({ })",
+            "scope": [
+                "punctuation.section.property-list.css.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ff0080"
+            }
+        },
+        {
+            "name": "card-mod CSS - Pseudo-selectors (:host, :host-context)",
+            "scope": [
+                "entity.other.pseudo-class.ha.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#bbadff"
+            }
+        },
+        {
             "name": "Comments (general)",
             "scope": [
                 "comment",

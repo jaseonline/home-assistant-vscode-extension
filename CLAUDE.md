@@ -86,7 +86,7 @@ The extension host and language server communicate beyond standard LSP via custo
 - `ha_connected` — WebSocket connected, carries `{ name, version }`
 - `ha_connection_error` — WebSocket failed, carries `{ error }`
 - `configuration_check_completed` — result of `checkConfig`
-- `get_eror_log_completed` — (typo in original) result of `getErrorLog`
+- `get_error_log_completed` — result of `getErrorLog`
 - `render_template_completed` — rendered template string
 
 ### AuthMiddleware

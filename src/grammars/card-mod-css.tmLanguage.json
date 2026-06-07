@@ -1,0 +1,36 @@
+{
+  "scopeName": "card-mod-css.injection",
+  "injectionSelector": "L:string.unquoted.block.homeassistant",
+  "name": "Grammar for card-mod CSS constructs in Home Assistant block scalars",
+  "patterns": [
+    {
+      "comment": "HA pseudo-selectors :host and :host-context",
+      "match": ":host(?:-context)?(?=[\\s{(,]|$)",
+      "name": "entity.other.pseudo-class.ha.homeassistant"
+    },
+    {
+      "comment": "HA web component element names used as CSS selectors: ha-*, hui-*, mwc-*",
+      "match": "(?:ha|hui|mwc)-[a-z][a-z0-9-]*",
+      "name": "entity.name.tag.css.ha-element.homeassistant"
+    },
+    {
+      "comment": "CSS custom properties (CSS variables) -- prefix",
+      "match": "--[a-z][a-z0-9-]*",
+      "name": "variable.other.custom-property.ha.homeassistant"
+    },
+    {
+      "comment": "CSS block delimiters",
+      "match": "[{}]",
+      "name": "punctuation.section.property-list.css.homeassistant"
+    },
+    {
+      "comment": "CSS property names: lowercase-with-hyphens followed by colon (not :// or ::)",
+      "match": "\\b([a-z][a-z0-9-]*)(?=[ \\t]*:[^:/])",
+      "captures": {
+        "1": {
+          "name": "support.type.property-name.css.homeassistant"
+        }
+      }
+    }
+  ]
+}

@@ -202,6 +202,21 @@
                                 </string>
                                 <key>name</key>
                                 <string>string.unquoted.plain.out.homeassistant</string>
+                                <key>patterns</key>
+                                <array>
+                                    <dict>
+                                        <key>match</key>
+                                        <string>card_mod\b</string>
+                                        <key>name</key>
+                                        <string>keyword.other.card-mod-key.homeassistant</string>
+                                    </dict>
+                                    <dict>
+                                        <key>match</key>
+                                        <string>\$</string>
+                                        <key>name</key>
+                                        <string>keyword.operator.shadow-dom.homeassistant</string>
+                                    </dict>
+                                </array>
                             </dict>
                         </array>
                     </dict>
@@ -625,6 +640,21 @@
                                 </string>
                                 <key>name</key>
                                 <string>string.unquoted.plain.in.homeassistant</string>
+                                <key>patterns</key>
+                                <array>
+                                    <dict>
+                                        <key>match</key>
+                                        <string>card_mod\b</string>
+                                        <key>name</key>
+                                        <string>keyword.other.card-mod-key.homeassistant</string>
+                                    </dict>
+                                    <dict>
+                                        <key>match</key>
+                                        <string>\$</string>
+                                        <key>name</key>
+                                        <string>keyword.operator.shadow-dom.homeassistant</string>
+                                    </dict>
+                                </array>
                             </dict>
                         </array>
                     </dict>

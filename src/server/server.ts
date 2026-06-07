@@ -247,7 +247,7 @@ connection.onInitialize(async (params) => {
   });
   connection.onRequest("getErrorLog", async (_) => {
     const result = await haConnection.callApi("get", "error_log");
-    connection.sendNotification("get_eror_log_completed", result);
+    connection.sendNotification("get_error_log_completed", result);
   });
   connection.onRequest("renderTemplate", async (args: { template: string }) => {
     const timePrefix = `[${new Date().toLocaleTimeString()}] `;
