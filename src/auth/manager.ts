@@ -101,7 +101,7 @@ export class AuthManager {
   public static async migrateTokenFromSettings(context: vscode.ExtensionContext): Promise<boolean> {
     // Check current namespace first, then fall back to old 1.1.5 namespace
     const config = vscode.workspace.getConfiguration("home-assistant-vscode");
-    const oldConfig = vscode.workspace.getConfiguration("home-assistant-vscode-extension");
+    const oldConfig = vscode.workspace.getConfiguration("home-assistant-vscode");
 
     let token = config.get<string>("longLivedAccessToken");
     let sourceConfig: vscode.WorkspaceConfiguration = config;
@@ -145,7 +145,7 @@ export class AuthManager {
   public static async migrateUrlFromSettings(context: vscode.ExtensionContext): Promise<boolean> {
     // Check current namespace first, then fall back to old 1.1.5 namespace
     const config = vscode.workspace.getConfiguration("home-assistant-vscode");
-    const oldConfig = vscode.workspace.getConfiguration("home-assistant-vscode-extension");
+    const oldConfig = vscode.workspace.getConfiguration("home-assistant-vscode");
 
     let url = config.get<string>("hostUrl");
     let sourceConfig: vscode.WorkspaceConfiguration = config;

@@ -53,24 +53,41 @@ const yamlLsUmdToEsm = {
   },
 };
 
+// yaml-language-server's yamlFormatter.js requires prettier at module top-level
+// (not lazily), so marking prettier as external causes a MODULE_NOT_FOUND crash
+// at server startup. We don't need YAML formatting in the HA extension, so stub
+// all prettier imports with empty objects — the formatter will silently be a no-op.
+const prettierStub = {
+  name: "prettier-stub",
+  setup(build) {
+    build.onResolve({ filter: /^prettier/ }, (args) => ({
+      namespace: "prettier-stub",
+      path: args.path,
+    }));
+    build.onLoad({ filter: /.*/, namespace: "prettier-stub" }, () => ({
+      contents: "module.exports = {};",
+      loader: "js",
+    }));
+  },
+};
+
 const shared = {
   bundle: true,
   platform: "node",
   target: "node18",
   format: "cjs",
-  plugins: [yamlLsUmdToEsm],
+  plugins: [yamlLsUmdToEsm, prettierStub],
+  // Prefer ESM ('module') over UMD ('main') for all packages. Without this,
+  // packages like jsonc-parser resolve to lib/umd/main.js, which uses the same
+  // UMD factory pattern and hides its own relative sub-module requires from
+  // esbuild's static analysis (e.g. require2('./impl/format')).
+  mainFields: ["module", "main"],
   external: [
     // Provided by VS Code at runtime
     "vscode",
     // Native addons — optional ws optimisations, ws falls back to pure JS
     "bufferutil",
     "utf-8-validate",
-    // Used by yaml-language-server's YAML formatter; prettier is a devDependency
-    // and is not needed for core HA config-helper functionality
-    "prettier",
-    "prettier/standalone",
-    "prettier/plugins/yaml",
-    "prettier/plugins/estree",
   ],
   sourcemap: !isProduction,
   minify: isProduction,
