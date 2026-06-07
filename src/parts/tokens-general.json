@@ -13,8 +13,7 @@
     {
         "name": "Strings (general)",
         "scope": [
-            "string",
-            "string.quoted"
+            "string"
         ],
         "settings": {
             "foreground": "#ffe600"
@@ -30,7 +29,7 @@
         }
     },
     {
-        "name": "Constants",
+        "name": "Constants (general)",
         "scope": [
             "constant.language"
         ],
@@ -75,9 +74,7 @@
     {
         "name": "Variables",
         "scope": [
-            "variable",
-            "variable.other",
-            "variable.parameter"
+            "variable"
         ],
         "settings": {
             "foreground": "#00ffe7"
@@ -133,9 +130,17 @@
         }
     },
     {
-        "name": "Punctuation (colons, commas, dots)",
+        "name": "Punctuation (general)",
         "scope": [
-            "punctuation",
+            "punctuation"
+        ],
+        "settings": {
+            "foreground": "#e8e8f0"
+        }
+    },
+    {
+        "name": "Operators (general)",
+        "scope": [
             "keyword.operator"
         ],
         "settings": {
