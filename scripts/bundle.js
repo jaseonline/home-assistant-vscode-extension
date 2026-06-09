@@ -118,10 +118,9 @@ async function copySchemas() {
 
   const jsonSrc = path.join(schemasSrc, "json");
   for (const file of fs.readdirSync(jsonSrc)) {
-    fs.copyFileSync(
-      path.join(jsonSrc, file),
-      path.join(schemasDest, "json", file),
-    );
+    const srcPath = path.join(jsonSrc, file);
+    if (!fs.statSync(srcPath).isFile()) continue;
+    fs.copyFileSync(srcPath, path.join(schemasDest, "json", file));
   }
   console.log("  ✓ schema JSON → out/server/");
 }
