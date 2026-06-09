@@ -47,7 +47,7 @@ export async function activate(
     console.error("Failed to migrate credentials:", error);
   }
 
-  reporter = new TelemetryReporter("InstrumentationKey=ff172110-5bb2-4041-9f31-e157f1efda56");
+  reporter = new TelemetryReporter("InstrumentationKey=999");
 
   try {
     reporter.sendTelemetryEvent("extension.activate");
@@ -75,7 +75,7 @@ export async function activate(
   };
 
   // Create file system watcher and register for disposal to prevent memory leaks
-  const fileWatcher = vscode.workspace.createFileSystemWatcher("**/*.?(e)y?(a)ml");
+  const fileWatcher = vscode.workspace.createFileSystemWatcher("**/*.{yml,yaml}");
   context.subscriptions.push(fileWatcher);
 
   const clientOptions: LanguageClientOptions = {
@@ -208,7 +208,7 @@ export async function activate(
 
   let haOutputChannel: vscode.OutputChannel;
   context.subscriptions.push(
-    client.onNotification("get_eror_log_completed", (result) => {
+    client.onNotification("get_error_log_completed", (result) => {
       if (!haOutputChannel) {
         haOutputChannel = vscode.window.createOutputChannel(
           "Home Assistant Error Log",
@@ -415,7 +415,15 @@ export async function activate(
       "home-assistant-vscode.renderTemplate",
       async () => {
         const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+          await vscode.window.showWarningMessage("No active editor — open a Home Assistant YAML file and select a template to render.");
+          return;
+        }
         const selectedText = editor.document.getText(editor.selection);
+        if (!selectedText) {
+          await vscode.window.showWarningMessage("No text selected — select a Jinja2 template expression to render.");
+          return;
+        }
         await client.sendRequest("renderTemplate", { template: selectedText });
       },
     ),
@@ -490,10 +498,11 @@ export async function activate(
       Object.values(fileAssociations).indexOf("home-assistant") === -1
     ) {
       console.log("Home Assistant workspace detected, setting YAML file associations");
-      // Set general YAML files to home-assistant, but exclude docker-compose and esphome files
+      // Merge with existing associations so unrelated user mappings are not lost
       await vscode.workspace
         .getConfiguration()
         .update("files.associations", {
+          ...fileAssociations,
           "*.yaml": "home-assistant",
           // Modern Docker Compose filenames (compose.yaml is the preferred format)
           "compose.yml": "yaml",
@@ -511,7 +520,7 @@ export async function activate(
         }, false);
     }
   } else {
-    console.log("Configuration.yaml found but this doesn't appear to be a Home Assistant workspace - skipping file associations");
+    console.log("Home Assistant workspace not detected - skipping file associations");
   }
 
   // Listen for configuration changes that might affect the connection
@@ -547,7 +556,9 @@ export async function activate(
 }
 
 export async function deactivate(): Promise<void> {
-  await reporter.dispose();
+  if (reporter) {
+    await reporter.dispose();
+  }
 }
 
 

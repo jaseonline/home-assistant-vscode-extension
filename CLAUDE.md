@@ -130,6 +130,5 @@ The label validator flags `Reload`, `Lighting`, `Music` as unknown — these are
 
 ## Pending Work (Fork Tracks)
 
-- **Track 2** — Improve YAML grammar (`syntaxes/external/YAML.tmLanguage`) to emit distinct TextMate scopes for HA-specific patterns (entity ID domains like `light.`, `sensor.`; service call names). Enables richer syntax colour with the HA Neon Dark theme.
 - **Track 3** — Evaluate `jaseonline/home-assistant-json-schema` repo (`C:\Dev\projects\personal\home-assistant-json-schema`) for automated schema generation to replace hand-written `.ts` files in `src/language-service/src/schemas/integrations/core/`. High effort; separate sub-project.
 - **Optional** — Build script to assemble `src/parts/*.json` into `src/themes/ha-neon-dark-color-theme.json` (currently hand-maintained).
