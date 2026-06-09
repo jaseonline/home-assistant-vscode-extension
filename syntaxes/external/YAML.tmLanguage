@@ -759,7 +759,7 @@
                     </dict>
                     <dict>
                         <key>begin</key>
-                        <string>(?=(?:alarm_control_panel|assist_pipeline|automation|binary_sensor|button|calendar|camera|climate|conversation|counter|cover|device_tracker|event|fan|group|homeassistant|image|input_boolean|input_button|input_datetime|input_number|input_select|input_text|lock|logbook|media_player|notify|number|persistent_notification|person|recorder|remote|scene|script|select|sensor|siren|sun|switch|system_health|text|timer|todo|update|vacuum|water_heater|weather|zone)\.[a-z0-9])</string>
+                        <string>(?=(?:alarm_control_panel|assist_pipeline|automation|binary_sensor|button|calendar|camera|climate|conversation|counter|cover|device_tracker|event|fan|group|homeassistant|image|input_boolean|input_button|input_datetime|input_number|input_select|input_text|light|lock|logbook|media_player|notify|number|persistent_notification|person|recorder|remote|scene|script|select|sensor|siren|sun|switch|system_health|text|timer|todo|update|vacuum|water_heater|weather|zone)\.[a-z0-9])</string>
                         <key>end</key>
                         <string>(?=\s*$|\s+#|\s*:(\s|$)|\s*:[\[\]{},]|\s*[\[\]{},])</string>
                         <key>name</key>
@@ -898,7 +898,7 @@
                     </dict>
                     <dict>
                         <key>begin</key>
-                        <string>(?=(?:alarm_control_panel|assist_pipeline|automation|binary_sensor|button|calendar|camera|climate|conversation|counter|cover|device_tracker|event|fan|group|homeassistant|image|input_boolean|input_button|input_datetime|input_number|input_select|input_text|lock|logbook|media_player|notify|number|persistent_notification|person|recorder|remote|scene|script|select|sensor|siren|sun|switch|system_health|text|timer|todo|update|vacuum|water_heater|weather|zone)\.[a-z0-9])</string>
+                        <string>(?=(?:alarm_control_panel|assist_pipeline|automation|binary_sensor|button|calendar|camera|climate|conversation|counter|cover|device_tracker|event|fan|group|homeassistant|image|input_boolean|input_button|input_datetime|input_number|input_select|input_text|light|lock|logbook|media_player|notify|number|persistent_notification|person|recorder|remote|scene|script|select|sensor|siren|sun|switch|system_health|text|timer|todo|update|vacuum|water_heater|weather|zone)\.[a-z0-9])</string>
                         <key>end</key>
                         <string>(?=\s*$|\s+#|\s*:(\s|$))</string>
                         <key>name</key>

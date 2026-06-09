@@ -80,7 +80,7 @@
             "variable.other.property.homeassistant"
         ],
         "settings": {
-            "foreground": "#ffe600"
+            "foreground": "#00FF51"
         }
     },
     {
@@ -96,7 +96,7 @@
             "punctuation.section.embedded.end.homeassistant"
         ],
         "settings": {
-            "foreground": "#ff0080",
+            "foreground": "#FF0000",
             "fontStyle": "bold"
         }
     },
@@ -133,7 +133,7 @@
             "string.quoted.single.homeassistant"
         ],
         "settings": {
-            "foreground": "#ffe600"
+            "foreground": "#5fe8ff"
         }
     },
     {
@@ -155,7 +155,7 @@
             "string.unquoted.block.homeassistant"
         ],
         "settings": {
-            "foreground": "#ffe600"
+            "foreground": "#FAFAFA"
         }
     },
     {
@@ -206,7 +206,7 @@
             "punctuation.definition.sequence.item.homeassistant"
         ],
         "settings": {
-            "foreground": "#e8e8f0"
+            "foreground": "#881A94"
         }
     },
     {
@@ -215,7 +215,7 @@
             "entity.name.tag.homeassistant"
         ],
         "settings": {
-            "foreground": "#29b8db"
+            "foreground": "#ff7300"
         }
     },
     {
@@ -262,7 +262,7 @@
             "support.type.property-name.css.homeassistant"
         ],
         "settings": {
-            "foreground": "#ffe600"
+            "foreground": "#ffe6ff"
         }
     },
     {
@@ -281,6 +281,33 @@
         ],
         "settings": {
             "foreground": "#bbadff"
+        }
+    },
+    {
+        "name": "Home Assistant - Custom Card Prefix (custom:)",
+        "scope": [
+            "keyword.other.custom-prefix.homeassistant"
+        ],
+        "settings": {
+            "foreground": "#e8e8f0"
+        }
+    },
+    {
+        "name": "Home Assistant - Custom Card Separator (:)",
+        "scope": [
+            "punctuation.separator.custom-type.homeassistant"
+        ],
+        "settings": {
+            "foreground": "#FF0000"
+        }
+    },
+    {
+        "name": "Home Assistant - Custom Card Name",
+        "scope": [
+            "entity.name.type.custom-card.homeassistant"
+        ],
+        "settings": {
+            "foreground": "#00FF51"
         }
     }
 ]

@@ -1,0 +1,39 @@
+{
+  "scopeName": "ha-entity-patterns.injection",
+  "injectionSelector": "L:source.home-assistant - (entity.name.tag.homeassistant | comment.line.number-sign.homeassistant | punctuation.definition.comment.homeassistant)",
+  "name": "Home Assistant entity IDs and service calls",
+  "patterns": [
+    { "include": "#custom-card" },
+    { "include": "#service-call" },
+    { "include": "#entity-id" }
+  ],
+  "repository": {
+    "custom-card": {
+      "comment": "Custom card type: 'custom:card-name' — off-white prefix, red colon, green card name.",
+      "match": "\\b(custom)(:)([a-z][a-z0-9-]*)",
+      "captures": {
+        "1": { "name": "keyword.other.custom-prefix.homeassistant" },
+        "2": { "name": "punctuation.separator.custom-type.homeassistant" },
+        "3": { "name": "entity.name.type.custom-card.homeassistant" }
+      }
+    },
+    "service-call": {
+      "comment": "Service/action call value: 'service: domain.name' or 'action: domain.name'. Lookbehind ensures we only colour the value, not entity_id: values which share the same domain.name shape.",
+      "match": "(?<=(?:service|action):\\s{1,4})([a-z_][a-z0-9_]*)(\\.)([a-z_][a-z0-9_]*)",
+      "captures": {
+        "1": { "name": "support.function.service.homeassistant" },
+        "2": { "name": "punctuation.accessor.dot.homeassistant" },
+        "3": { "name": "support.function.service.homeassistant" }
+      }
+    },
+    "entity-id": {
+      "comment": "HA entity ID: known-domain.entity_name. Domain list covers all built-in HA domains. Captures split domain (yellow), dot (off-white), entity name (magenta).",
+      "match": "\\b(alarm_control_panel|automation|binary_sensor|button|calendar|camera|climate|counter|cover|device_tracker|event|fan|geo_location|group|humidifier|image|input_boolean|input_button|input_datetime|input_number|input_select|input_text|light|lock|media_player|notify|number|person|plant|remote|scene|schedule|script|select|sensor|siren|sun|switch|text|timer|todo|tts|update|vacuum|wake_word|water_heater|weather|zone|homeassistant|persistent_notification)(\\.)([a-z0-9_]+)\\b",
+      "captures": {
+        "1": { "name": "support.type.domain.homeassistant" },
+        "2": { "name": "punctuation.accessor.dot.homeassistant" },
+        "3": { "name": "entity.other.entity-name.homeassistant" }
+      }
+    }
+  }
+}

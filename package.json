@@ -2,7 +2,7 @@
   "name": "home-assistant-vscode",
   "displayName": "Home Assistant Config Helper",
   "description": "Home Assistant Configuration Helper",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "preview": false,
   "engines": {
     "vscode": "^1.99.0"
@@ -240,6 +240,18 @@
         "embeddedLanguages": {
           "meta.embedded.block.css": "css"
         }
+      },
+      {
+        "comments": [
+          "Colours HA entity IDs (domain.entity_name) and service calls (service: domain.action)",
+          "using distinct scopes for domain, dot, and name — enabling neon split-colour highlighting.",
+          "Service calls detected via Oniguruma lookbehind for 'service:' / 'action:' keys."
+        ],
+        "scopeName": "ha-entity-patterns.injection",
+        "path": "./src/grammars/ha-entity-patterns.tmLanguage.json",
+        "injectTo": [
+          "source.home-assistant"
+        ]
       }
     ],
     "commands": [

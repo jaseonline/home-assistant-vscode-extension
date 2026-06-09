@@ -30,6 +30,7 @@ export type Action =
   | ServiceAction
   | SequenceAction
   | StopAction
+  | SetConversationResponseAction
   | WaitForTriggerAction
   | WaitTemplateAction
   | VariablesAction
@@ -494,6 +495,31 @@ export interface StopAction {
    * https://www.home-assistant.io/docs/scripts/#stopping-a-script-sequence
    */
   response_variable?: string;
+}
+
+export interface SetConversationResponseAction {
+  /**
+   * Alias for the set conversation response action.
+   */
+  alias?: string;
+
+  /**
+   * Every individual action can be disabled, without removing it.
+   * https://www.home-assistant.io/docs/scripts/#disabling-an-action
+   */
+  enabled?: boolean;
+
+  /**
+   * Set it to true if you'd like to continue the action sequence, regardless of whether that action encounters an error.
+   * https://www.home-assistant.io/docs/scripts/#continuing-on-error
+   */
+  continue_on_error?: boolean;
+
+  /**
+   * Sets the response to be returned by the conversation agent when this script or automation is called from a voice assistant.
+   * https://www.home-assistant.io/docs/scripts/#set-conversation-response
+   */
+  set_conversation_response: Template | null;
 }
 
 export interface WaitForTriggerAction {
