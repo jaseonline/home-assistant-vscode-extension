@@ -1,0 +1,35 @@
+{
+    "//": "Colour palette — single source of truth for theme colours. Parts files reference these as $token or $token@AA (alpha suffix). Keys starting with // are ignored by the resolver. Values are descriptive of the current theme; standardise here.",
+
+    "//syntax": "— core neon syntax colours (see tokens-ha.json) —",
+    "neon.blue": "#00b4ff",
+    "neon.yellow": "#ffff00",
+    "neon.magenta": "#ff00ff",
+    "neon.pink": "#ff0080",
+    "neon.green": "#00ff51",
+    "neon.orange": "#ff9500",
+    "neon.orange.alt": "#ff7300",
+    "neon.red": "#ff0000",
+    "neon.mint": "#00ffe7",
+    "neon.teal": "#5fe8ff",
+    "neon.amber": "#ffe600",
+    "state.green": "#00ff80",
+    "purple": "#c792ea",
+    "lavender": "#bbadff",
+    "violet": "#881a94",
+    "pink.card-mod": "#ff4d73",
+    "pink.css-prop": "#00ff80",
+
+    "//ui": "— UI accent and text —",
+    "accent.pink": "#fc49ab",
+    "text.body": "#cfd8dc",
+    "text.bright": "#e8e8f0",
+    "text.ui": "#cccccc",
+    "text.comment": "#929292",
+    "off-white": "#fafafa",
+    "white": "#ffffff",
+    "black": "#000000",
+
+    "//surfaces": "— backgrounds —",
+    "bg.editor": "#0f0f0f"
+}

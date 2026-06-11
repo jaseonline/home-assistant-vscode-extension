@@ -131,4 +131,5 @@ The label validator flags `Reload`, `Lighting`, `Music` as unknown — these are
 ## Pending Work (Fork Tracks)
 
 - **Track 3** — Evaluate `jaseonline/home-assistant-json-schema` repo (`C:\Dev\projects\personal\home-assistant-json-schema`) for automated schema generation to replace hand-written `.ts` files in `src/language-service/src/schemas/integrations/core/`. High effort; separate sub-project.
+- **Track 4** — Lovelace dashboard editing: edit storage-mode dashboards from VS Code via WebSocket (`lovelace/dashboards/list` / `lovelace/config` / `lovelace/config/save`), surfaced through a `ha-dashboard:` FileSystemProvider + QuickPick command. Full scope: `docs/TRACK4-dashboard-editing.md`. Concept ported from `myakove/homeassistant-lsp`; reimplement against `haConnection.ts`, do not vendor.
 - **Optional** — Build script to assemble `src/parts/*.json` into `src/themes/ha-neon-dark-color-theme.json` (currently hand-maintained).

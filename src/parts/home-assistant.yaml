@@ -1,0 +1,3297 @@
+streamline_templates: !include /config/dashboards/streamline_templates.yaml
+button_card_templates: !include_dir_named /config/dashboards/button_card_templates/
+navbar-templates: !include navbar_templates.yaml
+
+deep_press:
+  enable_unsupported: true
+swipe_nav:
+  wrap: true
+  animate: "none" # Valid options: 'none', 'slide', 'fade', 'flip'
+  skip_tabs: "1, 3"
+  prevent_default: true
+  swipe_amount: 30
+
+kiosk_mode:
+  admin_settings:
+    hide_header: true
+    hide_sidebar: false
+  non_admin_settings:
+    hide_header: true
+    hide_sidebar: true
+    custom_width: 768
+
+views:
+  - title: Lighting
+    type: custom:vertical-layout
+    layout:
+      mediaquery:
+        "(max-width: 435px)":
+          column_widths: 100%
+          width: 100%
+          max_cols: 1
+          max_width: 100vw
+          margin: 0
+          padding: 0
+        "(max-width: 800px)":
+          column_widths: repeat(2, minmax(0, 1fr))
+        "(max-width: 9999px)":
+          column_widths: repeat(3, minmax(0, 1fr))
+    path: lighting
+    icon: mdi:home-lightbulb
+    badges: []
+    cards:
+      - type: custom:streamline-card
+        template: heading
+        variables:
+          - name: Living Room
+          - left_entity: automation.routine_morning_lights_music
+          - right_entity: switch.ice_machine
+          - right_name: Ice
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.living_room_spots
+          - name: Spots
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.sofa_lights
+          - name: Sofa
+        visibility:
+          - condition: not
+            conditions:
+              - condition: state
+                entity: light.living_room_spots
+                state: "on"
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.tv_lightstrip
+          - name: TV Lightstrip
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.pendant_lights
+          - name: Hanging
+
+      - type: custom:streamline-card
+        template: heading
+        variables:
+          - name: Kitchen
+          - right_entity: switch.adaptive_lighting_adaptive_kitchen
+          - left_entity: automation.night_light_living_room_motion_on
+          - left_name: Night
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.kitchen_spots
+          - name: Spots
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.kitchen_lightstrip
+          - name: Lightstrip
+      - type: custom:layout-break
+
+      - type: custom:streamline-card
+        template: heading
+        variables:
+          - name: Dining
+          - left_entity: automation.automation_dining_table_lights_on
+          - left_name: Dining
+          - right_entity: switch.adaptive_lighting_adaptive_dining
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.dining_table
+          - switchOnScene: scene.dining_table_read
+          - name: Table
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.floor_lamp
+          - name: Floor Lamp
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.bar_lights
+          - name: Bar
+          - apiId: barLights
+          - switchOnScene: scene.bar_lights_scene
+
+      - type: custom:streamline-card
+        template: heading
+        variables:
+          - name: Main Bedroom
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          entity: light.main_bedroom_spots
+          name: Spots
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.reading_lights
+          - name: Reading
+          - switchOnScene: scene.reading_lights
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: light.jasons_bedside_light
+                    state: "off"
+                  - condition: state
+                    entity: light.jordans_bedside_light
+                    state: "off"
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: light.jasons_bedside_light
+                    state: "on"
+                  - condition: state
+                    entity: light.jordans_bedside_light
+                    state: "on"
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.jasons_bedside_light
+          - name: Jason's Bedside
+          - switchOnScene: scene.reading_lights
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: light.jasons_bedside_light
+                    state: "off"
+                  - condition: state
+                    entity: light.jordans_bedside_light
+                    state: "on"
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: light.jasons_bedside_light
+                    state: "on"
+                  - condition: state
+                    entity: light.jordans_bedside_light
+                    state: "off"
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.jordans_bedside_light
+          - name: Jordan's Bedside
+          - switchOnScene: scene.reading_lights
+        visibility:
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: light.jasons_bedside_light
+                    state: "off"
+                  - condition: state
+                    entity: light.jordans_bedside_light
+                    state: "on"
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: light.jasons_bedside_light
+                    state: "on"
+                  - condition: state
+                    entity: light.jordans_bedside_light
+                    state: "off"
+      - type: custom:layout-break
+
+      - type: custom:streamline-card
+        template: heading
+        variables:
+          - name: Second Bedroom
+          - left_entity: switch.portable_radiator
+          - right_entity: switch.sonos_living_room_night_sound
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.second_bedroom_spots
+          - name: Spots
+
+      - type: custom:streamline-card
+        template: heading
+        variables:
+          - name: Home Office
+          - right_entity: switch.adaptive_lighting_adaptive_home_office
+      - type: custom:streamline-card
+        template: mushroom_light
+        variables:
+          - entity: light.office_lights
+          - name: Desk
+      - type: grid
+        square: false
+        columns: 3
+        card_mod:
+          style: |
+            #root > * {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+            }
+        cards:
+          - type: custom:button-card
+            template: card_chip
+            entity: switch.monitor
+            variables:
+              name: Monitor
+          - type: custom:button-card
+            template: card_chip
+            entity: switch.printer
+            variables:
+              name: Printer
+          - type: custom:button-card
+            template: card_chip
+            entity: switch.office_power_strip_label_maker
+            variables:
+              name: DYMO
+          - type: custom:button-card
+            template: card_chip
+            entity: switch.wd_nas
+            variables:
+              name: EX2Ultra
+          - type: custom:button-card
+            template: card_chip
+            entity: switch.external_hdd
+            variables:
+              name: ext HDD
+          - type: custom:button-card
+            template: card_chip
+            entity: switch.utility_cupboard
+            variables:
+              name: Utility
+      - type: custom:button-card
+        template: card_title
+        name: Guest Wi-Fi
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-rows: 1fr 1fr
+          grid-template-columns: 2fr 3fr
+          grid-template-areas: |
+            "qr ssid"
+            "qr pwd"
+        cards:
+          - type: custom:button-card
+            entity: sensor.unifi_wifi_networks
+            template: card_chip
+            icon: mdi:wifi
+            variables:
+              name: |
+                [[[
+                  return entity?.attributes?.data[2]?.name;
+                ]]]
+            view_layout:
+              grid-area: ssid
+            card_mod:
+              style: |
+                :host {
+                  justify-self: center;
+                  align-self: center;
+                }
+          - type: custom:button-card
+            entity: sensor.unifi_wifi_networks
+            template: card_chip
+            icon: mdi:lock
+            variables:
+              name: |
+                [[[
+                  return entity?.attributes?.data[2]?.password;
+                ]]]
+            view_layout:
+              grid-area: pwd
+            card_mod:
+              style: |
+                :host {
+                  justify-self: center;
+                  align-self: center;
+                }
+          - type: picture
+            image_entity: image.wifi_qr_matilda_guest
+            view_layout:
+              grid-area: qr
+            card_mod:
+              style: |
+                :host {
+                  justify-self: center;
+                  align-self: center;
+                }
+                ha-card.type-picture {
+                  box-shadow: var(--shadow-outset);
+                  border-radius: var(--ha-card-border-radius);
+                }
+                ha-card.type-picture img {
+                  padding: 15px;
+                  width: auto;
+                }
+      - type: custom:mushroom-entity-card
+        entity: media_player.fire_tv_max_adb
+        fill_container: false
+        tap_action:
+          action: more-info
+        icon_type: none
+        primary_info: state
+        icon: ""
+        card_mod:
+          style: |
+            :host {
+              z-index: 90;
+              position: absolute;
+              top: 55px;
+              left: 5px;
+            }
+        visibility:
+          - condition: state
+            entity: media_player.fire_tv_max_adb
+            state_not: "off"
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.main_bedroom_sensor_motion
+        fill_container: false
+        icon_type: none
+        primary_info: last-changed
+        icon: ""
+        card_mod:
+          style: |
+            :host ha-card {
+              box-shadow: none;
+              position: absolute;
+              top: 5px;
+              right: 5px;
+              {% if states('binary_sensor.main_bedroom_sensor_motion') == 'on' %}
+                --ha-card-background: rgba(255,0,0,1);
+                animation: blinking 1s linear alternate infinite;
+              {% endif %}
+            }
+            @keyframes blinking {
+              0% {opacity: .2;}
+              50% {opacity: .8;}
+            }
+      - type: custom:navbar-card
+        routes:
+          - url: /home-assistant/lighting
+            label: Lighting
+            icon: mdi:home-lightbulb
+          - url: /home-assistant/sonos
+            icon: mdi:music
+            label: Music
+          - url: /home-assistant/transport
+            icon: mdi:train-bus
+            label: Transport
+          - url: /home-assistant/system
+            icon: mdi:information-variant
+            label: System
+            hidden: |
+              [[[
+                return user.name != 'Jason Titter';
+              ]]]
+          - url: /home-assistant/weather
+            icon: mdi:weather-partly-cloudy
+            label: Weather
+          - url: /home-assistant/climate
+            icon: mdi:home-thermometer
+            label: Climate
+          - label: Reload Themes
+            icon: mdi:refresh
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              data:
+                skip_condition: true
+                entity_id: automation.reload_themes
+            hidden: |
+              [[[
+                return user.name != 'Jason Titter';
+              ]]]
+          - label: More
+            icon: mdi:dots-vertical
+            hidden: |
+              [[[
+                return user.name != 'Jason Titter';
+              ]]]
+            tap_action:
+              action: open-popup
+            popup:
+              - label: Network
+                url: /home-assistant/network
+                icon: mdi:network
+              - label: Agent Screen
+                url: /agent-screen
+                icon: mdi:face-agent
+              - label: Settings
+                icon: mdi:cog
+                url: /config
+              - label: Dev Tools
+                icon: mdi:hammer
+                url: /config/developer-tools
+              - label: Restart
+                icon: mdi:power-cycle
+                tap_action:
+                  action: call-service
+                  service: homeassistant.restart
+                  service_data: {}
+                  confirmation:
+                    text: Are you sure you want to restart Home Assistant?
+        desktop:
+          show_labels: popup_only
+          show_popup_label_backgrounds: true
+          min_width: 768
+          position: bottom
+          hidden: |
+            [[[
+              return user.name != 'Jason Titter';
+            ]]]
+        mobile:
+          show_labels: false
+          show_popup_label_backgrounds: true
+          mode: docked
+          position: bottom
+          hidden: |
+            [[[
+              return user.name != 'Jason Titter';
+            ]]]
+        layout:
+          reflect_child_state: true
+          auto_padding:
+            enabled: true
+            desktop_px: 100
+            mobile_px: 80
+            media_player_px: 100
+        haptic:
+          url: true
+          tap_action: true
+          hold_action: true
+          double_tap_action: true
+        media_player:
+          players:
+            - entity: media_player.sonos_second_bedroom
+          desktop_position: bottom-right
+          album_cover_background: false
+          show: |-
+            [[[
+              const mediaPlayerState = states['media_player.sonos_second_bedroom'];
+              const lastChanged = new Date(mediaPlayerState.last_changed);
+              const now = Date.now();
+              const fiveMinutes = 5 * 60 * 1000;
+
+              // Display media player if it's playing OR paused in the last 5 minutes
+              return (
+                mediaPlayerState.state == 'playing' ||
+                (mediaPlayerState.state == 'paused' &&
+                  (now - lastChanged) <= fiveMinutes)
+              );
+            ]]]
+        styles: |-
+          .navbar {
+            --navbar-box-shadow: var(--shadow-outset);
+            --navbar-box-shadow-mobile-floating: var(--shadow-outset);
+            --navbar-box-shadow-desktop: var(--shadow-outset);
+            --navbar-primary-color: var(--grey-4-color);
+            --navbar-background-color: var(--ha-card-background);
+            --navbar-route-icon-size: 2rem;
+            --navbar-route-image-size: 2rem;
+            --navbar-border-radius: var(--ha-card-border-radius, 12px);
+            --icon-primary-color: var(--primary-text-color);
+          }
+          .navbar.mobile {
+            --navbar-box-shadow: none;
+            --navbar-box-shadow-mobile-floating: none;
+            --navbar-background-color: rgba(255, 255, 255, 0.1);
+          }
+          .navbar-card.desktop {
+            height: 60px;
+            border: none;
+          }
+
+          .navbar-card.mobile {
+            height: 50px;
+            border: none;
+          }
+          .navbar-card.mobile .route {
+            overflow: hidden;
+          }
+          .navbar-card.mobile .button {
+            --navbar-box-shadow: none;
+            box-shadow: none;
+          }
+          ha-card.media-player.mobile {
+            display: none;
+          }
+          .route {
+            --icon-primary-color: var(--primary-text-color);
+            border-radius: var(--navbar-border-radius);
+            padding: 5px;
+            overflow: visible;
+          }
+
+          .button {
+            height: 40px;
+            width: 40px;
+            border-radius: var(--navbar-border-radius);
+            background: var(--grey-card-color);
+            transition: all 260ms ease;
+            box-shadow: var(--shadow-button-outset);
+          }
+
+          .button:hover {
+            --icon-primary-color: var(--secondary-accent-color);
+            box-shadow: var(--shadow-button-inset);
+            color: var(--secondary-accent-color);
+            text-shadow: 0 0 15px var(--secondary-accent-color);
+          }
+
+          .button:active,
+          .button.active {
+            --icon-primary-color: var(--secondary-accent-color);
+            box-shadow: var(--shadow-button-inset);
+            background: var(--grey-card-color);
+            text-shadow: 0 0 15px var(--secondary-accent-color);
+          }
+
+          .navbar-popup-backdrop {
+            background-color: var(--dialog-scrim-color);
+            backdrop-filter: var(--dialog-backdrop-filter);
+          }
+
+          .navbar-popup {
+            padding: 0 0 20px 0;
+            gap: 20px;
+            background: none;
+          }
+
+          .popup-item {
+            --icon-primary-color: var(--primary-text-color);
+            overflow: visible;
+            background: var(--grey-card-color);
+            border-radius: var(--navbar-border-radius);
+            text-align: left !important;
+            width: 100%;
+          }
+          .popup-item.label-left .label {
+            text-align: start;
+          }
+          .popup-item .button:active,
+          .popup-item .button {
+            box-shadow: var(--shadow-button-outset);
+          }
+
+          .media-player {
+            background: var(--ha-card-background);
+            box-shadow: var(--shadow-outset);
+            height: 80px;
+            border: none;
+          }
+
+          .media-player-button {
+            height: 50px !important;
+            width: 50px;
+            border-radius: var(--navbar-border-radius);
+            transition: all 260ms ease;
+            box-shadow: var(--shadow-button-outset);
+            background: none;
+            --icon-primary-color: var(--primary-text-color);
+          }
+
+          .media-player-button:active,
+          .media-player-button:hover {
+            --icon-primary-color: var(--secondary-accent-color);
+            box-shadow: var(--shadow-button-inset);
+          }
+
+          .media-player-button-play-pause:active {
+            box-shadow: var(--shadow-button-inset);
+          }
+
+          .media-player .media-player-progress-bar {
+            background: var(--ha-card-background);
+            position: fixed;
+            bottom: .5rem;
+            left: 5.5rem;
+            right: 9.5rem;
+            height: .5rem;
+            border-radius: 1rem;
+            box-shadow: var(--progress-bar-shadow);
+          }
+
+          .media-player .media-player-progress-bar-fill {
+            border-radius: 1rem;
+            background: var(--slider-gradient);
+            box-shadow: var(--progress-bar-shadow);
+          }
+
+          .media-player .media-player-image {
+            background: var(--ha-card-background);
+            border-radius: var(--navbar-border-radius);
+            box-shadow: var(--shadow-outset);
+          }
+
+          .media-player-info {
+            overflow: hidden;
+          }
+
+          .media-player-title,
+          .media-player-artist {
+            animation: marquee 4s linear infinite;
+          }
+
+          @keyframes marquee {
+            to {
+              transform: translateX(-100%);
+            }
+          }
+
+          ha-card {
+            border: none !important;
+          }
+
+          ha-card:active {
+            --shadow-button-inset: none;
+            transform: none !important;
+          }
+
+          ha-ripple {
+            display: none !important;
+          }
+
+
+
+
+
+
+
+  - title: Transport
+    path: transport
+    icon: mdi:bus-clock
+    type: custom:vertical-layout
+    layout:
+      mediaquery:
+        "(max-width: 600px)":
+          column_widths: repeat(1, minmax(0, 1fr))
+        "(max-width: 800px)":
+          column_widths: repeat(2, minmax(0, 1fr))
+        "(max-width: 9999px)":
+          column_widths: repeat(3, minmax(0, 1fr))
+    badges: []
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: Tube Status
+        variables:
+          image: /local/images/tfl/roundel-underground.svg
+          url: >-
+            https://api.tfl.gov.uk/Line/Mode/tube,dlr,elizabeth-line/Status?detail=false
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          margin: 0
+          padding: 0
+          grid-gap: 10px 10px
+          grid-template-rows: repeat(1, minmax(0, 1fr))
+          grid-template-columns: repeat(3, minmax(0, 1fr))
+          mediaquery:
+            "(max-width: 600px)":
+              grid-template-rows: repeat(3, minmax(0, 1fr))
+              grid-template-columns: repeat(2, minmax(0, 1fr))
+        cards:
+          - type: custom:button-card
+            template: card_chip
+            entity: sensor.tfl_eph_departues
+            show_entity_picture: true
+            show_icon: false
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.popup
+                data:
+                  popup_card_id: eph_dep_northern_northbound
+            entity_picture: /local/images/tfl/roundel-northern.svg
+            variables:
+              icon_color: rgb(var(--mush-rgb-northern))
+              name: Northbound
+          - type: custom:button-card
+            template: card_chip
+            entity: sensor.tfl_eph_departues
+            show_entity_picture: true
+            show_icon: false
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.popup
+                data:
+                  popup_card_id: eph_dep_northern_southbound
+            entity_picture: /local/images/tfl/roundel-northern.svg
+            variables:
+              icon_color: rgb(var(--mush-rgb-northern))
+              name: Southbound
+          - type: custom:button-card
+            template: card_chip
+            entity: sensor.tfl_eph_departues
+            show_entity_picture: true
+            show_icon: false
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.popup
+                data:
+                  popup_card_id: eph_dep_bakerloo_northbound
+            entity_picture: /local/images/tfl/roundel-bakerloo.svg
+            variables:
+              icon_color: rgb(var(--mush-rgb-bakerloo))
+              name: Northbound
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: repeat(4, minmax(0, 1fr))
+          grid-template-rows: repeat(7, minmax(0, 1fr))
+        cards:
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: bakerloo
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: central
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: circle
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: district
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: dlr
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: elizabeth
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: hammersmith_city
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: jubilee
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: metropolitan
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: northern
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: piccadilly
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: victoria
+            view_layout:
+              grid-column: span 2
+          - type: custom:button-card
+            template: card_tfl_status
+            variables:
+              id: waterloo_city
+            view_layout:
+              grid-column: 2 / span 2
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: National Rail EPH
+        variables:
+          image: /local/images/tfl/national-rail.svg
+          url: >-
+            https://api.tfl.gov.uk/Line/bakerloo,northern/Arrivals/940GZZLUEAC?direction=all
+      - type: custom:mushroom-title-card
+        alignment: center
+        visibility:
+          - condition: state
+            entity: sensor.national_rail_elephant_departures
+            state: No Service
+        title: No Service
+        card_mod:
+          style: |
+            h1.title {
+              font-size: 18px;
+            }
+      - type: custom:mod-card
+        card_mod:
+          style:
+            "tabbed-card $":
+              # Retry point: mwc-tab shadow root (was: mwc-tab: with $: and $ mwc-tab-indicator $: sub-keys)
+              "mwc-tab $":
+                .: |
+                  .mdc-tab__text-label {
+                    background: var(--grey-3-color);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    text-shadow: rgba(0, 0, 0, 0.5) -1px -2px 1px;
+                  }
+                # Retry point: mwc-tab-indicator shadow root (was: $ mwc-tab-indicator $)
+                "mwc-tab-indicator $": |
+                  :host .mdc-tab-indicator__content--underline {
+                    border-color: transparent;
+                  }
+        card:
+          type: custom:tabbed-card
+          options:
+            defaultTabIndex: 0
+            isMinWidthIndicator: false
+          styles:
+            --mdc-tab-text-label-color-default: var(--grey-4-color)
+            --mdc-tab-color-default: var(--grey-5-color)
+            --mdc-ripple-press-opacity: 0
+            --mdc-typography-button-font-size: 16px
+            --mdc-ripple-color: transparent
+          tabs:
+            - attributes:
+                label: Northbound
+                isFadingIndicator: false
+              card:
+                type: custom:flex-table-card
+                selectable: true
+                disable_header_sort: true
+                max_rows: 6
+                entities:
+                  include: sensor.national_rail_eph_departures
+                css:
+                  th.center:nth-child(1): "width: 20px; padding: 0;"
+                  th.left:nth-child(3): "width: 30px;"
+                  th.left:nth-child(4): "width: 70px;"
+                  th.left:nth-child(5): "width: 70px;"
+                  th.left: "text-align: center;"
+                  th: "padding-left: 2px;padding-right: 2px;"
+                columns:
+                  - name: ""
+                    data: northbound.cancelReason
+                    align: center
+                    modify: |-
+                      if (x == null || x == '')
+                        {""}
+                      else
+                        '<div title="' + x + '">&#x26A0&#xFE0F</div>'
+                  - name: Destination
+                    data: northbound.destination
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else {x}
+                  - name: Plt.
+                    data: northbound.platform
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else x
+                  - name: Sched.
+                    data: northbound.std
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else {x}
+                  - name: Actual
+                    data: northbound.etd
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else if (x == "Cancelled")
+                        '<div style="color:red;">Cancelled</div>'
+                      else {x}
+            - attributes:
+                label: Southbound
+                isFadingIndicator: false
+              card:
+                type: custom:flex-table-card
+                selectable: true
+                disable_header_sort: true
+                max_rows: 6
+                entities:
+                  include: sensor.national_rail_eph_departures
+                css:
+                  th.center:nth-child(1): "width: 20px; padding: 0;"
+                  th.left:nth-child(3): "width: 30px;"
+                  th.left:nth-child(4): "width: 70px;"
+                  th.left:nth-child(5): "width: 70px;"
+                  th.left: "text-align: center;"
+                  th: "padding-left: 2px;padding-right: 2px;"
+                columns:
+                  - name: ""
+                    data: southbound.cancelReason
+                    align: center
+                    modify: |-
+                      if (x == null || x == '')
+                        {""}
+                      else
+                        '<div title="' + x + '">&#x26A0&#xFE0F</div>'
+                  - name: Destination
+                    data: southbound.destination
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else {x}
+                  - name: Plt.
+                    data: southbound.platform
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else x
+                  - name: Sched.
+                    data: southbound.std
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else {x}
+                  - name: Actual
+                    data: southbound.etd
+                    modify: |-
+                      if (x == null || x == '')
+                        {"-"}
+                      else if (x == "Cancelled")
+                        '<div style="color:red;">Cancelled</div>'
+                      else {x}
+        visibility:
+          - condition: state
+            entity: sensor.national_rail_elephant_departures
+            state_not: No Service
+
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-rows: 56px
+          grid-template-columns: minmax(56px, 1fr) auto minmax(56px, 1fr)
+          place-items: center
+        cards:
+          - type: custom:button-card
+            template: card_chip
+            entity: image.alert_bell
+            show_icon: true
+            tap_action:
+              action: perform-action
+              perform_action: browser_mod.popup
+              target: {}
+              data:
+                dismissable: true
+                content:
+                  type: custom:flex-table-card
+                  max_rows: 6
+                  disable_header_sort: true
+                  sort_by: data.lastUpdate+
+                  entities:
+                    include: sensor.bus_stop_a_disruptions
+                  css:
+                    thead th:nth-child(0): "width: 30px;"
+                    thead th:nth-child(1): "width: auto;"
+                    th.left: "text-align: center;"
+                    th: "padding-left: 2px;padding-right: 2px;"
+                  columns:
+                    - name: Date
+                      data: data.lastUpdate
+                      modify: |-
+                        if (x == null || x == '')
+                          {"-"}
+                        else {x}
+                    - name: Description
+                      data: data.description
+                      modify: |-
+                        if (x == null || x == '')
+                          {"-"}
+                        else {x}
+                right_button: CLOSE
+                right_button_variant: neutral
+                right_button_appearance: plain
+                right_button_action:
+                  action: browser_mod.close_popup
+                  data:
+                    all: true
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: start;
+                  align-self: center;
+                }
+            visibility:
+              - condition: state
+                entity: binary_sensor.bus_stop_a_disruptions
+                state_not: "0"
+          - type: custom:button-card
+            template: card_title
+            entity: sensor.bus_stop_a
+            name: |
+              [[[
+                return entity?.attributes?.friendly_name;
+              ]]]
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: center;
+                  align-self: center;
+                }
+          - type: custom:button-card
+            template: card_chip
+            entity: image.map_pin
+            show_icon: true
+            tap_action:
+              action: url
+              url_path: >-
+                https://maps.app.goo.gl/rwSyHyiC9c2fJpsN8
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: end;
+                  align-self: center;
+                }
+
+      - type: custom:mushroom-title-card
+        alignment: center
+        visibility:
+          - condition: state
+            entity: sensor.bus_stop_a
+            state_not: Buses arriving
+        title: No Service
+        card_mod:
+          style: |
+            h1.title {
+              font-size: 18px;
+            }
+      - type: custom:flex-table-card
+        max_rows: 6
+        disable_header_sort: true
+        entities:
+          include: sensor.bus_stop_a
+        css:
+          th.left:nth-child(1): "width: 20px;"
+          th.left:nth-child(2): "width: auto;"
+          th.left:nth-child(3): "width: 20px;"
+          th.left:nth-child(4): "width: 20px;"
+          th.left: "text-align: center;"
+          th: "padding-left: 2px;padding-right: 2px;"
+        columns:
+          - name: Route
+            data: data.route
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Destination
+            data: data.destination
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Arrival
+            data: data.arrival_time
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Mins
+            data: data.count_down
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+        visibility:
+          - condition: state
+            entity: sensor.bus_stop_a
+            state: Buses arriving
+
+      - type: custom:layout-break
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-rows: 56px
+          grid-template-columns: minmax(56px, 1fr) auto minmax(56px, 1fr)
+          place-items: center
+        cards:
+          - type: custom:button-card
+            template: card_chip
+            entity: image.alert_bell
+            show_icon: true
+            tap_action:
+              action: perform-action
+              perform_action: browser_mod.popup
+              target: {}
+              data:
+                dismissable: true
+                content:
+                  type: custom:flex-table-card
+                  max_rows: 6
+                  disable_header_sort: true
+                  sort_by: data.lastUpdate+
+                  entities:
+                    include: sensor.bus_stop_s_disruptions
+                  css:
+                    thead th:nth-child(0): "width: 30px;"
+                    thead th:nth-child(1): "width: auto;"
+                    th.left: "text-align: center;"
+                    th: "padding-left: 2px;padding-right: 2px;"
+                  columns:
+                    - name: Date
+                      data: data.lastUpdate
+                      modify: |-
+                        if (x == null || x == '')
+                          {"-"}
+                        else {x}
+                    - name: Description
+                      data: data.description
+                      modify: |-
+                        if (x == null || x == '')
+                          {"-"}
+                        else {x}
+                right_button: CLOSE
+                right_button_variant: neutral
+                right_button_appearance: plain
+                right_button_action:
+                  action: browser_mod.close_popup
+                  data:
+                    all: true
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: start;
+                  align-self: center;
+                }
+            visibility:
+              - condition: state
+                entity: binary_sensor.bus_stop_s_disruptions
+                state_not: "0"
+          - type: custom:button-card
+            template: card_title
+            entity: sensor.bus_stop_s
+            name: |
+              [[[
+                return entity?.attributes?.friendly_name;
+              ]]]
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: center;
+                  align-self: center;
+                }
+          - type: custom:button-card
+            template: card_chip
+            entity: image.map_pin
+            show_icon: true
+            tap_action:
+              action: url
+              url_path: >-
+                https://maps.app.goo.gl/R7xBRoJ9uqQqPYtB7
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: end;
+                  align-self: center;
+                }
+
+      - type: custom:mushroom-title-card
+        alignment: center
+        visibility:
+          - condition: state
+            entity: sensor.bus_stop_s
+            state: Buses not arriving
+        title: No Service
+        card_mod:
+          style: |
+            ha-card div h1.title {
+              font-size: 18px;
+            }
+      - type: custom:flex-table-card
+        max_rows: 6
+        disable_header_sort: true
+        entities:
+          include: sensor.bus_stop_s
+        css:
+          th.left:nth-child(1): "width: 20px;"
+          th.left:nth-child(2): "width: auto;"
+          th.left:nth-child(3): "width: 20px;"
+          th.left:nth-child(4): "width: 20px;"
+          th.left: "text-align: center;"
+          th: "padding-left: 2px;padding-right: 2px;"
+        columns:
+          - name: Route
+            data: data.route
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Destination
+            data: data.destination
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Arrival
+            data: data.arrival_time
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Mins
+            data: data.count_down
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+        visibility:
+          - condition: state
+            entity: sensor.bus_stop_s
+            state: Buses arriving
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-rows: 56px
+          grid-template-columns: minmax(56px, 1fr) auto minmax(56px, 1fr)
+          place-items: center
+        cards:
+          - type: custom:button-card
+            template: card_chip
+            entity: image.alert_bell
+            show_icon: true
+            tap_action:
+              action: perform-action
+              perform_action: browser_mod.popup
+              target: {}
+              data:
+                dismissable: true
+                content:
+                  type: custom:flex-table-card
+                  max_rows: 6
+                  disable_header_sort: true
+                  sort_by: data.lastUpdate+
+                  entities:
+                    include: sensor.bus_stop_v_disruptions
+                  css:
+                    thead th:nth-child(0): "width: 30px;"
+                    thead th:nth-child(1): "width: auto;"
+                    th.left: "text-align: center;"
+                    th: "padding-left: 2px;padding-right: 2px;"
+                  columns:
+                    - name: Date
+                      data: data.lastUpdate
+                      modify: |-
+                        if (x == null || x == '')
+                          {"-"}
+                        else {x}
+                    - name: Description
+                      data: data.description
+                      modify: |-
+                        if (x == null || x == '')
+                          {"-"}
+                        else {x}
+                right_button: CLOSE
+                right_button_variant: neutral
+                right_button_appearance: plain
+                right_button_action:
+                  action: browser_mod.close_popup
+                  data:
+                    all: true
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: start;
+                  align-self: center;
+                }
+            visibility:
+              - condition: state
+                entity: binary_sensor.bus_stop_v_disruptions
+                state_not: "0"
+          - type: custom:button-card
+            template: card_title
+            entity: sensor.bus_stop_v
+            name: |
+              [[[
+                return entity?.attributes?.friendly_name;
+              ]]]
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: center;
+                  align-self: center;
+                }
+          - type: custom:button-card
+            template: card_chip
+            entity: image.map_pin
+            show_icon: true
+            tap_action:
+              action: url
+              url_path: >-
+                https://maps.app.goo.gl/e13fDoZUjft9GEeF9
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: end;
+                  align-self: center;
+                }
+
+      - type: custom:mushroom-title-card
+        alignment: center
+        visibility:
+          - condition: state
+            entity: sensor.bus_stop_v
+            state: Buses not arriving
+        title: No Service
+        card_mod:
+          style: |
+            h1.title {
+              font-size: 18px;
+            }
+      - type: custom:flex-table-card
+        max_rows: 6
+        disable_header_sort: true
+        entities:
+          include: sensor.bus_stop_v
+        css:
+          th.left:nth-child(1): "width: 20px;"
+          th.left:nth-child(2): "width: auto;"
+          th.left:nth-child(3): "width: 20px;"
+          th.left:nth-child(4): "width: 20px;"
+          th.left: "text-align: center;"
+          th: "padding-left: 2px;padding-right: 2px;"
+        columns:
+          - name: Route
+            data: data.route
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Destination
+            data: data.destination
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Arrival
+            data: data.arrival_time
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+          - name: Mins
+            data: data.count_down
+            modify: |-
+              if (x == null || x == '')
+                {"-"}
+              else {x}
+        visibility:
+          - condition: state
+            entity: sensor.bus_stop_v
+            state: Buses arriving
+      - type: custom:navbar-card
+        template: primary_nav
+      - type: custom:popup-card
+        title: Northern Line Northbound
+        dismissable: false
+        card:
+          type: custom:layout-card
+          layout_type: custom:grid-layout
+          layout:
+            display: grid
+            grid-template-columns: 1fr
+            grid-template-rows: auto
+            width: 100%
+          cards:
+            - type: custom:flex-table-card
+              sort_by: platform_1.timeToStation+
+              strict: true
+              disable_header_sort: true
+              entities:
+                include: sensor.tfl_eph_departues
+              css:
+                th.left: "text-align: center"
+              columns:
+                - name: Destination
+                  data: platform_1.destination
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Arrival
+                  data: platform_1.expectedArrival
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Mins
+                  data: platform_1.timeToStation
+                  sortable: true
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Location
+                  data: platform_1.current_location
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+              card_mod:
+                class: popup-table
+        right_button: CLOSE
+        popup_card_id: eph_dep_northern_northbound
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+      - type: custom:popup-card
+        title: Northern Line Southbound
+        dismissable: false
+        card:
+          type: custom:layout-card
+          layout_type: custom:grid-layout
+          layout:
+            display: grid
+            grid-template-columns: 1fr
+            grid-template-rows: auto
+            width: 100%
+          cards:
+            - type: custom:flex-table-card
+              sort_by: platform_2.timeToStation+
+              strict: true
+              disable_header_sort: true
+              entities:
+                include: sensor.tfl_eph_departues
+              css:
+                th.left: "text-align: center"
+              columns:
+                - name: Destination
+                  data: platform_2.destination
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Arrival
+                  data: platform_2.expectedArrival
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Mins
+                  data: platform_2.timeToStation
+                  sortable: true
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Location
+                  data: platform_2.current_location
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+              card_mod:
+                class: popup-table
+        right_button: CLOSE
+        popup_card_id: eph_dep_northern_southbound
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+      - type: custom:popup-card
+        title: Bakerloo Line Northbound
+        dismissable: false
+        card:
+          type: custom:layout-card
+          layout_type: custom:grid-layout
+          layout:
+            display: grid
+            grid-template-columns: 1fr
+            grid-template-rows: auto
+            width: 100%
+          cards:
+            - type: custom:mushroom-title-card
+              title: Platform 3 & 4
+              alignment: center
+              title_tap_action:
+                action: none
+              subtitle_tap_action:
+                action: none
+            - type: custom:flex-table-card
+              sort_by: platform_3.timeToStation+
+              strict: true
+              disable_header_sort: true
+              entities:
+                include: sensor.tfl_eph_departues
+              css:
+                th.left: "text-align: center"
+              columns:
+                - name: Destination
+                  data: platform_3.destination
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Arrival
+                  data: platform_3.expectedArrival
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Mins
+                  data: platform_3.timeToStation
+                  sortable: true
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+                - name: Location
+                  data: platform_3.current_location
+                  modify: |-
+                    if (x == null || x == '')
+                      {"-"}
+                    else {x}
+              card_mod:
+                class: popup-table
+        right_button: CLOSE
+        popup_card_id: eph_dep_bakerloo_northbound
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+    subview: false
+  - title: Sonos
+    path: sonos
+    type: custom:vertical-layout
+    icon: mdi:music
+    layout:
+      grid-gap: 20px 20px
+      mediaquery:
+        "(max-width: 600px)":
+          column_widths: repeat(1, minmax(0, 1fr))
+        "(max-width: 800px)":
+          column_widths: repeat(2, minmax(0, 1fr))
+        "(max-width: 9999px)":
+          column_widths: repeat(3, minmax(0, 1fr))
+    badges: []
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: Speaker Controls
+        styles:
+          card:
+            - height: 48px
+      - type: custom:sonos-card
+        sections:
+          - groups
+        entityNameRegexToReplace: "Sonos "
+        storePlayerInSessionStorage: false # default is false. If set to true, the active player will be stored in the session storage instead of URL hash.
+        doNotRememberSelectedPlayer: false # default is false. If set to true, the selected player will not be remembered in URL hash or session storage.
+        heightPercentage: 100
+        widthPercentage: 100
+        groups:
+          compact: false
+        card_mod:
+          # prepend: true
+          style:
+            .: |
+              :host {
+                margin: 0;
+                --mdc-ripple-color: transparent;
+                --secondary-background-color: var(--ha-card-background);
+              }
+              ha-card {
+                background: transparent;
+                backdrop-filter: none;
+                box-shadow: none;
+                border: none;
+              }
+              ha-card::before { display: none; }
+              ha-card:hover { box-shadow: none; }
+              ha-card:active { 
+                box-shadow: none;
+                transform: none;
+              }
+            # Retry point 1: sonos-groups shadow root
+            "sonos-groups $":
+              .: |
+                mwc-list.list {
+                  overflow: visible;
+                  --mdc-list-vertical-padding: 20px;
+                }
+              # Retry point 2: mwc-list shadow root (was: sonos-groups$mwc-list$)
+              "mwc-list $": |
+                ul.mdc-deprecated-list {
+                  padding: 0 20px 20px 20px;
+                }
+              # Retry point 2: sonos-group shadow root (was: sonos-groups $ sonos-group:)
+              "sonos-group $":
+                .: |
+                  :host mwc-list-item {
+                    height: 70px;
+                    max-width: 100%;
+                    margin: 20px;
+                    background: var(--ha-card-background);
+                    box-shadow: var(--shadow-outset);
+                    transition: box-shadow 200ms ease, transform 180ms ease;
+                  }
+                  :host mwc-list-item:hover {
+                    box-shadow: var(--shadow-inset);
+                  }
+                  :host mwc-list-item:active {
+                    box-shadow: var(--shadow-inset);
+                    transform: scale(0.99);
+                  }
+                  :host(:first-child) mwc-list-item {
+                    margin-top: 10px;
+                  }
+                  :host mwc-list-item > div.row > div.text {
+                    width: fit-content;
+                    overflow: hidden;
+                  }
+                  :host mwc-list-item > div.row > div.text > span.song-title {
+                    animation: marquee 4s linear infinite;
+                  }
+                  @keyframes marquee {
+                    0% { transform: translate(0, 0); }
+                    100% { transform: translate(-100%, 0); }
+                  }
+                "sonos-group-icons $":
+                  "ha-icon $":
+                    "ha-svg-icon $": |
+                      :host {
+                        border-radius: 50%;
+                        padding: 4px;
+                        box-shadow: var(--circle-shadow-inset);
+                      }
+                # Retry point 3: mwc-list-item shadow root (was: $mwc-list-item$)
+                "mwc-list-item $": |
+                  :host {
+                    border: none;
+                    box-shadow: var(--shadow-outset);
+                    border-radius: var(--ha-card-border-radius);
+                    background: var(--ha-card-background);
+                  }
+                  :host([activated]) {
+                    --mdc-ripple-color: transparent !important;
+                  }
+                # Retry point 3: mwc-list-item element ÔåÆ already well-nested below
+                "mwc-list-item":
+                  $:
+                    "mwc-ripple $": |
+                      :host {
+                        --mdc-ripple-color: var(--ha-card-background) !important;
+                        box-shadow: var(--shadow-outset);
+                      }
+                      div.mdc-ripple-surface--primary--activated.mdc-ripple-upgraded {
+                        box-shadow: var(--shadow-outset);
+                        --mdc-ripple-color: var(--ha-card-background) !important;
+                      }
+                      div.mdc-ripple-surface.mdc-ripple-upgraded,
+                      div.mdc-ripple-surface.mdc-ripple-upgraded.mdc-ripple-upgraded--background-focused {
+                        box-shadow: var(--shadow-outset);
+                        border-radius: var(--ha-card-border-radius);
+                      }
+
+                # Retry point 3: playing-bars shadow root (was: sonos-groups$sonos-group$sonos-playing-bars:)
+                "sonos-playing-bars $": |
+                  div.bars div {
+                    background: var(--primary-dark-color);
+                  }
+      - type: custom:layout-break
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-rows: 56px
+          grid-template-columns: minmax(56px, 1fr) auto minmax(56px, 1fr)
+          place-items: center
+        cards:
+          - type: custom:button-card
+            entity: input_boolean.sonos_spotify
+            variables:
+              activePlayer: |
+                [[[ var activePlayer = states[window.sonosActiveEntityId].attributes.friendly_name.replace('Sonos ', ''); ]]]
+              spSource: |
+                [[[ var spSource = states['media_player.spotifyplus_jason'].attributes.source; ]]]
+            template: card_chip
+            name: |
+              [[[
+                  var entity = window.sonosActiveEntityId;
+                  return entity;
+              ]]]
+            show_entity_picture: true
+            show_name: false
+            entity_picture: |
+              [[[
+                return entity.attributes.entity_picture;
+              ]]]
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: start;
+                  align-self: center;
+                }
+          - type: custom:button-card
+            template: card_title
+            name: Now Playing
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: center;
+                  align-self: center;
+                }
+          - type: custom:button-card
+            entity: switch.sonos_living_room_night_sound
+            variables:
+              is_on: "[[[ return entity?.state === 'on'; ]]]"
+              name: |
+                [[[
+                  if (variables.is_on) return 'Shhh';
+                    else return 'Loud';
+                ]]]
+            template: card_chip
+            card_mod:
+              style: |
+                :host {
+                  --masonry-view-card-margin: 0px;
+                  justify-self: end;
+                  align-self: center;
+                }
+
+      - type: custom:sonos-card
+        title: ""
+        sections:
+          - player
+        labelWhenNoMediaIsSelected: No media selected
+        labelForTheAllVolumesSlider: All volumes
+        entityNameRegexToReplace: "Sonos "
+        storePlayerInSessionStorage: true # default is false. If set to true, the active player will be stored in the session storage instead of URL hash.
+        doNotRememberSelectedPlayer: true # default is false. If set to true, the selected player will not be remembered in URL hash or session storage.
+        artworkAsBackground: true
+        skipAdditionalPlayerSwitches: false
+        disableDynamicVolumeSlider: false
+        showAudioInputFormat: false
+        mediaArtworkOverrides:
+          - mediaTitleEquals: TV
+            sizePercentage: 90
+            imageUrl: >-
+              {{ 'http://10.88.1.70:8123' + ( state_attr('media_player.fire_tv_max_adb', 'entity_picture') | string ) }}
+          - mediaTitleEquals: Main Bathroom
+            imageUrl: >-
+              {{ 'http://10.88.1.70:8123' + ( state_attr('media_player.sonos_main_bathroom', 'entity_picture') | string ) }}
+          - mediaTitleEquals: No media selected
+            imageUrl: >-
+              {{ 'http://10.88.1.70:8123' + ( state_attr('camera.service_yard_camera_hd_stream', 'entity_picture') | string ) }}
+            sizePercentage: 90
+          - ifMissing: true
+            sizePercentage: 90
+            imageUrl: >-
+              {{ 'http://10.88.1.70:8123' + ( state_attr('camera.service_yard_camera_hd_stream', 'entity_picture') | string ) }}
+        layout:
+          players:
+            width: 100%
+        entities: []
+        showVolumeUpAndDownButtons: true
+        dynamicVolumeSlider: true
+        hideGroupCurrentTrack: true
+        mediaBrowserItemsPerRow: 1
+        widthPercentage: 100
+        heightPercentage: 100
+        topFavorites:
+          - ""
+        mediaBrowserShowTitleForThumbnailIcons: true
+        showFastForwardAndRewindButtons: false
+        hidePlayerControlPowerButton: false
+        hidePlayerControlShuffleButton: false
+        sectionButtonIcons:
+          player: mdi:play-box-multiple
+          mediaBrowser: mdi:star-box-multiple
+          groups: mdi:multicast
+          grouping: mdi:group
+          volumes: mdi:volume-high
+        startSection: player
+        hidePlayerControlNextTrackButton: false
+        hideBrowseMediaButton: true
+        artworkMinHeight: 20
+        favoritesHideTitleForThumbnailIcons: false
+        adjustVolumeRelativeToMainPlayer: true
+        skipApplyButtonWhenGrouping: true
+        hideVolumeCogwheel: true
+        showSourceInPlayer: false
+        hidePlaylistInPlayer: false
+        volumeStepSize: 1
+        inverseGroupMuteState: false
+        stopInsteadOfPause: false
+        visibility:
+          - condition: state
+            entity: input_boolean.sonos_spotify
+            state: "on"
+        player:
+          artworkAsBackground: true
+          artworkAsBackgroundBlur: 6
+          controlsLargeIcons: false
+          hideArtwork: false
+          hideArtistAlbum: false
+          hidePlaylist: false
+          hideVolume: false
+          mediaArtworkOverrides:
+            - ifMissing: false
+              mediaTitleEquals: TV
+              mediaContentIdEquals: Second Bedroom
+              imageUrl: >-
+                {{ 'http://10.88.1.70:8123' + state_attr('camera.service_yard_camera_sd_stream', 'entity_picture') }}
+              sizePercentage: 90
+            - ifMissing: true
+              imageUrl: >-
+                {{ 'http://10.88.1.70:8123' + state_attr('camera.service_yard_camera_sd_stream', 'entity_picture') }}
+              mediaTitleEquals: No media selected
+          artworkMinHeight: 15
+          controlsAndHeaderBackgroundOpacity: 0.3
+          fallbackArtwork: >-
+            {{ 'http://10.88.1.70:8123' + state_attr('camera.service_yard_camera_sd_stream', 'entity_picture') }}
+          showFastForwardAndRewindButtons: true
+          showVolumeUpAndDownButtons: true
+        volumes:
+          hideCogwheel: false
+        card_mod:
+          style:
+            .: |
+              :host {
+                --secondary-background-color: transparent;
+              }
+            # Retry point 1: sonos-player shadow root
+            # Consolidates: sonos-player$:, sonos-player $ sonos-player-header $ sonos-progress$:,
+            # and both sonos-player$ sonos-player-controls$ sonos-volume chains
+            "sonos-player $":
+              .: |
+                div.container {
+                  border-radius: 1.2rem;
+                }
+                sonos-player-header.header {
+                  margin: 0;
+                  border-radius: var(--ha-card-border-radius);
+                  box-shadow: var(--mushroom-brightness-shadow);
+                  overflow: hidden;
+                  transform: scale(.9);
+                }
+                sonos-player-header[background] {
+                  background: var(--ha-card-background);
+                }
+                sonos-player-controls.controls {
+                  border-radius: var(--ha-card-border-radius);
+                  box-shadow: var(--mushroom-brightness-shadow);
+                  transform: scale(.9);
+                }
+                sonos-player-controls[background] {
+                  background: var(--ha-card-background);
+                }
+                ha-icon-button.big-icon {
+                  --mdc-icon-button-size: 3.5rem;
+                  --mdc-icon-size: 3.5rem;
+                }
+              # Retry point 2: sonos-player-header shadow root
+              "sonos-player-header $":
+                # Retry point 3: sonos-progress shadow root (was: sonos-player $ sonos-player-header $ sonos-progress$)
+                "sonos-progress $": |
+                  :host div.progress-bar {
+                    height: 0.5rem;
+                    border-radius: 1.2rem;
+                    background: var(--slider-gradient);
+                  }
+                  :host div.progress-bar:after {
+                    background-color: white;
+                    width: 20px;
+                    margin: -10px;
+                    height: 100%;
+                  }
+                  :host div.progress div.bar {
+                    height: 7px;
+                    margin: 5px 5px 0 5px;
+                    padding: 0;
+                    border-radius: 1.2rem;
+                    box-shadow: var(--shadow-progress-bar-ridge);
+                  }
+              # Retry point 2: sonos-player-controls shadow root
+              # Consolidates both: sonos-player$ sonos-player-controls$ sonos-volume: and sonos-player$ sonos-player-controls$ sonos-volume$:
+              "sonos-player-controls $":
+                # Retry point 3: sonos-volume element
+                .: |
+                  #mediaControls {
+                    overflow: hidden;
+                  }
+                "sonos-volume":
+                  $: |
+                    ha-control-slider {
+                      --control-slider-thickness: 0.5rem;
+                      --control-slider-background: transparent;
+                      --control-slider-background-opacity: 1;
+                    }
+                  # Retry point 4: ha-control-slider shadow root (was: sonos-volume$: ha-control-slider$:)
+                "sonos-volume $":
+                  "ha-control-slider":
+                    $: |
+                      div#slider.slider {
+                        cursor: pointer;
+                        height: 0.5rem;
+                        border-radius: 1.2rem;
+                        box-shadow: var(--shadow-progress-bar-ridge);
+                      }
+                      #slider>div.slider-track-bar.start {
+                        background: var(--slider-gradient);
+                        background-color: var(--grey-1-color);
+                      }
+                      #slider>div.slider-track-bar.start::after {
+                        background-color: white;
+                        --handle-size: 20px;
+                        --handle-margin: -10px;
+                        height: 100%;
+                      }
+      - type: custom:spotifyplus-card
+        cardUniqueId: 1103b06b-e01e-4f6c-9ff9-c9a2c355bfbe
+        sections:
+          - player
+          - recents
+          - devices
+          - trackfavorites
+          - userpresets
+          - showfavorites
+          - searchmedia
+          - artistfavorites
+        entity: media_player.spotifyplus_jason
+        playerHeaderArtistTrack: "{player.media_artist} - {player.media_title}"
+        playerHeaderAlbum: "{player.media_album_name} {player.sp_playlist_name_title}"
+        playerHeaderNoMediaPlayingText: '"{player.name}" state is "{player.state}"'
+        albumFavBrowserTitle: >-
+          Album Favorites for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        albumFavBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        albumFavBrowserItemsPerRow: 4
+        albumFavBrowserItemsHideTitle: false
+        albumFavBrowserItemsHideSubTitle: false
+        albumFavBrowserItemsSortTitle: true
+        artistFavBrowserTitle: >-
+          Artist Favorites for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        artistFavBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        artistFavBrowserItemsPerRow: 4
+        artistFavBrowserItemsHideTitle: false
+        artistFavBrowserItemsHideSubTitle: true
+        artistFavBrowserItemsSortTitle: true
+        audiobookFavBrowserTitle: >-
+          Audiobook Favorites for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        audiobookFavBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        audiobookFavBrowserItemsPerRow: 4
+        audiobookFavBrowserItemsHideTitle: false
+        audiobookFavBrowserItemsHideSubTitle: false
+        audiobookFavBrowserItemsSortTitle: true
+        categoryBrowserTitle: >-
+          Categories for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        categoryBrowserSubTitle: click a tile item to view the content; click-hold for actions
+        categoryBrowserItemsPerRow: 4
+        categoryBrowserItemsHideTitle: false
+        categoryBrowserItemsHideSubTitle: true
+        categoryBrowserItemsSortTitle: true
+        deviceBrowserTitle: Spotify Connect Devices ({medialist.filteritemcount} items)
+        deviceBrowserSubTitle: click an item to select the device; click-hold for device info
+        deviceBrowserItemsPerRow: 1
+        deviceBrowserItemsHideTitle: false
+        deviceBrowserItemsHideSubTitle: false
+        episodeFavBrowserTitle: >-
+          Episode Favorites for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        episodeFavBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        episodeFavBrowserItemsPerRow: 4
+        episodeFavBrowserItemsHideTitle: false
+        episodeFavBrowserItemsHideSubTitle: false
+        episodeFavBrowserItemsSortTitle: true
+        playlistFavBrowserTitle: >-
+          Playlist Favorites for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        playlistFavBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        playlistFavBrowserItemsPerRow: 4
+        playlistFavBrowserItemsHideTitle: false
+        playlistFavBrowserItemsHideSubTitle: false
+        playlistFavBrowserItemsSortTitle: true
+        recentBrowserTitle: >-
+          Recently Played by {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        recentBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        recentBrowserItemsPerRow: 4
+        recentBrowserItemsHideTitle: false
+        recentBrowserItemsHideSubTitle: false
+        searchMediaBrowserTitle: >-
+          Search Media for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        searchMediaBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        searchMediaBrowserUseDisplaySettings: false
+        searchMediaBrowserItemsPerRow: 4
+        searchMediaBrowserItemsHideTitle: false
+        searchMediaBrowserItemsHideSubTitle: true
+        searchMediaBrowserItemsSortTitle: false
+        searchMediaBrowserSearchLimit: 50
+        searchMediaBrowserSearchTypes:
+          - Albums
+          - Artists
+          - Playlists
+          - Tracks
+          - AudioBooks
+          - Shows
+          - Episodes
+        showFavBrowserTitle: >-
+          Show Favorites for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        showFavBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        showFavBrowserItemsPerRow: 4
+        showFavBrowserItemsHideTitle: false
+        showFavBrowserItemsHideSubTitle: true
+        showFavBrowserItemsSortTitle: true
+        trackFavBrowserTitle: >-
+          Track Favorites for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        trackFavBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        trackFavBrowserItemsPerRow: 4
+        trackFavBrowserItemsHideTitle: false
+        trackFavBrowserItemsHideSubTitle: false
+        trackFavBrowserItemsSortTitle: false
+        userPresetBrowserTitle: >-
+          User Presets for {player.sp_user_display_name}
+          ({medialist.filteritemcount} items)
+        userPresetBrowserSubTitle: click a tile item to play the content; click-hold for actions
+        userPresetBrowserItemsPerRow: 4
+        userPresetBrowserItemsHideTitle: false
+        userPresetBrowserItemsHideSubTitle: false
+        userPresets:
+          - name: Daily Mix 1
+            subtitle: Various Artists
+            image_url: >-
+              https://dailymix-images.scdn.co/v2/img/ab6761610000e5ebcd3f796bd7ea49ed7615a550/1/en/default
+            uri: spotify:playlist:37i9dQZF1E39vTG3GurFPW
+            type: playlist
+          - name: My Track Favorites
+            subtitle: Shuffled
+            image_url: https://t.scdn.co/images/728ed47fc1674feb95f7ac20236eb6d7.jpeg
+            shuffle: true
+            type: trackfavorites
+        customImageUrls:
+          X_default: /local/images/spotifyplus_card_customimages/default.png
+          X_empty preset: /local/images/spotifyplus_card_customimages/empty_preset.png
+          X_Daily Mix 1: https://brands.home-assistant.io/spotifyplus/icon.png
+          X_playerBackground: /local/images/spotifyplus_card_customimages/playerBackground.png
+          X_playerIdleBackground: /local/images/spotifyplus_card_customimages/playerIdleBackground.png
+          X_playerOffBackground: /local/images/spotifyplus_card_customimages/playerOffBackground.png
+        sectionDefault: player
+        height: 100%
+        visibility:
+          - condition: state
+            entity: input_boolean.sonos_spotify
+            state_not: "on"
+        playerMinimizeOnIdle: false
+        playerHeaderHideProgressBar: false
+        playerControlsHideFavorites: true
+        playerControlsHide: false
+        playerControlsHidePlayPause: false
+        playerVolumeControlsHideMute: false
+        playerVolumeControlsHidePower: true
+        playerVolumeControlsHideSlider: false
+        playerVolumeControlsShowPlusMinus: true
+        playerVolumeControlsHideLevels: false
+        width: 80%
+        playerHeaderHide: false
+        playerControlsHidePlayQueue: false
+        playerControlsHideRepeat: false
+        playerControlsHideTrackNext: false
+        deviceControlByName: true
+        deviceBrowserItemsShowHiddenDevices: true
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: Groups
+        styles:
+          card:
+            - height: 48px
+      - type: custom:sonos-card
+        title: ""
+        sections:
+          - grouping
+        entityNameReplacement: ""
+        predefinedGroups:
+          - name: Everywhere
+            entities:
+              - media_player.sonos_living_room
+              - media_player.sonos_main_bathroom
+              - media_player.sonos_main_bedroom
+              - media_player.sonos_second_bedroom
+              - media_player.sonos_second_bathroom
+          - name: Our Room
+            entities:
+              - media_player.sonos_main_bedroom
+              - media_player.sonos_main_bathroom
+        entities:
+          - media_player.sonos_living_room
+          - media_player.sonos_second_bedroom
+          - media_player.sonos_second_bathroom
+          - media_player.sonos_main_bedroom
+          - media_player.sonos_main_bathroom
+        widthPercentage: 100
+        hideGroupCurrentTrack: false
+        showVolumeUpAndDownButtons: true
+        dynamicVolumeSlider: true
+        heightPercentage: 100
+        grouping:
+          compact: false
+          skipApplyButton: true
+          hideUngroupAllButtons: false
+          dontSwitchPlayer: true
+          dontSortMembersOnTop: true
+          disableMainSpeakers: false
+          hideVolumes: false
+          buttonColor: var(--ha-card-background)
+        groups:
+          compact: false
+        entityNameRegexToReplace: "Sonos "
+        storePlayerInSessionStorage: true
+        doNotRememberSelectedPlayer: false
+        changeVolumeOnSlide: true
+        entityId: media_player.sonos_second_bedroom
+        startSection: grouping
+        adjustVolumeRelativeToMainPlayer: false
+        footerHeight: 0
+        mediaTitleReplacement: "Sonos "
+        card_mod:
+          style:
+            # Retry point 1: sonos-grouping shadow root
+            "sonos-grouping $":
+              .: |
+                div.wrapper {
+                  flex-direction: column-reverse;
+                  min-width: 100%;
+                }
+                div.list {
+                  --secondary-background-color: var(--background-color);
+                  box-sizing: border-box;
+                  border-radius: var(--ha-card-border-radius, var(--ha-border-radius-lg));
+                  border-width: var(--ha-card-border-width, 1px);
+                  border-style: solid;
+                  border-color: var(--ha-card-border-color, var(--divider-color, #e0e0e0));
+                  color: var(--primary-text-color);
+                  display: block;
+                  transition: 0.3s ease-out;
+                  position: relative;
+                  &:hover { box-shadow: none; }
+                  &:active { box-shadow: none; }
+                }
+              # Retry point 2: sonos-grouping-item-row shadow root
+              # dict (not string) to allow both CSS via .: and further traversal to sonos-volume
+              "sonos-grouping-item-row $":
+                .: |
+                  div.item {
+                    border-radius: var(--ha-card-border-radius);
+                    background: var(--ha-card-background);
+                    border-color: var(--ha-card-border-color);
+                    border-width: var(--ha-card-border-width);
+                    border-style: var(--ha-card-border-style);
+                    backdrop-filter: var(--ha-card-backdrop-filter);
+                    box-shadow: var(--shadow-outset);
+                    overflow: visible;
+                    margin: 10px 10px 20px 10px;
+                    width: 90%;
+                    min-height: 70px;
+                    padding: 0 10px 0 10px;
+                    color: var(--primary-text-color);
+                    &::before { display: none; }
+                    --icon-box-shadow: 0.3rem 0.3rem 0.5rem black, -0.2rem -0.2rem 0.4rem rgba(51, 51, 51, 0.9);
+                    transition: box-shadow 200ms ease, transform 180ms ease;
+                  }
+                  div.item:hover {
+                    box-shadow: var(--shadow-inset);
+                  }
+                  div.item:active {
+                    box-shadow: var(--shadow-inset);
+                    transform: scale(0.99);
+                  }
+                  div.item[disabled] .icon {
+                    --icon-box-shadow: inset 0.2rem 0.2rem 0.5rem black, inset -0.2rem -0.2rem 0.5rem rgba(51, 51, 51, 0.9);
+                  }
+                  .icon[selected] {
+                    --icon-primary-color: var(--accent-color);
+                  }
+                  span.name {
+                    color: var(--accent-color);
+                    padding-left: 6px;
+                  }
+                "ha-icon $":
+                  .: |
+                    :host ha-svg-icon {
+                      box-shadow: var(--icon-box-shadow);
+                      padding: 5px;
+                      border-radius: 50%;
+                      color: var(--grey-3-color);
+                    }
+                  "ha-svg-icon $": |
+                    :host path.primary-path {
+                      d: path("M20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 16 0");
+                    }
+                # Retry point 3: sonos-volume shadow root
+                # Consolidates: $sonos-volume$: and $sonos-volume$ha-control-slider$:
+                "sonos-volume $":
+                  .: |
+                    ha-control-slider {
+                      --control-slider-thickness: 0.5rem;
+                      --control-slider-background-opacity: 1;
+                      --control-slider-background: transparent;
+                    }
+                  # Retry point 4: ha-control-slider shadow root
+                  "ha-control-slider $": |
+                    div.container {
+                      width: 100%;
+                      display: flex;
+                      flex-direction: row;
+                    }
+                    div.slider {
+                      box-shadow: var(--shadow-progress-bar-ridge);
+                    }
+                    div.slider>div.slider-track-bar {
+                      background-image: var(--slider-gradient);
+                    }
+                    div.slider>div.slider-track-bar::after {
+                      background-color: white;
+                      height: 100%;
+                    }
+              # Retry point 2: sonos-grouping-actions shadow root
+              "sonos-grouping-actions $":
+                .: |
+                  div.predefined-groups {
+                    justify-content: space-around;
+                    margin: 0 0 10px 0;
+                  }
+                # Retry point 3: sonos-grouping-button shadow root
+                "sonos-grouping-button $":
+                  # Retry point 4: ha-control-button shadow root (was: $ha-control-button$)
+                  "ha-control-button $": |
+                    button.button {
+                      --control-button-border-radius: 10px;
+                      --control-button-icon-color: var(--accent-color);
+                      --control-button-background-color: var(--ha-card-background);
+                      box-shadow: var(--shadow-outset);
+                      &::before { display: none; }
+                    }
+                    button.button:active {
+                      transform: translateY(-2px);
+                      box-shadow: var(--shadow-inset);
+                    }
+                    button.button:hover {
+                      transform: scale(0.98);
+                      box-shadow: var(--shadow-inset);
+                    }
+            .: |
+              ha-card {
+                background: transparent;
+                backdrop-filter: none;
+                box-shadow: none;
+                border: none;
+              }
+              ha-card::before { display: none; }
+              ha-card:hover { box-shadow: none; }
+              ha-card:active { 
+                box-shadow: none;
+                transform: none;
+              }
+      - type: custom:navbar-card
+        template: primary_nav
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.main_bedroom_sensor_motion
+        fill_container: false
+        tap_action:
+          action: more-info
+        icon_type: none
+        primary_info: last-changed
+        name: MB
+        icon: ""
+        card_mod:
+          style: |
+            ha-card {
+              z-index: 2;
+              position: absolute;
+              top: 0px;
+              right: 0px;
+              {% if states(config.entity) == 'on' %}
+                --ha-card-background: rgba(255,0,0,1);
+                animation: blinking 1s linear alternate infinite;
+              {% endif %}
+            }
+            @keyframes blinking {
+              0% {opacity: .5;}
+              50% {opacity: 1;}
+            }
+  - title: Weather
+    path: weather
+    icon: mdi:weather-partly-cloudy
+    type: custom:vertical-layout
+    layout:
+      mediaquery:
+        "(max-width: 600px)":
+          column_widths: repeat(1, minmax(0, 1fr))
+        "(max-width: 800px)":
+          column_widths: repeat(2, minmax(0, 1fr))
+        "(max-width: 9999px)":
+          column_widths: repeat(3, minmax(0, 1fr))
+    badges: []
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: Weather
+      - type: custom:weather-forecast-card
+        entity: weather.strata
+        name: Elephant & Castle
+        show_current: true
+        show_forecast: false
+        show_condition_effects: true
+        current:
+          show_attributes:
+            - humidity
+            - pressure
+            - wind_speed
+            - uv_index
+          secondary_info_attribute: humidity
+      - type: custom:button-card
+        template: card_title
+        name: Hourly Forecast
+      - type: custom:weather-forecast-card
+        entity: weather.strata
+        name: Elephant & Castle
+        show_current: false
+        show_forecast: true
+        default_forecast: hourly
+        show_condition_effects: true
+        current:
+          show_attributes:
+            - humidity
+            - pressure
+            - wind_speed
+            - uv_index
+          secondary_info_attribute: humidity
+        forecast:
+          mode: chart
+          extra_attribute: wind_direction
+          default_chart_attribute: temperature_and_precipitation
+          show_attribute_selector: false
+          daily_slots: 5
+          hourly_slots: 5
+      - type: custom:button-card
+        template: card_title
+        name: Daily Forecast
+      - type: custom:weather-forecast-card
+        entity: weather.strata
+        name: Elephant & Castle
+        show_current: false
+        show_forecast: true
+        default_forecast: daily
+        show_condition_effects: true
+        current:
+          show_attributes:
+            - humidity
+            - pressure
+            - wind_speed
+            - uv_index
+          secondary_info_attribute: humidity
+        forecast:
+          mode: chart
+          extra_attribute: wind_direction
+          default_chart_attribute: temperature_and_precipitation
+          show_attribute_selector: false
+          daily_slots: 5
+          hourly_slots: 5
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: UV Index
+      - type: custom:gauge-card-pro
+        entity: sensor.strata_uv_index
+        min: 1
+        max: 10
+        needle: true
+        needle_color:
+          light_mode: "#000"
+          dark_mode: "#FFF"
+        segments:
+          - from: 0
+            color: "#009900"
+          - from: 4
+            color: "#ff9900"
+          - from: 7
+            color: "#ff0000"
+          - from: 9
+            color: "#990099"
+        hide_background: false
+        gradient: true
+        gradient_background: true
+        gradient_resolution: auto
+        titles:
+          primary: UV Index
+        value_texts:
+          primary_unit: ""
+      - type: custom:button-card
+        template: card_title
+        name: Air Quality
+      - type: custom:gauge-card-pro
+        entity: sensor.strata_daqi_uk_aqi
+        entity2: sensor.strata_daqi_uk_category
+        min: 1
+        max: 10
+        needle: true
+        needle_color:
+          light_mode: "#000"
+          dark_mode: "#FFF"
+        segments:
+          - from: 0
+            color: "#009900"
+          - from: 4
+            color: "#ff9900"
+          - from: 7
+            color: "#ff0000"
+          - from: 9
+            color: "#990099"
+        hide_background: false
+        titles:
+          secondary: "{{ states(entity2) | replace('_', ' ') | title }}"
+        gradient: true
+        gradient_background: true
+        gradient_resolution: auto
+        value_texts:
+          primary: "{{ states(entity) | default(0) | int }}"
+      - type: custom:button-card
+        template: card_title
+        name: Pollen Forecast
+      - integration: kleenex
+        type: custom:pollenprognos-card
+        location: home
+        entity_prefix: ""
+        entity_suffix: ""
+        allergens:
+          - trees_cat
+          - grass_cat
+          - weeds_cat
+        minimal: false
+        minimal_gap: 35
+        background_color: ""
+        icon_size: 30
+        text_size_ratio: 1
+        allergen_colors:
+          - "#9CCC32"
+          - "#D4E157"
+          - "#FFCA28"
+          - "#FF8F00"
+          - "#E53935"
+          - "#B71C1C"
+        show_text_allergen: true
+        show_value_text: true
+        show_value_numeric: false
+        show_value_numeric_in_circle: true
+        show_empty_days: false
+        debug: false
+        show_version: true
+        days_to_show: 2
+        days_relative: true
+        days_abbreviated: false
+        days_uppercase: false
+        days_boldfaced: false
+        pollen_threshold: 0
+        sort: value_descending
+        sort_category_allergens_first: true
+        allergy_risk_top: true
+        allergens_abbreviated: false
+        link_to_sensors: true
+        date_locale: en-GB
+        title: false
+        phrases:
+          full: {}
+          short: {}
+          levels: []
+          days: {}
+          no_information: ""
+        mode: daily
+        numeric_state_raw_risk: false
+        sort_pollution_block: true
+        pollution_block_position: bottom
+        show_block_separator: false
+        city: ""
+        allergen_color_mode: custom
+        levels_inherit_mode: inherit_allergen
+        tap_action:
+          type: more-info
+
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: Previous 24hr
+      - type: custom:mini-graph-card
+        name: Last 24hrs
+        icon: local:sun-behind-rain-cloud
+        entities:
+          - entity: sensor.strata_temperature
+            name: Temperature
+          - entity: sensor.strata_precipitation_intensity
+            name: Rainfall
+            y_axis: secondary
+        hours_to_show: 24
+        line_width: 4
+        decimals: 0
+        hour24: false
+        smoothing: true
+        show:
+          name: true
+          legend: true
+        card_mod:
+          style: |
+            ha-card {
+              min-height: 100%;
+            }
+      - type: custom:button-card
+        template: card_title
+        name: Rain Radar
+      - type: custom:weather-radar-card
+        data_source: RainViewer-TWC
+        map_style: Dark
+        zoom_level: 10
+        center_latitude: 51.492849282110136
+        marker_latitude: 51.492849282110136
+        center_longitude: -0.09971737774321811
+        marker_longitude: -0.09971737774321811
+        extra_labels: true
+        show_range: true
+        show_marker: true
+        show_playback: false
+        square_map: true
+        show_recenter: true
+        show_zoom: false
+        show_scale: false
+        static_map: false
+        frame_count: 30
+        card_mod:
+          style: |
+            ha-card {
+              min-height: 100%;
+            }
+      - type: custom:navbar-card
+        template: primary_nav
+  - title: Climate
+    type: custom:vertical-layout
+    path: climate
+    icon: mdi:home-thermometer
+    layout:
+      mediaquery:
+        "(max-width: 600px)":
+          column_widths: repeat(1, minmax(0, 1fr))
+        "(max-width: 800px)":
+          column_widths: repeat(2, minmax(0, 1fr))
+        "(max-width: 9999px)":
+          column_widths: repeat(3, minmax(0, 1fr))
+    badges: []
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: Apartment Temps
+      - type: custom:battery-state-card
+        title: ""
+        icon: mdi:thermometer
+        colors:
+          steps:
+            - color: "#264CFF"
+              value: 20
+            - color: "#3FA0FF"
+              value: 21
+            - color: "#72D8FF"
+              value: 22
+            - color: "#AAF7FF"
+              value: 23
+            - color: "#E0FFFF"
+              value: 24
+            - color: "#FFFFBF"
+              value: 25
+            - color: "#FFE099"
+              value: 26
+            - color: "#FFAD72"
+              value: 27
+            - color: "#F76D5E"
+              value: 28
+            - color: "#D82632"
+              value: 29
+            - color: "#A50021"
+              value: 30
+          gradient: true
+        tap_action:
+          action: more-info
+        unit: ┬░C
+        entities:
+          - entity: sensor.apartment_sensor_temperature
+            name: Living Room
+          - entity: sensor.living_room_sensor_temperature
+            name: Dining
+          - entity: sensor.nest_temperature
+            name: Nest
+          - entity: sensor.main_bedroom_sensor_temperature
+            name: Main Bedroom
+          - entity: sensor.main_bathroom_sensor_temperature
+            name: Main Bathroom
+          - entity: sensor.second_bedroom_sensor_temperature
+            name: Second Bedroom
+          - entity: sensor.second_bathroom_sensor_temperature
+            name: Second Bathroom
+          - entity: sensor.front_door_sensor_temperature
+            name: Entrance
+          - entity: sensor.water_leak_sensor_temperature
+            name: Heat Exchanger
+          - entity: sensor.utility_cupboard_sensor_temperature
+            name: Utility Cupboard
+        card_mod:
+          style: |
+            svg {
+              color: currentcolor;
+              background-color: currentcolor;
+              opacity: 0.2;
+              --mdc-icon-size: 30px;
+              min-width: 40px;
+              min-height: 40px;
+              max-width: 40px;
+              max-height: 40px;
+              border-radius: 50%;
+              display: flex;
+            }
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: Outside Temp & Humidity
+      - type: custom:mini-graph-card
+        name: Local 24hrs
+        icon: local:sun
+        decimals: 0
+        entities:
+          - entity: sensor.openweathermap_temperature
+            name: Temperature
+          - entity: sensor.openweathermap_humidity
+            name: Humidity
+            y_axis: secondary
+        hours_to_show: 24
+        line_width: 4
+        smoothing: true
+        show:
+          name: true
+          legend: true
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: Inside Temp & Humidity
+      - type: custom:mini-graph-card
+        name: Apartment 24hrs
+        icon: local:sun
+        decimals: 0
+        entities:
+          - entity: sensor.nest_temperature
+            name: Temperature
+          - entity: sensor.nest_humidity
+            name: Humidity
+            y_axis: secondary
+        hours_to_show: 24
+        line_width: 4
+        smoothing: true
+        show:
+          name: true
+          legend: true
+      - type: custom:navbar-card
+        template: primary_nav
+  - title: Network
+    type: custom:grid-layout
+    path: network
+    icon: mdi:network
+    layout:
+      grid-template-columns: repeat(4, minmax(0, 1fr))
+      grid-template-rows: auto
+      mediaquery:
+        "(max-width: 600px)":
+          grid-template-columns: repeat(1, minmax(0, 1fr))
+        "(max-width: 900px)":
+          grid-template-columns: repeat(2, minmax(0, 1fr))
+        "(max-width: 1200px)":
+          grid-template-columns: repeat(3, minmax(0, 1fr))
+    subview: false
+    cards:
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: repeat(3, minmax(0, 1fr))
+          grid-template-rows: repeat(2, 50px)
+          mediaquery:
+            "(max-width: 900px)":
+              grid-template-columns: repeat(2, minmax(0, 1fr))
+        cards:
+          - type: custom:button-card
+            entity: sensor.unifi_network_health
+            template: card_chip
+            show_entity_picture: true
+            entity_picture: /local/images/unifi/microsoft.svg
+            styles:
+              card:
+                - max-width: 100px
+            name: |
+              [[[
+                if (entity.attributes.data[1].monitors[0] === undefined) return '';
+                else return entity.attributes.data[1].monitors[0].latency_average + ' ms';
+              ]]]
+          - type: custom:button-card
+            template: card_chip
+            show_entity_picture: true
+            entity_picture: /local/images/unifi/google.svg
+            entity: sensor.unifi_network_health
+            styles:
+              card:
+                - max-width: 100px
+            name: |
+              [[[
+                if (entity.attributes.data[1].monitors[1] === undefined) return '';
+                else return entity.attributes.data[1].monitors[1].latency_average + ' ms';
+              ]]]
+          - type: custom:button-card
+            template: card_chip
+            show_entity_picture: true
+            entity_picture: /local/images/unifi/cloudflare.svg
+            entity: sensor.unifi_network_health
+            styles:
+              card:
+                - max-width: 100px
+            name: |
+              [[[
+                if (entity.attributes.data[1].monitors[2] === undefined) return '';
+                else return entity.attributes.data[1].monitors[2].latency_average + ' ms';
+              ]]]
+        view_layout:
+          grid-column: 1 / 5
+          grid-row: 1 / 2
+      - type: custom:button-card
+        entity: sensor.unifi_device_uxg
+        template: card_unifi_devices
+      - type: custom:button-card
+        entity: sensor.unifi_device_cloudkey
+        template: card_unifi_devices
+      - type: custom:button-card
+        entity: sensor.unifi_device_us8p60
+        template: card_unifi_devices
+      - type: custom:button-card
+        entity: sensor.unifi_device_switch_8
+        template: card_unifi_devices
+      - type: custom:button-card
+        entity: sensor.unifi_device_usl16p
+        template: card_unifi_devices
+      - type: custom:button-card
+        entity: sensor.unifi_device_ap_ac_mesh
+        template: card_unifi_devices
+      - type: custom:button-card
+        entity: sensor.unifi_device_ap_ac_pro
+        template: card_unifi_devices
+      - type: markdown
+        content: >
+          Permalink - use to edit and share this gradient:
+          https://colorzilla.com/gradient-editor/#006e2e+10,006e2e+30,006e2e+50,ff0000+70,b56f00+90
+
+
+          background: linear-gradient(to right,  rgb(0,110,46) 10%,rgb(0,110,46)
+          30%,rgb(0,110,46) 50%,rgb(255,0,0) 70%,rgb(181,111,0) 90%);
+        visibility:
+          - condition: user
+            users:
+              - 735e0c0a9e694ea594fe983ed25c80f2
+        text_only: true
+      - type: custom:navbar-card
+        template: primary_nav
+  - title: System
+    path: system
+    icon: mdi:information-slab-circle-outline
+    type: custom:vertical-layout
+    visible:
+      - user: 735e0c0a9e694ea594fe983ed25c80f2
+    layout:
+      mediaquery:
+        "(max-width: 600px)":
+          column_widths: repeat(1, minmax(0, 1fr))
+        "(max-width: 800px)":
+          column_widths: repeat(2, minmax(0, 1fr))
+        "(max-width: 9999px)":
+          column_widths: repeat(3, minmax(0, 1fr))
+    badges: []
+    subview: false
+    cards:
+      - type: custom:button-card
+        template: card_title
+        name: People
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: repeat(2, minmax(0, 1fr))
+          grid-template-rows: minmax(0, 1fr)
+        cards:
+          - type: custom:mushroom-person-card
+            entity: person.jason_titter
+            fill_container: true
+            icon_type: entity-picture
+            name: Jason
+          - type: custom:mushroom-person-card
+            entity: person.jordan_bunyan
+            fill_container: true
+            icon_type: entity-picture
+            name: Jordan
+      - type: custom:button-card
+        template: card_title
+        name: Sensors
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: repeat(2, minmax(0, 1fr))
+          grid-template-rows: minmax(0, 1fr)
+        cards:
+          - type: custom:streamline-card
+            template: mushroom_entity
+            variables:
+              - entity: binary_sensor.main_bedroom_sensor_motion
+              - name: Main Bedroom
+              - secondary_info: last-changed
+              - icon_color: red
+          - type: custom:streamline-card
+            template: mushroom_entity
+            variables:
+              - entity: binary_sensor.main_bathroom_sensor_motion
+              - name: Main Bathroom
+              - icon_color: red
+              - secondary_info: last-changed
+          - type: custom:streamline-card
+            template: mushroom_entity
+            variables:
+              - entity: binary_sensor.apartment_sensor_motion
+              - name: Apartment
+              - icon_color: red
+              - secondary_info: last-changed
+          - type: custom:streamline-card
+            template: mushroom_entity
+            variables:
+              - entity: binary_sensor.front_door_sensor_door
+              - name: Front Door
+              - secondary_info: last-changed
+          - type: custom:streamline-card
+            template: mushroom_entity
+            variables:
+              - entity: binary_sensor.living_room_sensor_motion
+              - name: Dining Table
+              - secondary_info: last-changed
+          - type: custom:streamline-card
+            template: mushroom_entity
+            variables:
+              - secondary_info: last-changed
+              - entity: binary_sensor.second_bathroom_sensor_motion
+              - name: Second Bathroom
+      - type: custom:button-card
+        template: card_title
+        name: Fire TV Max
+      - type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: repeat(2, minmax(0, 1fr))
+          grid-template-rows: minmax(0, 1fr)
+        cards:
+          - type: custom:mushroom-media-player-card
+            variables:
+              - secondary_info: last-changed
+            entity: media_player.fire_tv_max_adb
+            fill_container: true
+            use_media_info: true
+            name: Fire TV Max
+            volume_controls: []
+            show_volume_level: false
+            collapsible_controls: true
+            secondary_info: last-changed
+            primary_info: state
+            icon: phu:firetv
+            media_controls:
+              - on_off
+              - play_pause_stop
+            icon_type: entity-picture
+          - type: custom:mushroom-media-player-card
+            variables:
+              - secondary_info: last-changed
+            entity: media_player.samsung_tv
+            fill_container: false
+            use_media_info: true
+            primary_info: state
+            media_controls:
+              - on_off
+            volume_controls: []
+            show_volume_level: false
+            secondary_info: last-changed
+            icon_type: entity-picture
+            collapsible_controls: true
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: Temperatures
+      - type: custom:battery-state-card
+        title: ""
+        icon: mdi:thermometer
+        colors:
+          steps:
+            - color: "#264CFF"
+              value: 20
+            - color: "#3FA0FF"
+              value: 21
+            - color: "#72D8FF"
+              value: 22
+            - color: "#AAF7FF"
+              value: 23
+            - color: "#E0FFFF"
+              value: 24
+            - color: "#FFFFBF"
+              value: 25
+            - color: "#FFE099"
+              value: 26
+            - color: "#FFAD72"
+              value: 27
+            - color: "#F76D5E"
+              value: 28
+            - color: "#D82632"
+              value: 29
+            - color: "#A50021"
+              value: 30
+          gradient: true
+        tap_action:
+          action: more-info
+        unit: ┬░C
+        entities:
+          - entity: sensor.apartment_sensor_temperature
+            name: Living Room
+          - entity: sensor.nest_temperature
+            name: Nest Thermostat
+          - entity: sensor.main_bedroom_sensor_temperature
+            name: Main Bedroom
+          - entity: sensor.main_bathroom_sensor_temperature
+            name: Main Bathroom
+          - entity: sensor.second_bedroom_sensor_temperature
+            name: Second Bedroom
+          - entity: sensor.second_bathroom_sensor_temperature
+            name: Second Bathroom
+          - entity: sensor.front_door_sensor_temperature
+            name: Front Door
+          - entity: sensor.water_leak_sensor_temperature
+            name: Heat Exchanger
+          - entity: sensor.utility_cupboard_sensor_temperature
+            name: Utility Cupboard
+      - type: custom:layout-break
+      - type: custom:button-card
+        template: card_title
+        name: Batteries
+      - type: custom:battery-state-card
+        title: ""
+        colors:
+          steps:
+            - "#ff0000"
+            - "#ffff00"
+            - "#00ff00"
+          gradient: true
+        entities:
+          - entity: sensor.apartment_sensor_battery
+            name: Apartment Sensor
+          - entity: sensor.front_door_sensor_battery
+            name: Front Door Sensor
+          - entity: sensor.floor_lamp_dimmer_battery
+            name: Floor Lamp Dimmer
+          - entity: sensor.jasons_dimmer_battery
+            name: JasonÔÇÖs Dimmer
+          - entity: sensor.jordans_dimmer_battery
+            name: JordanÔÇÖs Dimmer
+          - entity: sensor.kitchen_dimmer_battery
+            name: Kitchen Dimmer
+          - entity: sensor.living_room_dimmer_battery
+            name: Living Room Dimmer
+          - entity: sensor.main_bathroom_sensor_battery
+            name: Main Bathroom Sensor
+          - entity: sensor.main_bedroom_dimmer_battery
+            name: Main Bedroom Dimmer
+          - entity: sensor.main_bedroom_sensor_battery
+            name: Main Bedroom Sensor
+          - entity: sensor.office_button_battery
+            name: Office Button
+          - entity: sensor.pendant_lights_dimmer_battery
+            name: Pendant Lights Dimmer
+          - entity: sensor.second_bathroom_sensor_battery
+            name: Second Bathroom Sensor
+          - entity: sensor.second_bedroom_dimmer_battery
+            name: Second Bedroom Dimmer
+          - entity: sensor.second_bedroom_sensor_battery
+            name: Second Bedroom Sensor
+          - entity: sensor.sonos_main_bedroom_battery
+            name: Sonos Main Bedroom
+          - entity: sensor.utility_cupboard_sensor_battery
+            name: Utility Cupboard Sensor
+          - entity: sensor.water_leak_sensor_battery
+            name: Water Leak Sensor
+      - type: custom:navbar-card
+        template: primary_nav
+      - type: markdown
+        content: >-
+          ## System Links
+
+          * [BrowserMod Settings](/browser-mod)
+
+          * BrowserMod Device =
+          [Home-Assistant](/home-assistant/lighting?BrowserID=iPad-Homeassistant)
+
+          * [User Profile](/profile)
+
+          * BrowserMod Device =
+          [HA-WindowsAgent](/windows-agent/0?BrowserID=HA-WindowsAgent)
+        text_only: true
+  - type: custom:grid-layout
+    path: popups
+    icon: mdi:fit-to-page
+    cards:
+      - type: custom:popup-card
+        title: "Settings: Sonos Second Bedroom"
+        dismissable: false
+        right_button: CLOSE
+        popup_card_id: sonos_second_bedroom
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+        card:
+          type: custom:auto-entities
+          card:
+            type: entities
+          filter:
+            template: >
+              {% set pref = state_attr('media_player.sonos_second_bedroom',
+              'friendly_name') %}
+
+              [{% for e in
+              device_entities(device_id('media_player.sonos_second_bedroom')) |
+              sort(attribute='friendly_name') %}
+                {'entity': '{{e}}',
+                 'name': '{{ state_attr(e, 'friendly_name').removeprefix(pref) }}',
+                },
+              {% endfor %}]
+            exclude:
+              - options: {}
+                domain: media_player
+              - options: {}
+                entity_id: sensor.*rx
+              - options: {}
+                entity_id: sensor.*tx
+            include:
+              - options: {}
+                entity_id: switch.sonos_living_room_night_sound
+        target:
+          device_id: 64c3f4259a889712ca4cd445a459d50c
+      - type: custom:popup-card
+        title: "Settings: Sonos Living Room"
+        dismissable: false
+        right_button: CLOSE
+        popup_card_id: sonos_living_room
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+        card:
+          type: custom:auto-entities
+          card:
+            type: entities
+          filter:
+            template: >
+              {% set pref = state_attr('media_player.sonos_living_room',
+              'friendly_name') %}
+
+              [{% for e in
+              device_entities(device_id('media_player.sonos_living_room')) |
+              sort(attribute='friendly_name') %}
+                {'entity': '{{e}}',
+                 'name': '{{ state_attr(e, 'friendly_name').removeprefix(pref) }}',
+                },
+              {% endfor %}]
+            exclude:
+              - domain: media_player
+              - entity_id: sensor.*rx
+              - entity_id: sensor.*tx
+            include: []
+      - type: custom:popup-card
+        title: "Settings: Sonos Second Bathroom"
+        dismissable: false
+        card:
+          type: custom:auto-entities
+          card:
+            type: entities
+          filter:
+            template: >
+              {% set pref = state_attr('media_player.sonos_second_bathroom',
+              'friendly_name') %}
+
+              [{% for e in
+              device_entities(device_id('media_player.sonos_second_bathroom')) |
+              sort(attribute='friendly_name') %}
+                {'entity': '{{e}}',
+                 'name': '{{ state_attr(e, 'friendly_name').removeprefix(pref) }}',
+                },
+              {% endfor %}]
+            exclude:
+              - options: {}
+                domain: media_player
+              - options: {}
+                entity_id: sensor.*rx
+              - options: {}
+                entity_id: sensor.*tx
+            include: []
+        right_button: CLOSE
+        popup_card_id: sonos_second_bathroom
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+        card_mod:
+          style: |
+            :host {
+              --ha-card-box-shadow: var(--shadow-inset);
+            }
+      - type: custom:popup-card
+        title: "Settings: Sonos Main Bathroom"
+        dismissable: false
+        card:
+          type: custom:auto-entities
+          card:
+            type: entities
+          filter:
+            template: >
+              {% set pref = state_attr('media_player.sonos_main_bathroom',
+              'friendly_name') %}
+
+              [{% for e in
+              device_entities(device_id('media_player.sonos_main_bathroom')) |
+              sort(attribute='friendly_name') %}
+                {'entity': '{{e}}',
+                 'name': '{{ state_attr(e, 'friendly_name').removeprefix(pref) }}',
+                },
+              {% endfor %}]
+            exclude:
+              - options: {}
+                domain: media_player
+              - options: {}
+                entity_id: sensor.*rx
+              - options: {}
+                entity_id: sensor.*tx
+            include: []
+        right_button: CLOSE
+        popup_card_id: sonos_main_bathroom
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+        card_mod:
+          style: |
+            :host {
+              --ha-card-box-shadow: var(--shadow-inset);
+            }
+      - type: custom:popup-card
+        title: "Settings: Sonos Main Bedroom"
+        dismissable: false
+        card:
+          type: custom:auto-entities
+          card:
+            type: entities
+          filter:
+            template: >
+              {% set pref = state_attr('media_player.sonos_main_bedroom',
+              'friendly_name') %}
+
+              [{% for e in
+              device_entities(device_id('media_player.sonos_main_bedroom')) |
+              sort(attribute='friendly_name') %}
+                {'entity': '{{e}}',
+                 'name': '{{ state_attr(e, 'friendly_name').removeprefix(pref) }}',
+                },
+              {% endfor %}]
+            exclude:
+              - options: {}
+                domain: media_player
+              - options: {}
+                entity_id: sensor.*rx
+              - options: {}
+                entity_id: sensor.*tx
+            include: []
+        right_button: CLOSE
+        popup_card_id: sonos_main_bedroom
+        popup_card_all_views: true
+        icon: ""
+        right_button_variant: brand
+        right_button_appearance: filled
+        timeout_hide_progress: true
+        card_mod:
+          style: |
+            :host {
+              --ha-card-box-shadow: var(--shadow-inset);
+            }
+      - type: custom:navbar-card
+        template: primary_nav
+    title: Pop-ups
+    visible:
+      - user: 735e0c0a9e694ea594fe983ed25c80f2
+      - user: fd6ecc4298104b41b0472644bf659738
+      - user: 6f3265da51144dcfa9130185a8bfe602
+      - user: ecf85b9da15c494da049bcc59edad20f
+      - user: 4b9d812850e641c98bad4327336983b2
+      - user: 5ce47e1c68bb4eb9bb52fcff2e5a6f5b
+    layout:
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+      grid-template-rows: auto
+      grid-gap: 2% 2%
+      mediaquery:
+        "(max-width: 600px)":
+          grid-template-columns: repeat(1, minmax(0, 1fr))
+        "(max-width: 800px)":
+          grid-template-columns: repeat(2, minmax(0, 1fr))
+        "(max-width: 9999px)":
+          grid-template-columns: repeat(3, minmax(0, 1fr))

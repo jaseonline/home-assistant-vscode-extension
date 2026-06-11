@@ -2,11 +2,16 @@
 // Assembles src/themes/ha-neon-dark-color-theme.json from src/parts/
 //
 // Parts files (edit these, not the theme directly):
+//   src/parts/palette.json       — named colour tokens (single source of truth)
 //   src/parts/meta.json          — theme name, type, semanticHighlighting flag
 //   src/parts/workbench.json     — VS Code UI / workbench colors ("colors" key)
-//   src/parts/tokens-ha.json     — HA-specific TextMate token rules (18 rules)
-//   src/parts/tokens-general.json — general language TextMate token rules, incl. Jinja2 (35 rules)
+//   src/parts/tokens-ha.json     — HA-specific TextMate token rules
+//   src/parts/tokens-general.json — general language TextMate token rules, incl. Jinja2
 //   src/parts/semantic.json      — semantic token colors
+//
+// Colour tokens: any string value "$name" or "$name@AA" in a part is resolved
+// against palette.json at build time ("@AA" appends a hex alpha). Unknown
+// tokens fail the build. Raw hex values still pass through untouched.
 //
 // Output (do not edit directly):
 //   src/themes/ha-neon-dark-color-theme.json
@@ -30,11 +35,52 @@ function readPart(name) {
     }
 }
 
+// ---- palette ---------------------------------------------------------------
+const paletteRaw = readPart("palette.json");
+const palette = {};
+for (const [key, value] of Object.entries(paletteRaw)) {
+    if (key.startsWith("//")) continue; // comment keys
+    if (!/^#[0-9a-fA-F]{6}$/.test(value)) {
+        console.error(`palette.json: "${key}" must be a 6-digit hex colour, got "${value}"`);
+        process.exit(1);
+    }
+    palette[key] = value;
+}
+
+const TOKEN_RE = /^\$([^@]+)(?:@([0-9a-fA-F]{2}))?$/;
+let resolvedCount = 0;
+
+function resolvePalette(node, ctx) {
+    if (typeof node === "string") {
+        const m = TOKEN_RE.exec(node);
+        if (!m) return node;
+        const [, name, alpha] = m;
+        if (!(name in palette)) {
+            console.error(`Unknown palette token "$${name}" at ${ctx}`);
+            process.exit(1);
+        }
+        resolvedCount++;
+        return palette[name] + (alpha ? alpha.toLowerCase() : "");
+    }
+    if (Array.isArray(node)) {
+        return node.map((v, i) => resolvePalette(v, `${ctx}[${i}]`));
+    }
+    if (node && typeof node === "object") {
+        const out = {};
+        for (const [k, v] of Object.entries(node)) {
+            out[k] = resolvePalette(v, ctx ? `${ctx}.${k}` : k);
+        }
+        return out;
+    }
+    return node;
+}
+
+// ---- assemble ---------------------------------------------------------------
 const meta = readPart("meta.json");
-const workbench = readPart("workbench.json");
-const tokensHa = readPart("tokens-ha.json");
-const tokensGeneral = readPart("tokens-general.json");
-const semantic = readPart("semantic.json");
+const workbench = resolvePalette(readPart("workbench.json"), "workbench");
+const tokensHa = resolvePalette(readPart("tokens-ha.json"), "tokens-ha");
+const tokensGeneral = resolvePalette(readPart("tokens-general.json"), "tokens-general");
+const semantic = resolvePalette(readPart("semantic.json"), "semantic");
 
 if (!Array.isArray(tokensHa)) {
     console.error("tokens-ha.json must be a JSON array");
@@ -59,5 +105,5 @@ fs.writeFileSync(outFile, output, "utf8");
 const rel = path.relative(root, outFile);
 const tokenCount = theme.tokenColors.length;
 console.log(
-    `✓ Theme assembled → ${rel}  (${tokenCount} token rules: ${tokensHa.length} HA, ${tokensGeneral.length} general)`
+    `✓ Theme assembled → ${rel}  (${tokenCount} token rules: ${tokensHa.length} HA, ${tokensGeneral.length} general; ${resolvedCount} palette refs resolved from ${Object.keys(palette).length} tokens)`
 );

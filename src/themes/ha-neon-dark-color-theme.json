@@ -183,9 +183,9 @@
         "tab.activeBorderTop": "#00000000",
         "tab.inactiveBackground": "#2c2c2c",
         "tab.inactiveForeground": "#ffffff80",
-        "scrollbarSlider.background": "#FC49ABA3",
-        "scrollbarSlider.hoverBackground": "#FC49ABBB",
-        "scrollbarSlider.activeBackground": "#FC49ABBE",
+        "scrollbarSlider.background": "#fc49aba3",
+        "scrollbarSlider.hoverBackground": "#fc49abbb",
+        "scrollbarSlider.activeBackground": "#fc49abbe",
         "progressBar.background": "#fc49ab",
         "widget.shadow": "#0000005c",
         "pickerGroup.border": "#3f3f46",
@@ -256,9 +256,18 @@
         {
             "name": "Home Assistant - Entity ID",
             "scope": [
-                "entity.name.tag.home-assistant",
                 "constant.other.entity-id.home-assistant",
                 "constant.other.entity-id.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ff7300"
+            }
+        },
+        {
+            "name": "Home Assistant - Entity Tag",
+            "scope": [
+                "entity.name.tag.home-assistant",
+                "entity.name.tag.homeassistant"
             ],
             "settings": {
                 "foreground": "#00b4ff"
@@ -309,17 +318,35 @@
             }
         },
         {
-            "name": "Home Assistant - Keywords (automation, trigger, action, condition)",
+            "name": "Home Assistant - Keywords (control)",
             "scope": [
                 "keyword.control.home-assistant",
-                "keyword.control.homeassistant",
+                "keyword.control.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#00ff51",
+                "fontStyle": "bold"
+            }
+        },
+        {
+            "name": "Home Assistant - Keywords (other)",
+            "scope": [
                 "keyword.other.home-assistant",
-                "keyword.other.homeassistant",
+                "keyword.other.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ff0080",
+                "fontStyle": "bold"
+            }
+        },
+        {
+            "name": "Home Assistant - Keywords (type)",
+            "scope": [
                 "storage.type.home-assistant",
                 "storage.type.homeassistant"
             ],
             "settings": {
-                "foreground": "#ff0080",
+                "foreground": "#ff00ff",
                 "fontStyle": "bold"
             }
         },
@@ -334,7 +361,7 @@
                 "variable.other.property.homeassistant"
             ],
             "settings": {
-                "foreground": "#00FF51"
+                "foreground": "#00ff51"
             }
         },
         {
@@ -343,15 +370,24 @@
                 "punctuation.definition.template.begin.home-assistant",
                 "punctuation.definition.template.begin.homeassistant",
                 "punctuation.definition.template.end.home-assistant",
-                "punctuation.definition.template.end.homeassistant",
+                "punctuation.definition.template.end.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ff0000",
+                "fontStyle": "bold"
+            }
+        },
+        {
+            "name": "Home Assistant - Embedded",
+            "scope": [
                 "punctuation.section.embedded.begin.home-assistant",
                 "punctuation.section.embedded.begin.homeassistant",
                 "punctuation.section.embedded.end.home-assistant",
                 "punctuation.section.embedded.end.homeassistant"
             ],
             "settings": {
-                "foreground": "#FF0000",
-                "fontStyle": "bold"
+                "foreground": "#00b4ff",
+                "fontStyle": "italic"
             }
         },
         {
@@ -379,15 +415,23 @@
             }
         },
         {
-            "name": "Home Assistant - Strings",
+            "name": "Home Assistant - Strings Double",
             "scope": [
                 "string.quoted.double.home-assistant",
-                "string.quoted.double.homeassistant",
+                "string.quoted.double.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#5fe8ff"
+            }
+        },
+        {
+            "name": "Home Assistant - Strings Single",
+            "scope": [
                 "string.quoted.single.home-assistant",
                 "string.quoted.single.homeassistant"
             ],
             "settings": {
-                "foreground": "#5fe8ff"
+                "foreground": "#ff9500"
             }
         },
         {
@@ -409,7 +453,7 @@
                 "string.unquoted.block.homeassistant"
             ],
             "settings": {
-                "foreground": "#FAFAFA"
+                "foreground": "#fafafa"
             }
         },
         {
@@ -460,13 +504,14 @@
                 "punctuation.definition.sequence.item.homeassistant"
             ],
             "settings": {
-                "foreground": "#881A94"
+                "foreground": "#881a94"
             }
         },
         {
             "name": "Home Assistant - YAML Keys (homeassistant suffix)",
             "scope": [
-                "entity.name.tag.homeassistant"
+                "entity.name.tag.homeassistant",
+                "entity.name.tag.home-assistant"
             ],
             "settings": {
                 "foreground": "#ff7300"
@@ -475,7 +520,8 @@
         {
             "name": "card-mod - Key (card_mod:)",
             "scope": [
-                "keyword.other.card-mod-key.homeassistant"
+                "keyword.other.card-mod-key.homeassistant",
+                "keyword.other.card-mod-key.home-assistant"
             ],
             "settings": {
                 "foreground": "#ff4d73",
@@ -485,7 +531,8 @@
         {
             "name": "card-mod - Shadow DOM Piercing Key ($:)",
             "scope": [
-                "keyword.operator.shadow-dom.homeassistant"
+                "keyword.operator.shadow-dom.homeassistant",
+                "keyword.operator.shadow-dom.home-assistant"
             ],
             "settings": {
                 "foreground": "#00b4ff",
@@ -495,7 +542,8 @@
         {
             "name": "card-mod CSS - HA Element Selectors (ha-*, hui-*, mwc-*)",
             "scope": [
-                "entity.name.tag.css.ha-element.homeassistant"
+                "entity.name.tag.css.ha-element.homeassistant",
+                "entity.name.tag.css.ha-element.home-assistant"
             ],
             "settings": {
                 "foreground": "#00ffe7"
@@ -504,7 +552,8 @@
         {
             "name": "card-mod CSS - Custom Properties (--var-name)",
             "scope": [
-                "variable.other.custom-property.ha.homeassistant"
+                "variable.other.custom-property.ha.homeassistant",
+                "variable.other.custom-property.ha.home-assistant"
             ],
             "settings": {
                 "foreground": "#c792ea"
@@ -513,16 +562,18 @@
         {
             "name": "card-mod CSS - Property Names",
             "scope": [
-                "support.type.property-name.css.homeassistant"
+                "support.type.property-name.css.homeassistant",
+                "support.type.property-name.css.home-assistant"
             ],
             "settings": {
-                "foreground": "#ffe6ff"
+                "foreground": "#00ff80"
             }
         },
         {
             "name": "card-mod CSS - Block Delimiters ({ })",
             "scope": [
-                "punctuation.section.property-list.css.homeassistant"
+                "punctuation.section.property-list.css.homeassistant",
+                "punctuation.section.property-list.css.home-assistant"
             ],
             "settings": {
                 "foreground": "#ff0080"
@@ -531,7 +582,8 @@
         {
             "name": "card-mod CSS - Pseudo-selectors (:host, :host-context)",
             "scope": [
-                "entity.other.pseudo-class.ha.homeassistant"
+                "entity.other.pseudo-class.ha.homeassistant",
+                "entity.other.pseudo-class.ha.home-assistant"
             ],
             "settings": {
                 "foreground": "#bbadff"
@@ -540,7 +592,8 @@
         {
             "name": "Home Assistant - Custom Card Prefix (custom:)",
             "scope": [
-                "keyword.other.custom-prefix.homeassistant"
+                "keyword.other.custom-prefix.homeassistant",
+                "keyword.other.custom-prefix.home-assistant"
             ],
             "settings": {
                 "foreground": "#e8e8f0"
@@ -549,19 +602,21 @@
         {
             "name": "Home Assistant - Custom Card Separator (:)",
             "scope": [
-                "punctuation.separator.custom-type.homeassistant"
+                "punctuation.separator.custom-type.homeassistant",
+                "punctuation.separator.custom-type.home-assistant"
             ],
             "settings": {
-                "foreground": "#FF0000"
+                "foreground": "#ff0000"
             }
         },
         {
             "name": "Home Assistant - Custom Card Name",
             "scope": [
-                "entity.name.type.custom-card.homeassistant"
+                "entity.name.type.custom-card.homeassistant",
+                "entity.name.type.custom-card.home-assistant"
             ],
             "settings": {
-                "foreground": "#00FF51"
+                "foreground": "#00ff51"
             }
         },
         {
@@ -625,11 +680,35 @@
             }
         },
         {
-            "name": "Types and Classes",
+            "name": "Support Classes",
             "scope": [
-                "entity.name.type",
-                "entity.name.class",
-                "support.class",
+                "support.class"
+            ],
+            "settings": {
+                "foreground": "#bbadff"
+            }
+        },
+        {
+            "name": "Entity Name Type",
+            "scope": [
+                "entity.name.type"
+            ],
+            "settings": {
+                "foreground": "#bbadff"
+            }
+        },
+        {
+            "name": "Entity Name Class",
+            "scope": [
+                "entity.name.class"
+            ],
+            "settings": {
+                "foreground": "#bbadff"
+            }
+        },
+        {
+            "name": "Entity Name Namespace",
+            "scope": [
                 "entity.name.namespace"
             ],
             "settings": {
@@ -673,25 +752,89 @@
             }
         },
         {
-            "name": "Brackets and Braces",
+            "name": "Curly Brace",
             "scope": [
-                "punctuation.definition.bracket",
-                "punctuation.section.array.begin",
-                "punctuation.section.array.end",
-                "punctuation.section.block.begin",
-                "punctuation.section.block.end",
-                "meta.brace.round",
-                "meta.brace.square",
-                "meta.brace.curly",
-                "punctuation.parenthesis.begin",
-                "punctuation.parenthesis.end",
-                "punctuation.squarebracket.open",
-                "punctuation.squarebracket.close",
                 "punctuation.curlybrace.open",
                 "punctuation.curlybrace.close"
             ],
             "settings": {
                 "foreground": "#ff9500"
+            }
+        },
+        {
+            "name": "Square Brackets",
+            "scope": [
+                "punctuation.squarebracket.open",
+                "punctuation.squarebracket.close"
+            ],
+            "settings": {
+                "foreground": "#00ffe7"
+            }
+        },
+        {
+            "name": "Parenthesis",
+            "scope": [
+                "punctuation.parenthesis.begin",
+                "punctuation.parenthesis.end"
+            ],
+            "settings": {
+                "foreground": "#bbadff"
+            }
+        },
+        {
+            "name": "Curly Brace",
+            "scope": [
+                "meta.brace.curly"
+            ],
+            "settings": {
+                "foreground": "#ffe600"
+            }
+        },
+        {
+            "name": "Square Brace",
+            "scope": [
+                "meta.brace.square"
+            ],
+            "settings": {
+                "foreground": "#ff0080"
+            }
+        },
+        {
+            "name": "Parenthesis",
+            "scope": [
+                "meta.brace.round"
+            ],
+            "settings": {
+                "foreground": "#00b4ff"
+            }
+        },
+        {
+            "name": "Block Section",
+            "scope": [
+                "punctuation.section.block.begin",
+                "punctuation.section.block.end"
+            ],
+            "settings": {
+                "foreground": "#c792ea"
+            }
+        },
+        {
+            "name": "Array Section",
+            "scope": [
+                "punctuation.section.array.begin",
+                "punctuation.section.array.end"
+            ],
+            "settings": {
+                "foreground": "#00ff51"
+            }
+        },
+        {
+            "name": "Definition Bracket",
+            "scope": [
+                "punctuation.definition.bracket"
+            ],
+            "settings": {
+                "foreground": "#ff00ff"
             }
         },
         {
@@ -709,7 +852,7 @@
                 "keyword.operator"
             ],
             "settings": {
-                "foreground": "#e8e8f0"
+                "foreground": "#ffe600"
             }
         },
         {
