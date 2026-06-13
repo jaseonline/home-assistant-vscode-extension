@@ -17,7 +17,7 @@ description: >
 
 - **Repo:** `github.com/JaseOnline/home-assistant-vscode` — personal fork of `keesschollaart81/home-assistant-vscode`
 - **Local path:** `C:\Dev\projects\personal\home-assistant-vscode`
-- **Publisher:** `JaseOnline`  |  **Version:** `1.1.7`  |  **VS Code engine:** `^1.99.0`
+- **Publisher:** `JaseOnline`  |  **Version:** `1.1.12`  |  **VS Code engine:** `^1.99.0`
 - **Language ID:** `home-assistant` (`.yaml`, `.yml`)  |  `home-assistant-jinja` (`.jinja`)
 
 Fork-specific additions vs upstream:
@@ -175,17 +175,23 @@ npm run format
 npm test
 ```
 
+**Node / toolchain setup:**
+- **Node version:** `22` LTS (pinned in `.nvmrc`). Managed by **fnm** — auto-switches on `cd`. Run `fnm install 22` if a fresh machine.
+- **npm/npx:** bundled with Node 22 via fnm. Available at `C:\Users\jason\.local\bin` (global prefix). No pnpm/yarn needed.
+- `vsce` installed globally: `npm install -g @vscode/vsce` → lands at `C:\Users\jason\.local\bin\vsce`.
+
 **Important build gotchas:**
-- Always use `npm install --ignore-scripts` on Node v24/Windows — avoids `EINVAL` on `utf-8-validate`/`bufferutil` native bindings.
+- `npm install --ignore-scripts` on Windows — avoids `EINVAL` on `utf-8-validate`/`bufferutil` native bindings.
 - `generateSchemas.ts` **must** run via `ts-node`, not the compiled JS — it uses `__dirname` to find `.ts` source files.
 - The `compile` script runs: `build-theme.js` → `tsc` language-service → `generateSchemas.ts --quick` → `node scripts/bundle.js`.
 - Bundler is esbuild (via `scripts/bundle.js`), not webpack.
 
 **Package:**
 ```bash
-# Build .vsix
-vsce package
-# Output: ha-neon-dark-2.vsix (or version-named file in root)
+# Build .vsix (vsce runs prepublish → node scripts/bundle.js automatically)
+vsce package --no-yarn --skip-license --out ha-neon-dark-2.vsix
+# Install into VS Code
+code --install-extension ha-neon-dark-2.vsix --force
 ```
 
 ---
@@ -253,7 +259,7 @@ Deprecation drift — low urgency (old names still work in HA, no false errors):
 
 **Next steps when resuming Track 3:**
 1. Check if `generateSchemas` completed: tail `generate-schemas.log`; confirm `set_conversation_response` appears in `src/language-service/dist/schemas/json/integration-automation.json`
-2. Rebuild vsix: `npx vsce package --no-yarn --skip-license --out ha-neon-dark-2.vsix`
+2. Rebuild vsix: `vsce package --no-yarn --skip-license --out ha-neon-dark-2.vsix`
 3. Reinstall: `code --install-extension ha-neon-dark-2.vsix --force` + Developer: Reload Window
 4. Test: verify `set_conversation_response:` gets completion and no squiggle in an automation
 5. Next gap: add the 6 missing selectors to `selectors.ts`
