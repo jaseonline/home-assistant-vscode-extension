@@ -1,4 +1,5 @@
 {
+    "$schema": "vscode://schemas/color-theme",
     "enumMember": "$neon.blue",
     "variable.constant": "$lavender",
     "variable.defaultLibrary": "$text.bright",
@@ -15,7 +16,7 @@
     "string": "$neon.amber",
     "keyword": "$neon.pink",
     "number": "$purple",
-    "regexp": "$state.green",
+    "regexp": "$neon.green",
     "comment": "$text.comment",
     "property.readonly": "$accent.pink",
     "function.defaultLibrary": "$accent.pink",

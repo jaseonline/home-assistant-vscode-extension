@@ -34,7 +34,7 @@
       "constant.language"
     ],
     "settings": {
-      "foreground": "$state.green"
+      "foreground": "$neon.green"
     }
   },
   {
@@ -241,7 +241,7 @@
       "constant.character.escape"
     ],
     "settings": {
-      "foreground": "$state.green"
+      "foreground": "$neon.green"
     }
   },
   {
@@ -329,7 +329,7 @@
       "constant.other.character-class.regexp"
     ],
     "settings": {
-      "foreground": "$state.green"
+      "foreground": "$neon.green"
     }
   },
   {

@@ -4,6 +4,7 @@
     "type": "dark",
     "semanticHighlighting": true,
     "colors": {
+        "$schema": "vscode://schemas/color-theme",
         "editor.background": "#0f0f0f",
         "editor.foreground": "#cfd8dc",
         "editorLineNumber.foreground": "#858585",
@@ -32,7 +33,7 @@
         "editorBracketMatch.background": "#0064001a",
         "editorBracketMatch.border": "#888888",
         "editorBracketHighlight.foreground1": "#00b4ff",
-        "editorBracketHighlight.foreground2": "#ff0080",
+        "editorBracketHighlight.foreground2": "#fc49ab",
         "editorBracketHighlight.foreground3": "#c792ea",
         "editorBracketHighlight.foreground4": "#ffe600",
         "editorBracketHighlight.foreground5": "#bbadff",
@@ -40,7 +41,7 @@
         "editor.foldBackground": "#264f784d",
         "editorOverviewRuler.background": "#25252500",
         "editorOverviewRuler.border": "#7f7f7f4d",
-        "editorError.foreground": "#ff4d73",
+        "editorError.foreground": "#ff0000",
         "editorError.background": "#b73a3400",
         "editorWarning.foreground": "#ffe600",
         "editorWarning.background": "#a9904000",
@@ -65,7 +66,7 @@
         "editorSuggestWidget.background": "#252526",
         "editorSuggestWidget.border": "#454545",
         "editorSuggestWidget.foreground": "#ffffff",
-        "editorSuggestWidget.highlightForeground": "#ff4d73",
+        "editorSuggestWidget.highlightForeground": "#ff0000",
         "editorSuggestWidget.selectedBackground": "#4f3232",
         "editorHoverWidget.foreground": "#cccccc",
         "editorHoverWidget.background": "#252526",
@@ -118,7 +119,7 @@
         "list.activeSelectionBackground": "#094771",
         "list.activeSelectionForeground": "#ffffff",
         "list.dropBackground": "#383b3d",
-        "list.highlightForeground": "#ff4d73",
+        "list.highlightForeground": "#ff0000",
         "list.focusBackground": "#062f4a",
         "list.focusForeground": "#cccccc",
         "tree.indentGuidesStroke": "#585858",
@@ -246,7 +247,7 @@
         "terminal.ansiBrightWhite": "#e5e5e5",
         "terminal.ansiBrightYellow": "#f5f543",
         "terminal.ansiCyan": "#00ffe7",
-        "terminal.ansiGreen": "#00ff80",
+        "terminal.ansiGreen": "#00ff51",
         "terminal.ansiMagenta": "#c792ea",
         "terminal.ansiRed": "#fc49ab",
         "terminal.ansiWhite": "#e5e5e5",
@@ -260,7 +261,8 @@
                 "constant.other.entity-id.homeassistant"
             ],
             "settings": {
-                "foreground": "#ff7300"
+                "foreground": "#5fe8ff",
+                "fontStyle": "regular"
             }
         },
         {
@@ -270,7 +272,8 @@
                 "entity.name.tag.homeassistant"
             ],
             "settings": {
-                "foreground": "#00b4ff"
+                "foreground": "#00b4ff",
+                "fontStyle": "regular"
             }
         },
         {
@@ -282,7 +285,8 @@
                 "support.type.domain.homeassistant"
             ],
             "settings": {
-                "foreground": "#ffff00"
+                "foreground": "#ffff00",
+                "fontStyle": "regular"
             }
         },
         {
@@ -292,7 +296,8 @@
                 "entity.other.entity-name.homeassistant"
             ],
             "settings": {
-                "foreground": "#ff00ff"
+                "foreground": "#ff00ff",
+                "fontStyle": "regular"
             }
         },
         {
@@ -302,7 +307,8 @@
                 "punctuation.accessor.dot.homeassistant"
             ],
             "settings": {
-                "foreground": "#e8e8f0"
+                "foreground": "#e8e8f0",
+                "fontStyle": "regular"
             }
         },
         {
@@ -314,7 +320,8 @@
                 "entity.name.function.homeassistant"
             ],
             "settings": {
-                "foreground": "#ff9500"
+                "foreground": "#ff9500",
+                "fontStyle": "regular"
             }
         },
         {
@@ -325,7 +332,7 @@
             ],
             "settings": {
                 "foreground": "#00ff51",
-                "fontStyle": "bold"
+                "fontStyle": "regular"
             }
         },
         {
@@ -335,8 +342,8 @@
                 "keyword.other.homeassistant"
             ],
             "settings": {
-                "foreground": "#ff0080",
-                "fontStyle": "bold"
+                "foreground": "#fc49ab",
+                "fontStyle": "regular"
             }
         },
         {
@@ -346,22 +353,41 @@
                 "storage.type.homeassistant"
             ],
             "settings": {
-                "foreground": "#ff00ff",
-                "fontStyle": "bold"
+                "foreground": "#ffff00",
+                "fontStyle": "regular"
             }
         },
         {
-            "name": "Home Assistant - Property Keys",
+            "name": "Home Assistant - Property Name",
             "scope": [
                 "support.type.property-name.home-assistant",
-                "support.type.property-name.homeassistant",
+                "support.type.property-name.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ff00ff",
+                "fontStyle": "regular"
+            }
+        },
+        {
+            "name": "Home Assistant - Attribute Name",
+            "scope": [
                 "entity.other.attribute-name.home-assistant",
-                "entity.other.attribute-name.homeassistant",
+                "entity.other.attribute-name.homeassistant"
+            ],
+            "settings": {
+                "foreground": "#ff9500",
+                "fontStyle": "regular"
+            }
+        },
+        {
+            "name": "Home Assistant - Other Property",
+            "scope": [
                 "variable.other.property.home-assistant",
                 "variable.other.property.homeassistant"
             ],
             "settings": {
-                "foreground": "#00ff51"
+                "foreground": "#00ffe7",
+                "fontStyle": "regular"
             }
         },
         {
@@ -399,7 +425,8 @@
                 "variable.other.readwrite.homeassistant"
             ],
             "settings": {
-                "foreground": "#c792ea"
+                "foreground": "#c792ea",
+                "fontStyle": "regular"
             }
         },
         {
@@ -411,7 +438,8 @@
                 "constant.other.state.homeassistant"
             ],
             "settings": {
-                "foreground": "#00ff80"
+                "foreground": "#00ff51",
+                "fontStyle": "regular"
             }
         },
         {
@@ -421,7 +449,8 @@
                 "string.quoted.double.homeassistant"
             ],
             "settings": {
-                "foreground": "#5fe8ff"
+                "foreground": "#5fe8ff",
+                "fontStyle": "regular"
             }
         },
         {
@@ -431,7 +460,8 @@
                 "string.quoted.single.homeassistant"
             ],
             "settings": {
-                "foreground": "#ff9500"
+                "foreground": "#ff9500",
+                "fontStyle": "regular"
             }
         },
         {
@@ -443,7 +473,8 @@
                 "string.unquoted.plain.in.homeassistant"
             ],
             "settings": {
-                "foreground": "#00ffe7"
+                "foreground": "#00ffe7",
+                "fontStyle": "regular"
             }
         },
         {
@@ -453,7 +484,8 @@
                 "string.unquoted.block.homeassistant"
             ],
             "settings": {
-                "foreground": "#fafafa"
+                "foreground": "#fafafa",
+                "fontStyle": "regular"
             }
         },
         {
@@ -467,7 +499,8 @@
                 "constant.numeric.float.homeassistant"
             ],
             "settings": {
-                "foreground": "#c792ea"
+                "foreground": "#c792ea",
+                "fontStyle": "regular"
             }
         },
         {
@@ -492,7 +525,8 @@
                 "variable.other.alias.homeassistant"
             ],
             "settings": {
-                "foreground": "#bbadff"
+                "foreground": "#bbadff",
+                "fontStyle": "regular"
             }
         },
         {
@@ -504,7 +538,8 @@
                 "punctuation.definition.sequence.item.homeassistant"
             ],
             "settings": {
-                "foreground": "#881a94"
+                "foreground": "#881a94",
+                "fontStyle": "regular"
             }
         },
         {
@@ -514,7 +549,8 @@
                 "entity.name.tag.home-assistant"
             ],
             "settings": {
-                "foreground": "#ff7300"
+                "foreground": "#5fe8ff",
+                "fontStyle": "regular"
             }
         },
         {
@@ -524,7 +560,7 @@
                 "keyword.other.card-mod-key.home-assistant"
             ],
             "settings": {
-                "foreground": "#ff4d73",
+                "foreground": "#fc49ab",
                 "fontStyle": "bold"
             }
         },
@@ -546,7 +582,8 @@
                 "entity.name.tag.css.ha-element.home-assistant"
             ],
             "settings": {
-                "foreground": "#00ffe7"
+                "foreground": "#00ffe7",
+                "fontStyle": "regular"
             }
         },
         {
@@ -556,7 +593,8 @@
                 "variable.other.custom-property.ha.home-assistant"
             ],
             "settings": {
-                "foreground": "#c792ea"
+                "foreground": "#c792ea",
+                "fontStyle": "regular"
             }
         },
         {
@@ -566,7 +604,8 @@
                 "support.type.property-name.css.home-assistant"
             ],
             "settings": {
-                "foreground": "#00ff80"
+                "foreground": "#00ffe7",
+                "fontStyle": "regular"
             }
         },
         {
@@ -576,7 +615,8 @@
                 "punctuation.section.property-list.css.home-assistant"
             ],
             "settings": {
-                "foreground": "#ff0080"
+                "foreground": "#fc49ab",
+                "fontStyle": "regular"
             }
         },
         {
@@ -586,7 +626,8 @@
                 "entity.other.pseudo-class.ha.home-assistant"
             ],
             "settings": {
-                "foreground": "#bbadff"
+                "foreground": "#bbadff",
+                "fontStyle": "regular"
             }
         },
         {
@@ -596,7 +637,8 @@
                 "keyword.other.custom-prefix.home-assistant"
             ],
             "settings": {
-                "foreground": "#e8e8f0"
+                "foreground": "#e8e8f0",
+                "fontStyle": "regular"
             }
         },
         {
@@ -606,7 +648,8 @@
                 "punctuation.separator.custom-type.home-assistant"
             ],
             "settings": {
-                "foreground": "#ff0000"
+                "foreground": "#ff0000",
+                "fontStyle": "regular"
             }
         },
         {
@@ -654,7 +697,7 @@
                 "constant.language"
             ],
             "settings": {
-                "foreground": "#00ff80"
+                "foreground": "#00ff51"
             }
         },
         {
@@ -665,7 +708,7 @@
                 "storage.type"
             ],
             "settings": {
-                "foreground": "#ff0080",
+                "foreground": "#fc49ab",
                 "fontStyle": "bold"
             }
         },
@@ -796,7 +839,7 @@
                 "meta.brace.square"
             ],
             "settings": {
-                "foreground": "#ff0080"
+                "foreground": "#fc49ab"
             }
         },
         {
@@ -861,7 +904,7 @@
                 "constant.character.escape"
             ],
             "settings": {
-                "foreground": "#00ff80"
+                "foreground": "#00ff51"
             }
         },
         {
@@ -900,7 +943,7 @@
                 "variable.language.this"
             ],
             "settings": {
-                "foreground": "#ff0080",
+                "foreground": "#fc49ab",
                 "fontStyle": "bold"
             }
         },
@@ -920,7 +963,7 @@
                 "entity.other.jinja.delimiter.variable"
             ],
             "settings": {
-                "foreground": "#ff0080",
+                "foreground": "#fc49ab",
                 "fontStyle": "bold"
             }
         },
@@ -939,7 +982,7 @@
                 "keyword.control.jinja"
             ],
             "settings": {
-                "foreground": "#ff0080",
+                "foreground": "#fc49ab",
                 "fontStyle": "bold"
             }
         },
@@ -949,7 +992,7 @@
                 "constant.other.character-class.regexp"
             ],
             "settings": {
-                "foreground": "#00ff80"
+                "foreground": "#00ff51"
             }
         },
         {
@@ -1068,6 +1111,7 @@
         }
     ],
     "semanticTokenColors": {
+        "$schema": "vscode://schemas/color-theme",
         "enumMember": "#00b4ff",
         "variable.constant": "#bbadff",
         "variable.defaultLibrary": "#e8e8f0",
@@ -1082,9 +1126,9 @@
         "parameter": "#00ffe7",
         "variable": "#00ffe7",
         "string": "#ffe600",
-        "keyword": "#ff0080",
+        "keyword": "#fc49ab",
         "number": "#c792ea",
-        "regexp": "#00ff80",
+        "regexp": "#00ff51",
         "comment": "#929292",
         "property.readonly": "#fc49ab",
         "function.defaultLibrary": "#fc49ab",

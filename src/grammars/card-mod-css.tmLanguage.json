@@ -1,6 +1,6 @@
 {
   "scopeName": "card-mod-css.injection",
-  "injectionSelector": "L:string.unquoted.block.homeassistant",
+  "injectionSelector": "L:string.unquoted.block.homeassistant - meta.embedded.inline.jinja - meta.embedded.block.jinja - source.home-assistant-jinja",
   "name": "Grammar for card-mod CSS constructs in Home Assistant block scalars",
   "patterns": [
     {
@@ -19,8 +19,8 @@
       "name": "variable.other.custom-property.ha.homeassistant"
     },
     {
-      "comment": "CSS block delimiters",
-      "match": "[{}]",
+      "comment": "CSS block delimiters -- single braces only, never Jinja delimiters {{ }} {% %} {# #}",
+      "match": "(?<!\\{)\\{(?![{%#])|(?<![}%#])\\}(?!\\})",
       "name": "punctuation.section.property-list.css.homeassistant"
     },
     {
