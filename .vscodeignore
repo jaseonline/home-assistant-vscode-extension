@@ -29,9 +29,13 @@ out/themes/**
 .husky/**
 scripts/**
 CLAUDE.md
+docs/**
 CNAME
 .nvmrc
 .prettierignore
 .vscode-test.js
 eslint.config.mjs
 selfIdentity.plist
+# Stray logs (incl. iPhone syslogs) — never package
+**/*.log
+color-audit.md

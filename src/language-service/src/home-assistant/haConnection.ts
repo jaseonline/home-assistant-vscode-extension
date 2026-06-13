@@ -1268,6 +1268,41 @@ export class HaConnection implements IHaConnection {
     }
   }
 
+  public getErrorLog = async (): Promise<string> => {
+    if (!this.connection) {
+      return "Not connected to Home Assistant";
+    }
+    type LogEntry = {
+      name: string;
+      message: string[];
+      level: string;
+      source: [string, number];
+      timestamp: number;
+      exception: string;
+      count: number;
+      first_occurred: number;
+    };
+    const entries = await this.connection.sendMessagePromise<LogEntry[]>({
+      type: "system_log/list",
+    });
+    return entries
+      .map((entry) => {
+        const date = new Date(entry.timestamp * 1000).toLocaleString();
+        const messages = entry.message.join("\n");
+        const src = `${entry.source[0]}:${entry.source[1]}`;
+        const count = entry.count > 1 ? ` (×${entry.count})` : "";
+        const parts = [
+          `${date} ${entry.level} [${entry.name}] (${src})${count}`,
+          messages,
+        ];
+        if (entry.exception) {
+          parts.push(entry.exception);
+        }
+        return parts.join("\n");
+      })
+      .join("\n\n---\n\n");
+  };
+
   public callApi = async (
     method: Method,
     api: string,
